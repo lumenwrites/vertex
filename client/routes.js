@@ -1,0 +1,57 @@
+import React from 'react';
+import { Route, IndexRoute } from 'react-router';
+
+import Main from './components/Main';
+
+import PostList from './components/PostList';
+import PostNew from './components/PostNew';
+import PostEdit from './components/PostEdit';
+import PostDetail from './components/PostDetail';
+
+import About from './components/About';
+
+import Signin from './components/auth/signin';
+import Signout from './components/auth/signout';
+import RequireAuth from './components/auth/require_auth';
+
+
+// require.ensure polyfill for node
+if (typeof require.ensure !== 'function') {
+  require.ensure = function requireModule(deps, callback) {
+    callback(require);
+  };
+}
+
+// react-router setup with code-splitting
+// More info: http://blog.mxstbr.com/2016/01/react-apps-with-pages/
+export default (
+    <Route path="/" component={Main}>
+	<IndexRoute component={PostList} />
+	<Route path="post/new" component={RequireAuth(PostEdit)} />
+	<Route path="post/:slug" component={PostDetail} />
+	<Route path="category/:category" component={PostList} />
+	<Route path="tag/:tag" component={PostList} />		
+	<Route path="post/:slug/edit" component={RequireAuth(PostEdit)} />
+	<Route path="about" component={About} />
+	<Route path="login" component={Signin} />
+	<Route path="logout" component={Signout} />        		
+  </Route>
+);
+
+/* 
+<IndexRoute
+getComponent={(nextState, cb) => {
+    require.ensure([], require => {
+        cb(null, require('./modules/Post/pages/PostListPage/PostListPage').default);
+    });
+}}
+/>
+<Route
+path="/posts/:slug-:cuid"
+getComponent={(nextState, cb) => {
+    require.ensure([], require => {
+        cb(null, require('./modules/Post/pages/PostDetailPage/PostDetailPage').default);
+    });
+}}
+/>
+*/
