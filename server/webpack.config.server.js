@@ -7,8 +7,8 @@ module.exports = {
   entry: path.resolve(__dirname, 'server.js'),
 
   output: {
-    path: __dirname + '/dist/',
-    filename: 'server.bundle.js',
+      path: __dirname + '/dist/',
+      filename: 'server.bundle.js',
   },
 
   target: 'node',

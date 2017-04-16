@@ -8,6 +8,7 @@ import morgan from 'morgan';
 
 import postRoutes from './routes/post.routes.js';
 import authRoutes from './routes/auth.routes.js';
+import ostatusRoutes from './routes/ostatus.routes.js';
 
 // Initialize the Express Server
 const server = new Express();
@@ -30,9 +31,22 @@ server.use(bodyParser.urlencoded({ limit: '20mb', extended: false }));
 /* server.use(morgan('combined'));*/
 server.use(cors());
 
-server.use(Express.static(path.resolve(__dirname, '../dist')));
+/* API Routes */
 server.use('/api/v1', postRoutes);
 server.use('/api/v1/auth', authRoutes);
+
+/* OStatus Routes */
+server.use('/', ostatusRoutes);
+
+/* Serve static files */
+server.use('/styles', Express.static(path.resolve(__dirname, '../client/styles')));
+server.use('/media', Express.static(path.resolve(__dirname, '../client/media')));
+server.get('/bundle.js',(req,res) => {
+    res.sendFile(path.resolve(__dirname, '../client/dist/bundle.js'));
+});
+/* Send the rest of the requests to react. */
+server.use((req, res) => res.sendFile(path.resolve(__dirname, '../client/index.html')));
+
 
 // start server
 const port = process.env.PORT || 3000;

@@ -1,15 +1,41 @@
-FROM node
-MAINTAINER jaga santagostino <kandros5591@gmail.com>
+FROM ubuntu:latest
+MAINTAINER Ray ALez <raymestalez@gmail.com>
 
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
+# Setup environment variables containing paths
+ENV HOMEDIR=/home
+ENV PROJECT_DIR=/home/vertex
+ENV CLIENT_DIR=/home/vertex/client
+ENV SERVER_DIR=/home/vertex/server
 
-COPY package.json /usr/src/app
-RUN npm install
-COPY . /usr/src/app
+# Install basic apps
+RUN apt-get update && apt-get install -y emacs curl
 
-ENV NODE_ENV production
+# Install node 7
+RUN curl -sL https://deb.nodesource.com/setup_7.x | bash -
+RUN apt-get install -y nodejs 
+	    	    
+# Copy project files into /home/vertex folder.
+RUN mkdir -p $PROJECT_DIR
+WORKDIR $PROJECT_DIR
+COPY . .
 
-EXPOSE 8000
-CMD ["npm", "run", "bs"]
+# Install dependencies
+WORKDIR $SERVER_DIR
+RUN npm install		
+WORKDIR $CLIENT_DIR
+RUN npm install		
+    
+# Port to expose
+EXPOSE 3000
+
+CMD [ "npm", "start" ]
+
+	
+
+	
+
+# ENV NODE_ENV production
+
+# EXPOSE 8000
+# CMD ["npm", "run", "bs"]
 

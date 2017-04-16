@@ -1,16 +1,25 @@
-web:
-  build: .
-  links:
-   - db
-  ports:
-   - "80:8000"
-  volumes:
-   - .:/usr/src/app/
-  environment:
-   NODE_ENV: production
-   MONGO_URL: mongodb://db:27017/mern-starter
-db:
-  image: mongo:latest
-  ports:
-   - "27017:27017"
+version: '2'
 
+services:
+  db:
+    image: mongo:latest
+    # ports:
+    #   - "27017:27017"
+    command: "--smallfiles --logpath=/dev/null"
+  web:
+    build: .
+    # Taking password, databasename, etc from the env variables file    
+    # env_file: ./backend/config/env
+    working_dir: /home/vertex/server
+    command: npm start
+    depends_on:
+      - db
+    links:
+      - db
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/home/vertex
+    environment:
+      NODE_ENV: production
+      MONGO_URL: mongodb://db:27017/vertex
