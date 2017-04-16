@@ -53,8 +53,8 @@ class PostList extends Component {
 
     renderPosts() {
 	const posts = this.props.posts;
-	console.log(">>>> src/components/post_list.js:");
-	console.log("Rendering posts." + JSON.stringify(posts));
+	/* console.log(">>>> src/components/post_list.js:");*/
+	/* console.log("Rendering posts." + JSON.stringify(posts));*/
 
 
 	/* If there are no posts in the state (haven't fetched them yet) -

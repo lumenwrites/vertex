@@ -88,10 +88,10 @@ export default class Post extends Component {
 	if (tags && tags.length > 0) {
 	    tagItems = tags.map((tag) => {
 		return (
-		    <span key={tag.slug}>
-			<Link to={'/tag/' + tag.slug}>
+		    <span key={tag}>
+			<Link to={'/tag/' + tag}>
 			    <Label bsStyle="default">
-				{tag.title}
+				{tag}
 			    </Label>
 			    &nbsp;
 			</Link>

@@ -10,7 +10,14 @@ import sanitizeHtml from 'sanitize-html';
  * @returns void
  */
 export function getPosts(req, res) {
-    Post.find().sort('-dateAdded').exec((err, posts) => {
+    var filter = {}
+    if (req.query.tag) {
+	var tag = req.query.tag;
+	console.log("Posts filtered by tag: " + tag);
+	filter = {tags:{$all:tag}};
+    }
+
+    Post.find(filter).sort('-dateAdded').exec((err, posts) => {
 	if (err) {
 	    res.status(500).send(err);
 	}
@@ -36,6 +43,7 @@ export function createPost(req, res) {
 
     var firstline = post.body.split('\n')[0];
     post.slug = slug(firstline)+"-"+cuid.slug();
+    post.tags = post.tags.replace(/\s/g, '').split(",");
 
     post = new Post(post);
 

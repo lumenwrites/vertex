@@ -8,28 +8,12 @@ export default function(state=INITIAL_STATE, action) {
 	    var posts = state;
 	    var post = action.payload;
 	    /* console.log("Created post " +  JSON.stringify(post));*/
-	    var tags = post.tags.split(',');
-	    post.tags = tags.map((t)=>{
-		return {
-		    title: t,
-		    slug: t
-		};
-	    })
-	    console.log("Add created post to the stream " + JSON.stringify(post));
+	    /* console.log("Add created post to the stream " + JSON.stringify(post));*/
 	    posts.unshift(post);
 	    /* console.log("Updated posts " + JSON.stringify(posts));*/
 	    return [...posts];
 	case 'FETCH_POSTS':
 	    var posts = action.payload
-	    posts.map((post)=>{
-		var tags = post.tags.split(',');
-		post.tags = tags.map((t)=>{
-		    return {
-			title: t,
-			slug: t
-		    };
-		})
-	    });
 	    return posts;
 	default:
 	    return state;
