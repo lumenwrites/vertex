@@ -31,7 +31,7 @@ export function getFeed(req, res) {
 	}
 
 	posts.forEach(post => {
-	    var link = "http://lumenwrites.com/post" + post.slug;
+	    var link = "http://lumenwrites.com/post/" + post.slug;
 	    feed.addItem({
 		title: post.body,
 		id: link,
@@ -47,6 +47,6 @@ export function getFeed(req, res) {
 	    })
 	})
 	res.type("application/xml");
-	res.send(feed.rss2());
+	res.send(feed.atom1());
     });
 }

@@ -32,12 +32,12 @@ var LUMEN = {
         {
             "rel": "http://activitystrea.ms/spec/1.0",
             "type": "application/atom+xml",
-            "href": "https://lumenwrites.com/@lumen.atom"
+            "href": "https://lumenwrites.com/feed/posts.atom"
         },
         {
             "rel": "http://schemas.google.com/g/2010#updates-from",
             "type": "application/atom+xml",
-            "href": "https://lumenwrites.com/@lumen.atom"            
+            "href": "https://lumenwrites.com/feed/posts.atom"            
         }
     ]
 }
