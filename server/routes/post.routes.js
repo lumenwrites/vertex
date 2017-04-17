@@ -15,7 +15,6 @@ router.route('/posts').post(PostController.createPost);
 router.route('/posts/:cuid').delete(PostController.deletePost);
 
 router.route('/test').get(PostController.test);
-router.route('/settings').get((req,res)=> res.send({hi:"Hello!"}));
 router.route('/categories').get((req,res)=> res.send({hi:"Hello!"}));
 
 export default router;

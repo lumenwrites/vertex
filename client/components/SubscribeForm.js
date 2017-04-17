@@ -29,7 +29,7 @@ class SubscribeForm extends Component {
 			     ref="email" />
 		<Button bsStyle="primary" className="subscribe"
 			type="submit">Subscribe</Button>
-		<a href="/feed/rss" className="btn rss">
+		<a href="/feed/posts.atom" className="btn rss">
 		    <FontAwesome name='rss' />
 		</a> 
 		<div className="clearfix"></div>

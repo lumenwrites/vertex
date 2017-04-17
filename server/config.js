@@ -1,3 +1,4 @@
 module.exports = {
-    secret: 'asdfsdfsf'
+    secret: 'asdfsdfsf',
+    about: "Hello!"
 };

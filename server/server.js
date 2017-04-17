@@ -7,6 +7,7 @@ import cors from 'cors';
 import morgan from 'morgan';
 
 import postRoutes from './routes/post.routes.js';
+import settingsRoutes from './routes/settings.routes.js';
 import feedsRoutes from './routes/feeds.routes.js';
 import subscriberRoutes from './routes/subscriber.routes.js';
 import authRoutes from './routes/auth.routes.js';
@@ -35,6 +36,7 @@ server.use(cors());
 
 /* API Routes */
 server.use('/api/v1', postRoutes);
+server.use('/api/v1', settingsRoutes);
 server.use('/api/v1', subscriberRoutes);
 server.use('/api/v1/auth', authRoutes);
 
