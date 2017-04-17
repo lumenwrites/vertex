@@ -7,6 +7,7 @@ import cors from 'cors';
 import morgan from 'morgan';
 
 import postRoutes from './routes/post.routes.js';
+import feedsRoutes from './routes/feeds.routes.js';
 import subscriberRoutes from './routes/subscriber.routes.js';
 import authRoutes from './routes/auth.routes.js';
 import ostatusRoutes from './routes/ostatus.routes.js';
@@ -40,6 +41,7 @@ server.use('/api/v1/auth', authRoutes);
 
 /* OStatus Routes */
 server.use('/', ostatusRoutes);
+server.use('/', feedsRoutes);
 
 /* Serve static files */
 server.use('/styles', Express.static(path.resolve(__dirname, '../client/styles')));
