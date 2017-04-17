@@ -26,7 +26,7 @@ export function signinUser({username, password}) {
 		 console.log("Successfully signed in!");
 		 // if request is good
 		 // - update state to indicate that I'm signed in
-		 dispatch({ type: AUTH_USER});
+		 dispatch({ type: 'AUTH_USER'});
 		 console.log("Auth action dispatched(to flip auth state to true)");
 		 // - save JWT token
 		 localStorage.setItem('token', response.data.token);
@@ -77,7 +77,7 @@ export function signoutUser() {
     console.log("Redirecting to /, and dispatching action UNAUTH_USER.");
     browserHistory.push('/');    
     return {
-	type: UNAUTH_USER
+	type: 'UNAUTH_USER'
     };
 }
 

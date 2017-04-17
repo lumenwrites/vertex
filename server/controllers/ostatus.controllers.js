@@ -86,10 +86,26 @@ export function createPost(req, res) {
     });
 }
 
+var POST_STREAM = [{
+    "@context": ["https://www.w3.org/ns/activitystreams",
+		 {"@language": "en-GB"}],
+    "id": "https://rhiaro.co.uk/2016/05/minimal-activitypub",
+    "type": "Article",
+    "name": "Minimal ActivityPub update client",
+    "content": "Today I finished morph, a client for posting ActivityStreams2...",
+    "attributedTo": "https://rhiaro.co.uk/#amy",
+    "to": "https://rhiaro.co.uk/followers/",
+    "cc": "https://e14n.com/evan"
+}]
+
 export function hostMeta(req, res) {
     res.send(HOST_META);    
 }
 
 export function webFingerAccount(req, res) {
     res.send(LUMEN);    
+}
+
+export function postStream(req, res) {
+    res.send(POST_STREAM);    
 }

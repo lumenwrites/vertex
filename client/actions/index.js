@@ -46,7 +46,7 @@ export function fetchPosts(filter) {
     return function(dispatch) {
 	axios.get(url)
 	     .then(response => {
-		 console.log("Received posts " + JSON.stringify(response.data));
+		 /* console.log("Received posts " + JSON.stringify(response.data));*/
 		 dispatch({
 		     type: 'FETCH_POSTS',
 		     payload: response.data
@@ -177,7 +177,7 @@ export function createSubscriber(props) {
 	axios.post(`${API_URL}/subscribe`, props)
 	     .then(response => {
 		 /* browserHistory.push('/');*/
-		 /* console.log(response);*/
+		 console.log(response);
 		 dispatch({
 		     type: 'CREATE_SUBSCRIBER',
 		     payload: response
