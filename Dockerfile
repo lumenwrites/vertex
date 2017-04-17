@@ -23,7 +23,8 @@ COPY . .
 WORKDIR $CLIENT_DIR
 RUN npm install		
 WORKDIR $SERVER_DIR
-RUN npm install		
+RUN npm install
+RUN npm build
     
 # Port to expose
 EXPOSE 3000
