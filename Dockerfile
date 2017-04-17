@@ -20,15 +20,15 @@ WORKDIR $PROJECT_DIR
 COPY . .
 
 # Install dependencies
-WORKDIR $SERVER_DIR
-RUN npm install		
 WORKDIR $CLIENT_DIR
+RUN npm install		
+WORKDIR $SERVER_DIR
 RUN npm install		
     
 # Port to expose
 EXPOSE 3000
 
-CMD [ "npm", "start" ]
+CMD [ "npm", "serve" ]
 
 	
 
