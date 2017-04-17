@@ -22,6 +22,7 @@ services:
     #   - .:/home/vertex
     volumes:
       - ./client:/home/vertex/client
+      - ./server:/home/vertex/server      
     environment:
       NODE_ENV: production
       MONGO_URL: mongodb://db:27017/vertex

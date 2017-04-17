@@ -10,7 +10,7 @@
     "start": "BABEL_DISABLE_CACHE=1 NODE_ENV=development nodemon index.js",
     "serve": "NODE_ENV=production node index.js",
     "bs": "npm run clean && npm run build && npm run build:server && npm run start:prod",
-    "build": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js",
+    "build": "cross-env NODE_ENV=production webpack --config ./server/webpack.config.prod.js",
     "build:server": "cross-env NODE_ENV=production webpack --config webpack.config.server.js",
     "clean": "rimraf dist",
     "slate": "rimraf node_modules && npm install",
