@@ -18,8 +18,8 @@ services:
       - db
     ports:
       - "3000:3000"
-    volumes:
-      - .:/home/vertex
+    # volumes:
+    #   - .:/home/vertex
     environment:
       NODE_ENV: production
       MONGO_URL: mongodb://db:27017/vertex
