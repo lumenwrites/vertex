@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { Panel, Label } from 'react-bootstrap';
 
 import Remarkable from 'remarkable';
-
 import FontAwesome from 'react-fontawesome';
 
-export default class Post extends Component {
+import { deletePost } from '../actions/index';
+
+class Post extends Component {
     renderPostHeader () {
 	/* Return post header */
 	if (this.props.link ) {
@@ -139,15 +141,16 @@ export default class Post extends Component {
 			  Draft
 		      </Label>
 		      : null }		    
-		    { this.props.authenticated ?
+		    { this.props.authenticated && false ?
 		      <Link to={"/post/"+this.props.slug+"/edit"} className="icon">
 			  <i className="fa fa-pencil"></i>
 		      </Link>
 		      : null }
-		    { this.props.authenticated   && false ?
-		      <Link to={"/post/"+this.props.slug+"/edit"} className="icon">
+		    { this.props.authenticated ?
+		      <a onClick={()=>this.props.deletePost(this.props.slug)}
+			 className="icon">
 			  <i className="fa fa-trash"></i>
-		      </Link>
+		      </a>
 		      : null }		
 
 		</div>
@@ -174,3 +177,4 @@ export default class Post extends Component {
 }
 
 
+export default connect(null, { deletePost })(Post);

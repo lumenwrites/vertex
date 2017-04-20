@@ -40,7 +40,8 @@ export default (
 
 /* 
 <IndexRoute
-getComponent={(nextState, cb) => {
+getComponent={(n
+extState, cb) => {
     require.ensure([], require => {
         cb(null, require('./modules/Post/pages/PostListPage/PostListPage').default);
     });

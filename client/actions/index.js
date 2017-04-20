@@ -132,10 +132,11 @@ export function deletePost(slug) {
 	     .then(response => {
 		 console.log(">>>> src/actions/index.js (promise):");
 		 console.log("Successfully deleted post. Dispatching action DELETE_POST.");
-		 browserHistory.push('/');		 
+		 browserHistory.push('/');
+
 		 dispatch({
 		     type: 'DELETE_POST',
-		     payload: response
+		     payload: slug
 		 });
 	     });
     };

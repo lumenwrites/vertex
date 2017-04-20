@@ -111,8 +111,7 @@ class PostList extends Component {
 	    <div>
 		{ this.renderMetaInfo() }
 		{ this.props.authenticated ?
-		  <Editor params={this.props.params}
-			  route={this.props.route}/>
+		  <Editor params={this.props.params}/>
 		: null }
 		{ this.renderPosts() }
 		<Pagination next={this.props.posts.next}

@@ -20,10 +20,6 @@ export default function(state=INITIAL_STATE, action) {
 	    return {...state, tags: tags };		
 	case 'CREATE_POST':
 	    return INITIAL_STATE;
-	case 'UPDATE_POST':
-	    return INITIAL_STATE;
-	case 'DELETE_POST':
-	    return INITIAL_STATE;
 	case 'FETCH_POST':
 	    /* console.log("Fetched post " + action.payload.body);*/
 	    return action.payload;

@@ -64,7 +64,8 @@ class Editor extends Component {
 		    ref={(input) => { this.editor = input; }} 
 		    options={{
 			spellChecker: false,
-			toolbar: this.props.params.slug ? defaultToolbar : false,
+			toolbar: this.props.params.slug ?
+				 defaultToolbar : false,
 			status: false,
 			placeholder: "Write here... (can use markdown)",
 			initialValue: this.props.postForm.body,

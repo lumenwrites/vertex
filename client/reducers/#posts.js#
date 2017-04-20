@@ -15,7 +15,7 @@ export default function(state=INITIAL_STATE, action) {
 	case 'DELETE_POST':
 	    var slug = action.payload;
 	    var posts = state;
-	    posts = posts.filter((p)=>{
+	    posts = post0s.filter((p)=>{
 		return p.slug !== slug;
 	    });
 	    return [...posts];
