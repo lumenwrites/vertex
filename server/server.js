@@ -12,6 +12,7 @@ import feedsRoutes from './routes/feeds.routes.js';
 import subscriberRoutes from './routes/subscriber.routes.js';
 import authRoutes from './routes/auth.routes.js';
 import ostatusRoutes from './routes/ostatus.routes.js';
+import activitypubRoutes from './routes/activitypub.routes.js';
 
 // Initialize the Express Server
 const server = new Express();
@@ -43,6 +44,7 @@ server.use('/api/v1/auth', authRoutes);
 
 /* OStatus Routes */
 server.use('/', ostatusRoutes);
+server.use('/', activitypubRoutes);
 server.use('/', feedsRoutes);
 
 /* Serve static files */

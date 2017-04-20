@@ -12,7 +12,7 @@ let feed = new Feed({
     
     author: {
 	name: 'Lumen Writes',
-	email: 'lumenwries@gmail.com',
+	email: 'lumenwrites@gmail.com',
 	link: 'http://lumenwrites.com/'
     }
 })
