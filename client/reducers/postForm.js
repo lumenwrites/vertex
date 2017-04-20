@@ -11,7 +11,7 @@ const INITIAL_STATE = {
 export default function(state=INITIAL_STATE, action) {
     switch(action.type) {
 	case 'UPDATE_POST_BODY':
-	    console.log("Editing form " + JSON.stringify(state));
+	    /* console.log("Editing form " + JSON.stringify(state));*/
 	    var body = action.payload;
 	    return {...state, body: body };
 	case 'UPDATE_POST_TAGS':

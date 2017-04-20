@@ -5,7 +5,7 @@ import { AUTH_USER, UNAUTH_USER, AUTH_ERROR, FETCH_MESSAGE } from './types';
 export var API_URL = '/api/v1';
 /* console.log("NODE_ENV " + process.env.NODE_ENV);*/
 if (process.env.NODE_ENV === 'development' || true) {
-    console.log("Connecting to API on localhost");
+    /* console.log("Connecting to API on localhost");*/
     API_URL = 'http://localhost:3000/api/v1';
 }
 

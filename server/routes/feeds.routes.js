@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import * as FeedController from '../controllers/feed.controller';
+import * as feedsControllers from '../controllers/feeds.controllers';
 const router = new Router();
 
 // Get all Posts
-router.route('/feed/posts.atom').get(FeedController.getFeed);
+router.route('/feed/posts.atom').get(feedsControllers.getFeed);
 
 export default router;

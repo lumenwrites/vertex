@@ -67,16 +67,18 @@ class Header extends Component {
     
     renderCategories(){
 	const categories = this.props.settings.categories;
-	console.log("Rendering categories: " + categories);
+	/* console.log("Rendering categories: " + categories);*/
 
 	if (!categories || categories.length == 0) { return null; };
 
 	const categories_list = categories.map((category) => {
+	    /* Capitalize */
+	    var capitalized = category.charAt(0).toUpperCase() + category.slice(1);
 	    /* console.log("Looping over categories. Category: " + category);*/
 	    return (
 		<li key={category}>
 		    <Link to={'/tag/' + category}>
-		    {category}
+		    {capitalized}
 		    </Link>
 		</li>
 	    );

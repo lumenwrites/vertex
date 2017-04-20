@@ -6,11 +6,10 @@ import path from 'path';
 import cors from 'cors';
 import morgan from 'morgan';
 
-import postRoutes from './routes/post.routes.js';
+import postsRoutes from './routes/posts.routes.js';
 import settingsRoutes from './routes/settings.routes.js';
 import feedsRoutes from './routes/feeds.routes.js';
-import subscriberRoutes from './routes/subscriber.routes.js';
-import authRoutes from './routes/auth.routes.js';
+import profilesRoutes from './routes/profiles.routes.js';
 import ostatusRoutes from './routes/ostatus.routes.js';
 import activitypubRoutes from './routes/activitypub.routes.js';
 
@@ -36,10 +35,9 @@ server.use(bodyParser.urlencoded({ limit: '20mb', extended: false }));
 server.use(cors());
 
 /* API Routes */
-server.use('/api/v1', postRoutes);
+server.use('/api/v1', postsRoutes);
 server.use('/api/v1', settingsRoutes);
-server.use('/api/v1', subscriberRoutes);
-server.use('/api/v1/auth', authRoutes);
+server.use('/api/v1', profilesRoutes);
 
 
 /* OStatus Routes */
