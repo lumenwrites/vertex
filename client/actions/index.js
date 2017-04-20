@@ -60,14 +60,14 @@ export function fetchPost(slug) {
      * console.log("Fetching post.");	    */
     
     return function(dispatch) {    
-	axios.get(`${API_URL}/post/${slug}/`)
+	axios.get(`${API_URL}/posts/${slug}/`)
 	     .then(response => {
 		 /* console.log("Successfully fetched post.");
 		    console.log(response.data.body);*/
 		 
 		 dispatch({
-		     type: FETCH_POST,
-		     payload: response
+		     type: 'FETCH_POST',
+		     payload: response.data
 		 });
 	     });
     };
@@ -106,10 +106,10 @@ export function updatePost(slug, post) {
     /* console.log("Post Tags: " + post.tags);*/
 
     return function(dispatch) {
-	axios.put(`${API_URL}/post/${slug}/`, post, config)
+	axios.post(`${API_URL}/posts/${slug}`, post, config)
 	     .then(response => {
-		 /* console.log(">>>> src/actions/index.js (promise):");
-		 console.log("Updated a post. Redirecting to it.");  */
+		 console.log(">>>> src/actions/index.js:");
+		 console.log("Updated a post. Redirecting to it. " + response.data.body ); 
 		 browserHistory.push('/post/' + response.data.slug);
 		 /* console.log(response);*/
 		 dispatch({

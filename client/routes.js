@@ -5,7 +5,7 @@ import Main from './components/Main';
 
 import PostList from './components/PostList';
 import PostNew from './components/PostNew';
-import PostEdit from './components/PostEdit';
+import Editor from './components/Editor';
 import PostDetail from './components/PostDetail';
 
 import About from './components/About';
@@ -27,11 +27,11 @@ if (typeof require.ensure !== 'function') {
 export default (
     <Route path="/" component={Main}>
 	<IndexRoute component={PostList} />
-	<Route path="post/new" component={RequireAuth(PostEdit)} />
+	<Route path="post/new" component={RequireAuth(Editor)} />
 	<Route path="post/:slug" component={PostDetail} />
 	<Route path="category/:category" component={PostList} />
 	<Route path="tag/:tag" component={PostList} />		
-	<Route path="post/:slug/edit" component={RequireAuth(PostEdit)} />
+	<Route path="post/:slug/edit" component={RequireAuth(Editor)} />
 	<Route path="about" component={About} />
 	<Route path="login" component={Signin} />
 	<Route path="logout" component={Signout} />        		

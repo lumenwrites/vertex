@@ -22,11 +22,12 @@ export function getPosts(req, res) {
 
 /* Get a single post */
 export function getPost(req, res) {
-    Post.findOne({ cuid: req.params.cuid }).exec((err, post) => {
+    console.log("Fetching post by slug " + req.params.slug);
+    Post.findOne({ slug: req.params.slug }).exec((err, post) => {
 	if (err) {
 	    res.status(500).send(err);
 	}
-	res.json({ post });
+	res.json(post);
     });
 }
 
@@ -55,9 +56,19 @@ export function createPost(req, res) {
     });
 }
 
+/* Update post  */
+export function updatePost(req, res) {
+    var post = req.body;
+    Post.findOneAndUpdate({ slug: req.params.slug }, post, (err, post) => {
+	if (err) { return next(err); }
+	console.log("Updated post! " + JSON.stringify(post));
+	return res.json(post);
+    });
+}
+
 /* Delete a post  */
 export function deletePost(req, res) {
-    Post.findOne({ cuid: req.params.cuid }).exec((err, post) => {
+    Post.findOne({ slug: req.params.slug }).exec((err, post) => {
 	if (err) {
 	    res.status(500).send(err);
 	}

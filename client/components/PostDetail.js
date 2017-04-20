@@ -43,6 +43,7 @@ class PostDetail extends Component {
 	const settings =  this.props.settings;
 	const post = this.props.post;
 
+	if (!post) { return null; }
 	/* Remove markdown from post body, and truncate it to 160 chars. */
 	const body = removeMd(this.props.post.body);	
 	const truncate_length = 160;
@@ -85,11 +86,12 @@ class PostDetail extends Component {
 
     render() {
 	const { post } = this.props;
-	if (!post) {
+	if (!post.body) {
 	    return (
 		<div></div>
 	    );
 	}
+	/* console.log("Rendering post " + post);*/
 
 	return (
 	    <div>
@@ -120,8 +122,8 @@ class PostDetail extends Component {
 }
 
 function mapStateToProps(state) {
-    return { post:state.posts.post,
-	     settings: state.settings.all,
+    return { post:state.post,
+	     settings: state.settings,
     	     authenticated: state.auth.authenticated };
 }
 

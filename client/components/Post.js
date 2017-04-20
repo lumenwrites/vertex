@@ -139,7 +139,7 @@ export default class Post extends Component {
 			  Draft
 		      </Label>
 		      : null }		    
-		    { this.props.authenticated   && false ?
+		    { this.props.authenticated ?
 		      <Link to={"/post/"+this.props.slug+"/edit"} className="icon">
 			  <i className="fa fa-pencil"></i>
 		      </Link>

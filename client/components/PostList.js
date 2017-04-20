@@ -6,7 +6,7 @@ import MetaTags from 'react-meta-tags';
 import { fetchSettings, fetchPosts } from '../actions/index';
 
 import Post from './Post';
-import PostEdit from './PostEdit';
+import Editor from './Editor';
 import Pagination from './Pagination';
 
 class PostList extends Component {
@@ -111,7 +111,7 @@ class PostList extends Component {
 	    <div>
 		{ this.renderMetaInfo() }
 		{ this.props.authenticated ?
-		  <PostEdit params={this.props.params}/>
+		  <Editors params={this.props.params}/>
 		: null }
 		{ this.renderPosts() }
 		<Pagination next={this.props.posts.next}
@@ -125,7 +125,7 @@ class PostList extends Component {
 
 function mapStateToProps(state) {
     return { posts: state.posts,
-    	     settings: state.settings.all,
+    	     settings: state.settings,
     	     authenticated: state.auth.authenticated};
 }
 /* First argument connects redux state to the component,
