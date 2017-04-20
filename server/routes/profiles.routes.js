@@ -2,14 +2,15 @@ import { Router } from 'express';
 const router = new Router();
 
 const passport = require('passport');
-const profilesControllers = require('../controllers/profiles.controllers.js');
 const passportService = require('../services/passport');
 
-const requireProfiles = passport.authenticate('jwt', {  session:false });
+const requireAuth = passport.authenticate('jwt', {  session:false });
 const requireSignin = passport.authenticate('local', {  session:false });
 
+const profilesControllers = require('../controllers/profiles.controllers.js');
+
 // Make every request go through the passport profilesentication check:
-router.route('/').get(requireProfiles, function(req, res){
+router.route('/auth-test').get(requireAuth, function(req, res){
     res.send({ message:'Successfully accessed protected API!'});
 });
 

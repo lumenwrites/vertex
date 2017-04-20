@@ -47,16 +47,21 @@ const jwtOptions = {
 };
 
 // Create JWT Strategy for token authentication
-const jwtLogin = new JwtStrategy(jwtOptions, function(payload, done){
+const jwtLogin = {name:'jwt'};
+
+    new JwtStrategy(jwtOptions, function(payload, done){
     // payload is a decoded JWT token, sub and iat from the token.
     // done is a callback, depending on whether auth is successful
 
+    console.log("JWT login ");
+    res.send("fuck off");
+asdfs
     // See if user id from payload exists in our database
     // If it does call 'done' with that user
     // otherwise, call 'done' without a user object
     User.findById(payload.sub, function(err, user){
 	if (err) { return done(err, false); }
-
+	console.log("JWT login "); 
 	if (user) {
 	    done(null, user);
 	} else {

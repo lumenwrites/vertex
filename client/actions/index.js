@@ -123,13 +123,12 @@ export function updatePost(slug, post) {
 export function deletePost(slug) {
     /* console.log(">>>> src/actions/index.js:");
      * console.log("Deleting post.");	    */
-
     const config = {
 	headers:  { authorization: 'Token ' + localStorage.getItem('token')}
     };
     
     return function(dispatch) {    
-	axios.delete(`${API_URL}/post/${slug}/`, config)
+	axios.delete(`${API_URL}/posts/${slug}`, config)
 	     .then(response => {
 		 console.log(">>>> src/actions/index.js (promise):");
 		 console.log("Successfully deleted post. Dispatching action DELETE_POST.");

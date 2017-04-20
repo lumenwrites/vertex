@@ -25,19 +25,8 @@ class Editor extends Component {
     }
 
 
-    renderDeleteButton () {
-	/* If I'm editing a post (and not creating a new one) - render delete button. */
-	if (this.props.params.slug) {
-	    return (	
-		    <Button onClick={()=>this.props.deletePost(this.props.params.slug)}>
-			Delete Post
-		    </Button>
-	    );
-	} else {
-	    return null;
-	}
 
-    }
+
 
     renderPublishButton () {
 	if (!this.props.post) {return null;}
@@ -119,16 +108,19 @@ class Editor extends Component {
 	    
 	    {this.props.params.slug ?
 		 <div>
-		     <br/>		     
-		     { this.renderDeleteButton() }
+		     <br/>
+		     <Button onClick={()=>this.props.deletePost(this.props.params.slug)}>
+			 Delete Post
+		     </Button>
 
+		     {/*  
 		     <div className="right">
 			 <IndexLinkContainer to={{ pathname: '/'}}>
 			     <Button type="submit">Cancel</Button>
 			 </IndexLinkContainer> &nbsp;
 			 { this.renderPublishButton() }
 		     </div>
-		     
+		       */}
 		     <div className="clearfix"></div>
 		     <br/>
 		 </div>
