@@ -18,14 +18,15 @@ class Editor extends Component {
     }
 
     componentWillMount() {
+	/* Clean the form */
+	this.props.updatePostBody("");
+	this.props.updatePostTags("");	    
+
 	if (this.props.params.slug) {
 	    /* If there's slug - fetch post and put it into the form. */
 	    this.props.fetchPost(this.props.params.slug);
 	}
     }
-
-
-
 
 
     renderPublishButton () {
