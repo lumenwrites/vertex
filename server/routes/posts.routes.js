@@ -13,7 +13,7 @@ router.route('/posts').get(postsControllers.getPosts);
 router.route('/posts/:slug').get(postsControllers.getPost);
 
 // Add a new Post
-router.route('/posts').post(requireAuth, postsControllers.createPost);
+router.route('/posts').post(postsControllers.createPost);
 
 // Update post
 router.route('/posts/:slug').post(postsControllers.updatePost);

@@ -47,15 +47,11 @@ const jwtOptions = {
 };
 
 // Create JWT Strategy for token authentication
-const jwtLogin = {name:'jwt'};
-
-    new JwtStrategy(jwtOptions, function(payload, done){
+const jwtLogin = new JwtStrategy(jwtOptions, function(payload, done){
     // payload is a decoded JWT token, sub and iat from the token.
     // done is a callback, depending on whether auth is successful
 
-    console.log("JWT login ");
-    res.send("fuck off");
-asdfs
+    console.log("JWT login");
     // See if user id from payload exists in our database
     // If it does call 'done' with that user
     // otherwise, call 'done' without a user object
@@ -70,6 +66,8 @@ asdfs
     });
     
 });
+
+/* console.log("jwtLogin " + JSON.stringify(jwtLogin));*/
 
 // Tell passport to use JWT strategy
 passport.use(jwtLogin);
