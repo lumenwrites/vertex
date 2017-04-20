@@ -1,4 +1,5 @@
 module.exports = {
     secret: 'asdfsdfsf',
-    about: "Hello!"
+    about: "Hello!",
+    categories: ["meta", "jokes", "sketches"]
 };

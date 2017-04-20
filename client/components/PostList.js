@@ -35,7 +35,7 @@ class PostList extends Component {
 
     componentDidUpdate(nextProps) {
 	if ((this.props.route.path !== nextProps.route.path) ||
-	    (nextProps.params.category !== this.props.params.category) ||
+	    (nextProps.params.tag !== this.props.params.tag) ||
 	    (nextProps.location.query.page !== this.props.location.query.page)) {
 	    /* If the route has changed - refetch the posts.
 	       Gotta check if route is different with the if statement,

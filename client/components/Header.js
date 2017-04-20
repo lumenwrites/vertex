@@ -27,8 +27,7 @@ class Header extends Component {
 	/* action creator will grab the post with this id from the API   */
 	/* and send it to the reducer */
 	/* reducer will add it to the state */
-	/* this.props.fetchCategories();*/
-	/* this.props.fetchSettings();	*/
+	this.props.fetchSettings();	
     }
 
     componentDidUpdate() {
@@ -67,17 +66,17 @@ class Header extends Component {
     }
     
     renderCategories(){
-	const categories = this.props.categories.results;
-	/* console.log("Rendering categories: " + categories);*/
+	const categories = this.props.settings.categories;
+	console.log("Rendering categories: " + categories);
 
 	if (!categories || categories.length == 0) { return null; };
 
 	const categories_list = categories.map((category) => {
 	    /* console.log("Looping over categories. Category: " + category);*/
 	    return (
-		<li key={category.slug}>
-		    <Link to={'/category/' + category.slug}>
-		    {category.title}
+		<li key={category}>
+		    <Link to={'/tag/' + category}>
+		    {category}
 		    </Link>
 		</li>
 	    );
@@ -117,6 +116,7 @@ class Header extends Component {
 			</div>
 			<div className="col-xs-12 col-sm-6 main-menu">
 			    <div className="menu">
+				{ this.renderCategories() }
 				<a onClick={this.openModal}>
 				    Subscribe
 				</a>
@@ -145,9 +145,8 @@ class Header extends Component {
 function mapStateToProps(state) {
     return {
 	authenticated: state.auth.authenticated,
-	categories: state.categories.all,
 	settings: state.settings.all,
 	subscribed: state.profiles.subscribed
     };
 }
-export default connect(mapStateToProps, { fetchCategories, fetchSettings, subscribedClose })(Header);
+export default connect(mapStateToProps, { fetchSettings, subscribedClose })(Header);

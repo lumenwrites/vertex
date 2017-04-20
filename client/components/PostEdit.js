@@ -21,18 +21,21 @@ class PostEdit extends Component {
     constructor(props){
 	super(props);
 	/* Set empty state to avoid errors before post is fetched */
-	this.state = { body:"",
-		       published: false,
-		       tags: "",
-		       category: ""};
+	this.state = {
+	    body:"",
+	    published: false,
+	    tags: ""
+	};
 	
 	/* So that I would be able to access this component with "this"
 	   inside the functions: */
 	this.onTagsChange = this.onTagsChange.bind(this);
-	this.onCategoryChange = this.onCategoryChange.bind(this);
 	this.onPublishClick = this.onPublishClick.bind(this);		
     }
-    
+
+    componentDidUpdate(prevProps){
+	this.editor.simplemde.codemirror.options.extraKeys['Tab'] = false;
+    }
     componentWillMount() {
 	/* this.props.params.slug is the post slug passed here by the router.
 	   If it's there - I want to fetch the post,
@@ -47,7 +50,6 @@ class PostEdit extends Component {
 	    /* Which will be rendered into the form */
 	    this.props.fetchPost(this.props.params.slug);
 	}
-	this.props.fetchCategories();
     }
 
 
@@ -56,18 +58,13 @@ class PostEdit extends Component {
     onTagsChange(event) {
 	this.setState({ tags: event.target.value });
     };
-    onCategoryChange(event) {
-	const selectedCategory = ReactDOM.findDOMNode(this.select).value;
-	console.log("Selected category: " + selectedCategory);
-	this.setState({ category: selectedCategory });	
-    };
     onPublishClick(event) {
 	/* Flip published state */
 	/* this.setState({ published: !this.state.published });	*/
 
-	const { body, tags, category } = this.state;
+	const { body, tags } = this.state;
 	const published = !this.state.published;
-	const post = { published, tags, category };
+	const post = { published, tags };
 	this.props.updatePost(this.props.params.slug, post);
     }
     onDelete() {
@@ -75,31 +72,6 @@ class PostEdit extends Component {
 	this.props.deletePost(this.props.params.slug);
     }
     
-
-    renderCategories(){
-	const categories = this.props.categories.results;
-
-	if (!categories || categories.length == 0) { return null; };
-
-	const categories_list = categories.map((category) => {
-	    return (
-		<option key={category.slug} value={category.slug}>
-			{category.title}
-		</option>
-	    );
-	});
-
-	return (
-	    <FormControl ref={select => { this.select = select }}
-	                 onChange={this.onCategoryChange}
-	                 value={this.state.category}
-	                 componentClass="select"
-	                 className="select-categories">
-		<option value="">Category</option>
-		{ categories_list }
-	    </FormControl>
-	);
-    }
 
     renderDeleteButton () {
 	/* If I'm editing a post (and not creating a new one) - render delete button. */
@@ -136,23 +108,13 @@ class PostEdit extends Component {
 	const { postForm } = this.props;
 	var postLength = postForm.body.length + postForm.tags.length;
 
-	const categories = this.props.categories;
-	var noCategories = false;
-	if (categories.results) {
-	    /* If categories have been fetched - check if user has created any */
-	    if (categories.results.length == 0) {
-		/* If there are no categories -
-		   then we'll want tags input to be fullwidth */
-		noCategories = true;
-	    }
-	}
-
 	return (
 	    <div className="post-editor">
 		{/* Body */}
 		<SimpleMDE
 		    onChange={this.props.updatePostBody}
 		    value={this.props.postForm.body}
+		    ref={(input) => { this.editor = input; }} 
 		    options={{
 			spellChecker: false,
 			toolbar: false,
@@ -164,14 +126,18 @@ class PostEdit extends Component {
 			    delay: 1000,
 			    uniqueId: "NewPost",
 			    delay: 1000,
-			},				
+			},
+			indentWithTabs: false,
+			tabSize: 4,
+			shortcuts: {
+			    "indent": null //unbind tab
+			}
 		    }}/>
 		{/* Tags.
 		    If there are no categories - I'm not rendering
 		    the categories selector, so I need to make the
 		    width 100%. */}			
-		<FormControl className={"post-tags " +
-		     (noCategories ? "force-fullwidth" : "")}
+		<FormControl className={"post-tags force-fullwidth"}
 			     type="text"
 			     placeholder="tag1, tag2, tag3"
 			     value={this.props.postForm.tags}
@@ -196,7 +162,6 @@ function mapStateToProps(state) {
     return {
 	post:state.posts,
 	postForm:state.postForm,	
-	categories: state.categories.all
     };
 }
 
