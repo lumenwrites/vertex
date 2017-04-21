@@ -21,10 +21,9 @@ class Editor extends Component {
 	/* Clean the form */
 	this.props.updatePostBody("");
 	this.props.updatePostTags("");	   
-	console.log("Props " + JSON.stringify(this.props));
+	/* console.log("Props " + JSON.stringify(this.props));*/
 	if (this.props.autopublish) {
-	    /* If I'm writing a new post in the big editor,
-	       by default it's unpublished.*/
+	    /* If I'm writing a new post from the timeline, I publish it by default.*/
 	    this.props.setPublished(true);
 	}
 	if (this.props.params.slug) {
@@ -85,17 +84,21 @@ class Editor extends Component {
 		    { postLength }
 		</div>
 
-	    { !this.props.params.slug ?
-	     <Button className="post-button" bsStyle="primary"
-		     onClick={()=>this.props.createPost(this.props.postForm)}>
-		 { this.props.autopublish ?
-		   "Post" : "Save" }
-	     </Button>
-	     :
-	     <Button bsStyle="primary"
-		     onClick={()=>this.props.updatePost(this.props.params.slug,
-							this.props.postForm)}>
-		 Save
+	    { this.props.params.slug ?
+	      <Button bsStyle="primary"
+		      onClick={()=>this.props.updatePost(this.props.params.slug,
+							 this.props.postForm)}>
+		  {/* If there's a slug, that means I'm editing a post. */}
+		  Save
+	      </Button>
+              :
+	      <Button className="post-button" bsStyle="primary"
+		      onClick={()=>this.props.createPost(this.props.postForm)}>
+		  {/* If there's no slug - I am creating a new post.
+		      If the post is published automatically, I call the button "Post".
+		      Otherwise I "Save" an unpublished draft. */}
+		  { this.props.autopublish ?
+		    "Post" : "Save" }
 	     </Button>
 	    }
 
