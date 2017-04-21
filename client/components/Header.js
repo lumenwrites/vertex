@@ -99,6 +99,7 @@ class Header extends Component {
 
     
     render() {
+	const title = this.props.settings.title;
 	return (
 	    <header>
 		<Modal show={this.state.showModal}
@@ -112,8 +113,9 @@ class Header extends Component {
 		    <div className="row">      
 			<div className="col-xs-12 col-sm-6 search">
 			    <Link className="logo" to={'/'}>
-				<img src="/media/images/screaming-sun.png"/>
-				lumen<span className="bold">writes</span>
+				<img src="/media/images/logo.png"/>
+				<span className="title"
+				     dangerouslySetInnerHTML={{__html: title}}></span>
 			    </Link>
 			</div>
 			<div className="col-xs-12 col-sm-6 main-menu">

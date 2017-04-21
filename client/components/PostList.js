@@ -86,19 +86,19 @@ class PostList extends Component {
     renderMetaInfo () {
 	const settings =  this.props.settings;
 
-	if (!settings.title ) { return null; }
+	if (!settings.metaTitle ) { return null; }
 
 	return (
             <MetaTags>
 		{/* Main */}
-		<title>{settings.title}</title>
-		<meta name="author" content={settings.author} />  
+		<title>{settings.metaTitle}</title>
+		<meta name="author" content={settings.metaAuthor} />  
 		<meta name="description"
-		      content={settings.description} />
+		      content={settings.metaDescription} />
 		<meta name="keywords"
-		      content={settings.keywords} />
+		      content={settings.metaKeywords} />
 		{/* Facebook */}
-		<meta property="og:title" content={settings.title} />
+		<meta property="og:title" content={settings.metaTitle} />
 		<meta property="og:image" content={settings.image_social} />
 		{/* Twitter */}
 		<meta property="twitter:card" content="summary_large_image" />
