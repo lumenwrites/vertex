@@ -20,33 +20,25 @@ class Editor extends Component {
     componentWillMount() {
 	/* Clean the form */
 	this.props.updatePostBody("");
-	this.props.updatePostTags("");	    
-
+	this.props.updatePostTags("");	   
+	console.log("Props " + JSON.stringify(this.props));
+	if (this.props.autopublish) {
+	    /* If I'm writing a new post in the big editor,
+	       by default it's unpublished.*/
+	    this.props.setPublished(true);
+	}
 	if (this.props.params.slug) {
 	    /* If there's slug - fetch post and put it into the form. */
 	    this.props.fetchPost(this.props.params.slug);
 	}
     }
 
-
-    renderPublishButton () {
-	if (!this.props.post) {return null;}
-	console.log("State: \n" + JSON.stringify(this.state));
-	if (!this.props.postForm.published) {
-	    return (	
-		    <Button onClick={
-			()=>this.props.publishPost(this.props.params.slug)}>
-			Publish</Button>
-	    );
-	    } else {
-		return (
-		    <Button onClick={
-			()=>this.props.publishPost(this.props.params.slug)}>
-			Un-Publish</Button>
-		);
-	}
+    onPublishClick() {
+	var post = this.props.postForm;
+	post.published = !this.props.postForm.published;
+	console.log("Updating post " + JSON.stringify(post));
+	this.props.updatePost(this.props.params.slug, post);
     }
-
     
     render() {
 	/* Grabbing the post from the redux state
@@ -64,7 +56,7 @@ class Editor extends Component {
 		    ref={(input) => { this.editor = input; }} 
 		    options={{
 			spellChecker: false,
-			toolbar: this.props.params.slug ?
+			toolbar: this.props.params.slug || this.props.route ?
 				 defaultToolbar : false,
 			status: false,
 			placeholder: "Write here... (can use markdown)",
@@ -93,10 +85,11 @@ class Editor extends Component {
 		    { postLength }
 		</div>
 
-	    {!this.props.params.slug ?
+	    { !this.props.params.slug ?
 	     <Button className="post-button" bsStyle="primary"
 		     onClick={()=>this.props.createPost(this.props.postForm)}>
-		 Post
+		 { this.props.autopublish ?
+		   "Post" : "Save" }
 	     </Button>
 	     :
 	     <Button bsStyle="primary"
@@ -115,14 +108,11 @@ class Editor extends Component {
 			 Delete Post
 		     </Button>
 
-		     {/*  
-		     <div className="right">
-			 <IndexLinkContainer to={{ pathname: '/'}}>
-			     <Button type="submit">Cancel</Button>
-			 </IndexLinkContainer> &nbsp;
-			 { this.renderPublishButton() }
-		     </div>
-		       */}
+
+		     <Button className="right" onClick={this.onPublishClick.bind(this)}>
+		         {!this.props.postForm.published ? "Publish" : "Un-Publish" }
+	             </Button>
+		 
 		     <div className="clearfix"></div>
 		     <br/>
 		 </div>

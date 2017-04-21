@@ -25,6 +25,14 @@ export function updatePostTags(value) {
 }
 
 
+export function setPublished(published) {
+    return {
+	type: 'SET_PUBLISHED',
+	payload: published
+    }
+}
+
+
 export function fetchPosts(filter) {
     var posts_url = `${API_URL}/posts/`;
     var page_url = "";

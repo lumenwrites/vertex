@@ -136,12 +136,12 @@ class Post extends Component {
 			<i className="fi-arrow-up"></i> 3
 		    </span>
 		      */}
-		    { !this.props.published  && false ?
+		    { !this.props.published ?
 		      <Label bsStyle="default" className="label-draft">
 			  Draft
 		      </Label>
 		      : null }		    
-		    { this.props.authenticated && false ?
+		    { this.props.authenticated ?
 		      <Link to={"/post/"+this.props.slug+"/edit"} className="icon">
 			  <i className="fa fa-pencil"></i>
 		      </Link>

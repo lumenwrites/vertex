@@ -27,7 +27,7 @@ if (typeof require.ensure !== 'function') {
 export default (
     <Route path="/" component={Main}>
 	<IndexRoute component={PostList} />
-	<Route path="post/new" component={RequireAuth(Editor)} />
+	<Route path="write" component={RequireAuth(Editor)} />
 	<Route path="post/:slug" component={PostDetail} />
 	<Route path="category/:category" component={PostList} />
 	<Route path="tag/:tag" component={PostList} />		
