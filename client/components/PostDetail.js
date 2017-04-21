@@ -49,36 +49,35 @@ class PostDetail extends Component {
 	const truncate_length = 160;
 	const description = body.substring(0, truncate_length - 3) + "...";
 
+	var firstline = post.body.split('\n')[0];
+	var title = firstline.substring(0, 80);	
+	
 	/* Keywords */
 	var post_tags = "";
-	var post_category = "";	
 	if (post.tags) {
 	    post_tags = post.tags.map((tag) => {
 		return tag.title;
 	    }).join(",");
 	}
-	if (post.category) {
-	    post_category = post.category.title;
-	}
-	const keywords = settings.keywords + ',' + post_category + ',' + post_tags
+	const keywords = settings.metaKeywords + ',' + post_tags
 
 	if (!settings.title) { return null; }
 
 	return (
             <MetaTags>
 		{/* Main */}
-		<title>{post.title}</title>
-		<meta name="author" content={settings.author} />  
+		<title>{title}</title>
+		<meta name="author" content={settings.metaAuthor} />  
 		<meta name="description"
 		      content={description} />
 		<meta name="keywords"
 		      content={keywords} />		
 		{/* Facebook */}
-		<meta property="og:title" content={post.title} />
-		<meta property="og:image" content={settings.image_social} />
+		<meta property="og:title" content={title} />
+		<meta property="og:image" content={settings.metaSocialImage} />
 		{/* Twitter */}
 		<meta property="twitter:card" content="summary_large_image" />
-		<meta property="twitter:image" content={settings.image_social} />
+		<meta property="twitter:image" content={settings.metaSocialImage} />
             </MetaTags>
 	);
     }

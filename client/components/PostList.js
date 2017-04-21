@@ -99,10 +99,10 @@ class PostList extends Component {
 		      content={settings.metaKeywords} />
 		{/* Facebook */}
 		<meta property="og:title" content={settings.metaTitle} />
-		<meta property="og:image" content={settings.image_social} />
+		<meta property="og:image" content={settings.metaSocialImage} />
 		{/* Twitter */}
 		<meta property="twitter:card" content="summary_large_image" />
-		<meta property="twitter:image" content={settings.image_social} />
+		<meta property="twitter:image" content={settings.metaSocialImage} />
             </MetaTags>
 	);
     }

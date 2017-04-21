@@ -12,6 +12,9 @@ import routes from './routes';
 
 // Styles
 import './styles/bootstrap.min.css';
+import './styles/font-awesome.min.css';
+import './styles/foundation-icons.css';
+import './styles/simplemde.min.css';
 import './styles/style.scss';
 
 

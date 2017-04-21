@@ -151,7 +151,11 @@ class Post extends Component {
 			 className="icon">
 			  <i className="fa fa-trash"></i>
 		      </a>
-		      : null }		
+		      : null }
+		    <Link to={"/post/"+this.props.slug} className="icon">
+			<i className="fa fa-link"></i>
+		    </Link>
+		
 
 		</div>
 		<div className="clearfix"></div>
