@@ -23,7 +23,7 @@ class Editor extends Component {
 	this.props.updatePostTags("");	   
 	/* console.log("Props " + JSON.stringify(this.props));*/
 	if (this.props.autopublish) {
-	    /* If I'm writing a new post from the timeline, I publish it by default.*/
+	    /* If I'm writing a new post from the timeline, it's published by default.*/
 	    this.props.setPublished(true);
 	}
 	if (this.props.params.slug) {
