@@ -316,9 +316,8 @@ p {
     color: $black;
 }
 
-.force-fullwidth {
-    width: calc(100% - 60px - 60px)!important;
-}
+
+
 
 span.avoidwrap {
     display:inline-block; 
@@ -358,7 +357,9 @@ span.avoidwrap {
 .post-tags {
     border-top:none;    
     float: left;
-    width: calc(100% - 60px - 60px); /* - 200px*/
+    /* Tags input is fullwidth,
+       minus the width of character counter and a "Post" button */
+    width: calc(100% - 60px - 60px);
 }
 .select-categories {
     border-top:none;        

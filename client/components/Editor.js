@@ -13,7 +13,7 @@ import SimpleMDE from 'react-simplemde-editor';
 
 class Editor extends Component {
     componentDidUpdate(prevProps){
-	/* Disable tab key */
+	/* Disable tab key in the editor */
 	this.editor.simplemde.codemirror.options.extraKeys['Tab'] = false;
     }
 
@@ -22,30 +22,38 @@ class Editor extends Component {
 	this.props.updatePostBody("");
 	this.props.updatePostTags("");	   
 	/* console.log("Props " + JSON.stringify(this.props));*/
+
 	if (this.props.autopublish) {
 	    /* If I'm writing a new post from the timeline, it's published by default.*/
 	    this.props.setPublished(true);
 	}
+
 	if (this.props.params.slug) {
-	    /* If there's slug - fetch post and put it into the form. */
+	    /* If there's slug - that means I'm editing a post,
+	       so fetch the post and put it into the redux postForm. */
 	    this.props.fetchPost(this.props.params.slug);
 	}
     }
 
     onPublishClick() {
 	var post = this.props.postForm;
+	/* When I click Publish/Un-Publish button
+	   - flip the "published" parameter, and save the post.*/
 	post.published = !this.props.postForm.published;
-	console.log("Updating post " + JSON.stringify(post));
 	this.props.updatePost(this.props.params.slug, post);
     }
     
     render() {
-	/* Grabbing the post from the redux state
-	   (connected to this component at the end of this file) */
+	/* Grabbing the post from the redux state */
 	const { postForm } = this.props;
+	/* Calculate post length for character counter */
 	var postLength = postForm.body.length + postForm.tags.length;
 
-	var defaultToolbar = ["bold", "italic", "heading", "|", "quote", "unordered-list", "ordered-list", "|", "link", "image", "|", "preview", "side-by-side", "fullscreen", "guide"];
+	/* Customize toolbar for simplemde */
+	var defaultToolbar = ["bold", "italic", "heading", "|",
+			      "quote", "unordered-list", "ordered-list", "|",
+			      "link", "image", "|",
+			      "preview", "side-by-side", "fullscreen", "guide"];
 	return (
 	    <div className="post-editor">
 		{/* Body */}
@@ -55,17 +63,14 @@ class Editor extends Component {
 		    ref={(input) => { this.editor = input; }} 
 		    options={{
 			spellChecker: false,
+			/* If I'm on "/post/post-slug/edit", or on "/write"
+			   then I want to see the toolbar.
+			   Otherwise I'm on the timeline and I want to hide it.*/
 			toolbar: this.props.params.slug || this.props.route ?
 				 defaultToolbar : false,
 			status: false,
 			placeholder: "Write here... (can use markdown)",
 			initialValue: this.props.postForm.body,
-			autosave: {
-			    enabled: false,
-			    delay: 1000,
-			    uniqueId: "NewPost",
-			    delay: 1000,
-			},
 			indentWithTabs: false,
 			tabSize: 4
 		    }}/>
@@ -73,7 +78,7 @@ class Editor extends Component {
 		    If there are no categories - I'm not rendering
 		    the categories selector, so I need to make the
 		    width 100%. */}			
-		<FormControl className={"post-tags force-fullwidth"}
+		<FormControl className={"post-tags"}
 			     type="text"
 			     placeholder="tag1, tag2, tag3"
 			     value={this.props.postForm.tags}
@@ -105,21 +110,22 @@ class Editor extends Component {
 	    <div className="clearfix"></div>
 	    
 	    {this.props.params.slug ?
-		 <div>
-		     <br/>
-		     <Button onClick={()=>this.props.deletePost(this.props.params.slug)}>
-			 Delete Post
-		     </Button>
+	     <div>
+		 {/* If I'm editing the post,
+		     I want to show Delete and Publish buttons. */}
+		 <br/>
+		 <Button onClick={()=>this.props.deletePost(this.props.params.slug)}>
+		     Delete Post
+		 </Button>
 
-
-		     <Button className="right" onClick={this.onPublishClick.bind(this)}>
-		         {!this.props.postForm.published ? "Publish" : "Un-Publish" }
-	             </Button>
+		 <Button className="right" onClick={this.onPublishClick.bind(this)}>
+		     {!this.props.postForm.published ? "Publish" : "Un-Publish" }
+	         </Button>
 		 
-		     <div className="clearfix"></div>
-		     <br/>
-		 </div>
-		: null}
+		 <div className="clearfix"></div>
+		 <br/>
+	     </div>
+	     : null}
 	    </div>
 	);
     }
