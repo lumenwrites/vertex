@@ -24,7 +24,7 @@ export function getFeed(req, res) {
 	console.log("Posts filtered by tag: " + tag);
 	filter = {tags:{$all:tag}};
     }
-
+    filter.published = true;
     Post.find(filter).sort('-dateAdded').exec((err, posts) => {
 	if (err) {
 	    res.status(500).send(err);
