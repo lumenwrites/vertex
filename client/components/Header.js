@@ -11,7 +11,7 @@ import { Modal } from 'react-bootstrap';
 /* import LogoImage from '../../img/screaming-sun.png'*/
 import SubscribeForm from './SubscribeForm';
 
-import FontAwesome from 'react-fontawesome';
+/* import FontAwesome from 'react-fontawesome';*/
 
 class Header extends Component {
     constructor(props){
@@ -149,7 +149,7 @@ class Header extends Component {
 function mapStateToProps(state) {
     return {
 	authenticated: state.auth.authenticated,
-	settings: state.settings.all,
+	settings: state.settings,
 	subscribed: state.profiles.subscribed
     };
 }

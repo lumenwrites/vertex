@@ -60,7 +60,7 @@ class About extends Component {
 
 
 function mapStateToProps(state) {
-    return { settings: state.settings.all };
+    return { settings: state.settings };
 }
 
 export default connect(mapStateToProps, { fetchSettings })(About);

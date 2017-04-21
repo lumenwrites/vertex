@@ -61,7 +61,10 @@ class PostDetail extends Component {
 	}
 	const keywords = settings.metaKeywords + ',' + post_tags
 
-	if (!settings.title) { return null; }
+	/* console.log("Meta" + JSON.stringify(settings));*/
+
+	if (!settings.metaTitle ) { return null; }
+
 
 	return (
             <MetaTags>

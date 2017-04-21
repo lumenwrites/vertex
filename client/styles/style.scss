@@ -380,7 +380,7 @@ span.avoidwrap {
     background: white;
 }
 .CodeMirror, .CodeMirror-scroll {
-	min-height: 50px;
+	min-height: 50px!important;
 }
 .CodeMirror {
     border-radius: 0;
