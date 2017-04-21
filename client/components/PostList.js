@@ -60,6 +60,7 @@ class PostList extends Component {
 	/* If there are no posts in the state (haven't fetched them yet) -
 	   render an empty div in their place. */
 	if (!posts) { return ( <div></div> ); };
+	if (posts.length == 0) { return ( <div><br/><p>No posts here yet.</p></div> ); };
 	
 	return posts.map((post) => {
 	    if (post.published || this.props.authenticated) {
