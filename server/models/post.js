@@ -5,7 +5,6 @@ const postSchema = new Schema({
     slug: { type: 'String', required: true },
     body: { type: 'String', required: true },
     tags: [String],
-    category: { type: 'String' },        
     published: { type: 'Boolean', default: true },   
     dateAdded: { type: 'Date', default: Date.now, required: true },
 });

@@ -4,48 +4,31 @@ import { fetchSettings } from '../actions/index';
 import { Link } from 'react-router';
 
 class Pagination extends Component {
-    renderPrev () {
-	const currentPage = parseInt(this.props.location.query.page ?
-				     this.props.location.query.page : 1);
-	const prevPage =  currentPage - 1;
-	
-	if (this.props.prev) {
-	    return (
-		<Link to={""}
-		      query={Object.assign({}, this.props.location.query, {page:prevPage})}>
-		    <i className="fa fa-chevron-left left"></i>    
-		</Link>
-	    )
-	}
-    }
-
-    renderNext () {
-	const currentPage = parseInt(this.props.location.query.page ?
-				     this.props.location.query.page : 1);
-	const nextPage = currentPage + 1;
-	if (this.props.next) {
-	    return (
-		<Link to={""}
-		      query={Object.assign({}, this.props.location.query, {page:nextPage})}>
-		    <i className="fa fa-chevron-right right"></i>    
-		</Link>
-	    )
-	}
-    }
     render() {
-	const currentPage = parseInt(this.props.location.query.page ?
-				     this.props.location.query.page : 1);
-	const paginated = (this.props.prev || this.props.next)? true : false;
-	if (!paginated) { return null; }
+	var currentPage = parseInt(this.props.location.query.page ?
+				   this.props.location.query.page : 1);
+	var prevPage = currentPage - 1;
+	var nextPage = currentPage + 1;	
 
 	return (
 	    <div className="pagination panel">
 		<span className="step-links">
-		    { this.renderPrev () }
+		    { currentPage > 1 ?
+		    <Link to={""}
+			  query={Object.assign({}, this.props.location.query,
+					       {page:prevPage})}>
+			<i className="fa fa-chevron-left left"></i>    
+		    </Link>
+		    : null }
 		    <span className="current">
 			Page {currentPage}
 		    </span>
-		    { this.renderNext () }		    
+		    <Link to={""}
+			  query={Object.assign({}, this.props.location.query,
+					       {page:nextPage})}>
+			<i className="fa fa-chevron-right right"></i>    
+		    </Link>
+
 		</span>
 	    </div>
 	);

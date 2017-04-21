@@ -22,17 +22,7 @@ const userSchema = new Schema({
 	type: String,
 	required: true,
 	minlength: 4
-    },
-    tokens: [{
-	access: {
-	    type: String,
-	    required: true
-	},
-	token: {
-	    type: String,
-	    required: true	    
-	}
-    }]
+    }
 });
 
 

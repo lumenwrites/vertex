@@ -40,10 +40,6 @@ export function fetchPosts(filter) {
 	if (filter.currentPage) {
 	    page_url = "?page=" + filter.currentPage;
 	}
-	if (filter.category) {
-	    /* Posts filtered by category */
-	    posts_url = `${API_URL}/category/${filter.category}`
-	}
 	if (filter.tag) {
 	    /* Posts filtered by tag */
 	    posts_url = `${API_URL}/posts?tag=${filter.tag}`

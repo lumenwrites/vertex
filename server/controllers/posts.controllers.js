@@ -5,6 +5,7 @@ import sanitizeHtml from 'sanitize-html';
 
 /* Get all posts */
 export function getPosts(req, res) {
+    /* Filter by tag */
     var filter = {}
     if (req.query.tag) {
 	var tag = req.query.tag;
@@ -12,12 +13,20 @@ export function getPosts(req, res) {
 	filter = {tags:{$all:tag}};
     }
 
-    Post.find(filter).sort('-dateAdded').exec((err, posts) => {
-	if (err) {
-	    res.status(500).send(err);
-	}
-	res.json(posts.slice(0,12));
-    });
+    /* Pagination */
+    var perPage = 12;
+    var page = 0;
+    if (req.query.page) {
+	page = req.query.page - 1;
+    }
+    
+    Post.find(filter)
+	.limit(perPage)
+	.skip(perPage*page)
+	.sort('-dateAdded').exec((err, posts) => {
+	    if (err) { res.status(500).send(err); }
+	    res.json(posts);
+	});
 }
 
 /* Get a single post */
