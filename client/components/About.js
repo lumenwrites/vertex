@@ -58,6 +58,8 @@ class About extends Component {
     }
 }
 
+// Actions required to provide data for this component to render in sever side.
+About.need = [() => { return fetchSettings(); }];
 
 function mapStateToProps(state) {
     return { settings: state.settings };

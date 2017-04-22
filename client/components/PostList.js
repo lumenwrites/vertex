@@ -123,6 +123,11 @@ class PostList extends Component {
     }
 }
 
+// Actions required to provide data for this component to render in sever side.
+PostList.need = [
+    () => { return fetchSettings(); },
+    () => { return fetchPosts(); },
+];
 
 function mapStateToProps(state) {
     return { posts: state.posts,
