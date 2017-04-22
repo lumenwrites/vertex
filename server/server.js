@@ -89,33 +89,27 @@ function renderClient(req, res, next) {
 	/* if (err) { return res.status(500).end(renderError(err)); }
 	   if (!renderProps) { return next(); }*/
 
-	/* Create a new Redux store*/
+	/* Create a new empty Redux store*/
 	const store = configureStore()
-	/* This function will go and fetch all the data I need, and put it into the store
-	   I've just created. */
+	/* This function will execute all the action creators I need,
+	   and wait for them fetch all the data and put it into the store. */
 	return fetchComponentData(store, renderProps.components, renderProps.params)
 	    .then(() => {
-		/* console.log("Fetching data!");
-		   console.log("Store: " + JSON.stringify(store));		*/
-		// Render my components into html
+		/* Now store is filled with fetched data */
+		/* Pass it to the provider, which will use it to render components. */
 		const html = renderToString(
 		    <Provider store={store}>
 			<RouterContext {...renderProps} />
 		    </Provider>
 		)
 
-		// Grab the initial state from our Redux store
+		// Grab the state from the store
 		const initialState = store.getState();
-		console.log("State after fetching: " + JSON.stringify(initialState));
+		/* console.log("State after fetching: " + JSON.stringify(initialState));*/
 
-		
-		res
-		    .set('Content-Type', 'text/html')
-		    .status(200)
-		    .end(renderFullPage(html, initialState));
 		/* Take html made from my components, pass it to the function that
 		   will render the whole page, with header and all */
-		/* res.send(renderFullPage(html, initialState))*/
+		res.send(renderFullPage(html, initialState))
 	    });
     });
 }
@@ -125,12 +119,14 @@ function renderFullPage(html, initialState) {
     <!doctype html>
     <html>
       <head>
+        <link rel="stylesheet" href="/styles/style.css">
       </head>
       <body>
         <div id="root">${html}</div>
         <script>
           window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};
         </script>
+        <script src="/bundle.js"></script>
        </body>
     </html>
     `

@@ -181,7 +181,7 @@ export function fetchSettings() {
 export function fetchSettings() {
     return (dispatch) => {
 	return callApi('settings').then(res => {
-	    console.log("apiCaller response: " + JSON.stringify(res));
+	    /* console.log("apiCaller response: " + JSON.stringify(res));*/
 	    dispatch({
 		type: 'FETCH_SETTINGS',
 		payload: res

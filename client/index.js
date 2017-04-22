@@ -10,13 +10,6 @@ import rootReducer from './reducers/rootReducer';
 // Import Routes
 import routes from './routes';
 
-// Styles
-import './styles/bootstrap.min.css';
-import './styles/font-awesome.min.css';
-import './styles/foundation-icons.css';
-import './styles/simplemde.min.css';
-import './styles/style.scss';
-
 // Configrue and initialize store
 import { configureStore } from './store';
 const store = configureStore(window.__INITIAL_STATE__);

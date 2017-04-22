@@ -1,8 +1,3 @@
-var cssModulesIdentName = '[name]__[local]__[hash:base64:5]';
-if (process.env.NODE_ENV === 'production') {
-  cssModulesIdentName = '[hash:base64]';
-}
-
 module.exports = {
   output: {
     publicPath: '/',
@@ -16,6 +11,7 @@ module.exports = {
   },
   module: {
       loaders: [
+	  /* 
           {
               test: /\.scss$/,
               loaders: ['style', 'css', 'sass']
@@ -24,6 +20,8 @@ module.exports = {
 	      test: /\.css$/,
 	      loader: 'style-loader!css-loader'
 	  },
+	  */	  
+
 	  {
 	      test: /\.(png|woff|woff2|eot|ttf|svg)$/,
 	      loader: 'url-loader?limit=100000'
