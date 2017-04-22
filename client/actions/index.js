@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { browserHistory } from 'react-router';
 
+/* Isomorphic api caller. Magically fetches data, both on client and server. */
+import callApi from '../utils/apiCaller';
 
 export var API_URL = '/api/v1';
 /* console.log("NODE_ENV " + process.env.NODE_ENV);*/
@@ -162,16 +164,29 @@ export function fetchCategories() {
     };
 }
 
+
+/* 
 export function fetchSettings() {
     return function(dispatch) {    
 	axios.get(`${API_URL}/settings/`)
 	     .then(response => {
-		 /* console.log("Settings fetched: " + JSON.stringify(response));*/
 		 dispatch({
 		     type: 'FETCH_SETTINGS',
 		     payload: response
 		 });
 	     });
+    };
+}
+*/
+
+export function fetchSettings() {
+    return (dispatch) => {
+	return callApi('settings').then(res => {
+	    dispatch({
+		type: 'FETCH_SETTINGS',
+		payload: res
+	    });
+	});
     };
 }
 
