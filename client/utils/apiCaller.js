@@ -11,6 +11,7 @@ var API_URL = 'http://localhost:3000/api/v1';
 
 
 export default function callApi(endpoint, method = 'get', body) {
+    console.log("Calling api " + endpoint);
     return fetch(`${API_URL}/${endpoint}`, {
 	headers: { 'content-type': 'application/json' },
 	method,
