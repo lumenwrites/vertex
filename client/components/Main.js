@@ -5,10 +5,6 @@ import { connect } from 'react-redux';
 /* import Helmet from 'react-helmet';*/
 import { Grid, Row, Col } from 'react-bootstrap';
 
-/* Styles */
-import '../styles/bootstrap.min.css';
-import '../styles/style.scss';
-
 /* My Components */
 import Header from './Header';
 import Footer from './Footer';
@@ -34,29 +30,3 @@ export default class Main extends Component {
 	);
     }
 }
-/* 
-<div>
-<Helmet
-title="MERN Starter - Blog Main"
-titleTemplate="%s - Blog Main"
-meta={[
-    { charset: 'utf-8' },
-    {
-        'http-equiv': 'X-UA-Compatible',
-        content: 'IE=edge',
-    },
-    {
-        name: 'viewport',
-        content: 'width=device-width, initial-scale=1',
-    },
-]}
-/>
-<Header
-toggleAddPost={this.toggleAddPostSection}
-/>
-<div className={styles.container}>
-{this.props.children}
-</div>
-<Footer />
-</div>
-*/

@@ -19,8 +19,12 @@ if (process.env.NODE_ENV === 'production') {
 		    "verbose": false
 		}
 	    ]
-	]
+	],
+	"presets": ["react", "es2015", "stage-2"],
     });
+    /* require('babel-register')({
+       "presets": ["es2015"]
+     * });    */
     require('babel-polyfill');
 
     require('./server');

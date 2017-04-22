@@ -17,7 +17,6 @@ import './styles/foundation-icons.css';
 import './styles/simplemde.min.css';
 import './styles/style.scss';
 
-
 // Configrue and initialize store
 import { configureStore } from './store';
 const store = configureStore(window.__INITIAL_STATE__);

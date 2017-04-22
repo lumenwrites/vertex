@@ -15,33 +15,23 @@ module.exports = {
     ],
   },
   module: {
-    loaders: [ {
-            test: /\.css$/,
-            include: /node_modules/,
-            loaders: ['style-loader', 'css-loader'],
-	}, {
-            test: /\.jsx*$/,
-            exclude: [/node_modules/, /.+\.config.js/],
-            loader: 'babel',
-	}, {
-            test: /\.(jpe?g|gif|png|svg|woff|woff2|eot|ttf)$/i,
-            loader: 'url-loader?limit=10000',
-	}, {
-            test: /\.scss$/,
-            loaders: ['style', 'css', 'sass']
-	}, {
-            test: /\.json$/,
-            loader: 'json-loader',
-	},
+      loaders: [
+          {
+              test: /\.scss$/,
+              loaders: ['style', 'css', 'sass']
+          },
+	  {
+	      test: /\.css$/,
+	      loader: 'style-loader!css-loader'
+	  },
+	  {
+	      test: /\.(png|woff|woff2|eot|ttf|svg)$/,
+	      loader: 'url-loader?limit=100000'
+	  },
+	  {
+	      test: /\.json$/,
+	      loader: 'json-loader'
+	  }	    
     ],
-  },
-  postcss: () => [
-    postcssFocus(),
-    cssnext({
-      browsers: ['last 2 versions', 'IE > 10'],
-    }),
-    postcssReporter({
-      clearMessages: true,
-    }),
-  ],
+  }
 };
