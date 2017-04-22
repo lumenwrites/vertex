@@ -18,13 +18,13 @@ RUN apt-get install -y nodejs
 RUN mkdir -p $PROJECT_DIR
 WORKDIR $PROJECT_DIR
 COPY . .
+RUN npm install
 
 # Install dependencies
-WORKDIR $CLIENT_DIR
-RUN npm install		
+# WORKDIR $CLIENT_DIR
+# RUN npm install		
 WORKDIR $SERVER_DIR
-RUN npm install
-RUN npm build
+# RUN npm build
     
 # Port to expose
 EXPOSE 3000
