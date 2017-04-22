@@ -95,8 +95,8 @@ function renderClient(req, res, next) {
 	   I've just created. */
 	return fetchComponentData(store, renderProps.components, renderProps.params)
 	    .then(() => {
-		console.log("Fetched data!");
-		console.log("Store: " + JSON.stringify(store));		
+		/* console.log("Fetching data!");
+		   console.log("Store: " + JSON.stringify(store));		*/
 		// Render my components into html
 		const html = renderToString(
 		    <Provider store={store}>
@@ -108,9 +108,14 @@ function renderClient(req, res, next) {
 		const initialState = store.getState();
 		console.log("State after fetching: " + JSON.stringify(initialState));
 
+		
+		res
+		    .set('Content-Type', 'text/html')
+		    .status(200)
+		    .end(renderFullPage(html, initialState));
 		/* Take html made from my components, pass it to the function that
 		   will render the whole page, with header and all */
-		res.send(renderFullPage(html, initialState))
+		/* res.send(renderFullPage(html, initialState))*/
 	    });
     });
 }

@@ -170,6 +170,7 @@ export function fetchSettings() {
     return function(dispatch) {    
 	axios.get(`${API_URL}/settings/`)
 	     .then(response => {
+		 console.log("axios response: " + JSON.stringify(response));
 		 dispatch({
 		     type: 'FETCH_SETTINGS',
 		     payload: response
@@ -182,6 +183,7 @@ export function fetchSettings() {
 export function fetchSettings() {
     return (dispatch) => {
 	return callApi('settings').then(res => {
+	    console.log("apiCaller response: " + JSON.stringify(res));
 	    dispatch({
 		type: 'FETCH_SETTINGS',
 		payload: res
