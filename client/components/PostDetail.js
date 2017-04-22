@@ -123,6 +123,12 @@ class PostDetail extends Component {
     }
 }
 
+// Actions required to provide data for this component to render in sever side.
+PostDetail.need = [
+    () => { return fetchSettings(); },
+    () => { return fetchPost(); },
+];
+
 function mapStateToProps(state) {
     return { post:state.post,
 	     settings: state.settings,

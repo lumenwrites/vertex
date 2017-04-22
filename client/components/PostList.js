@@ -74,7 +74,6 @@ class PostList extends Component {
 			  body={post.body}
 			  published={post.published}
 			  authenticated={this.props.authenticated}
-			  category={post.category}		      
 			  tags={post.tags}
 			  truncate={100}
 			  link={`/post/${post.slug}`}/>

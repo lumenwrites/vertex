@@ -62,18 +62,14 @@ export function fetchPosts(filter) {
 export function fetchPost(slug) {
     /* console.log(">>>> src/actions/index.js:");
      * console.log("Fetching post.");	    */
-    
-    return function(dispatch) {    
-	axios.get(`${API_URL}/posts/${slug}/`)
-	     .then(response => {
-		 /* console.log("Successfully fetched post.");
-		    console.log(response.data.body);*/
-		 
-		 dispatch({
-		     type: 'FETCH_POST',
-		     payload: response.data
-		 });
-	     });
+    return (dispatch) => {
+	return callApi(`posts/${slug}`).then(res => {
+	    /* console.log("apiCaller response: " + JSON.stringify(res));*/
+	    dispatch({
+		type: 'FETCH_POST',
+		payload: res
+	    });
+	});
     };
 }
 
@@ -145,21 +141,6 @@ export function deletePost(slug) {
 	     });
     };
     
-}
-
-
-
-export function fetchCategories() {
-    return function(dispatch) {    
-	axios.get(`${API_URL}/categories/`)
-	     .then(response => {
-		 /* console.log("Categories fetched: " + response);*/
-		 dispatch({
-		     type: 'FETCH_CATEGORIES',
-		     payload: response
-		 });
-	     });
-    };
 }
 
 

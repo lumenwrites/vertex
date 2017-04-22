@@ -146,6 +146,9 @@ class Header extends Component {
 }
 
 
+// Actions required to provide data for this component to render in sever side.
+Header.need = [() => { return fetchSettings(); }];
+
 function mapStateToProps(state) {
     return {
 	authenticated: state.auth.authenticated,
