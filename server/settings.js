@@ -6,7 +6,8 @@ var settings = {
     metaTitle: "Lumen Writes",
     metaDescription: "I make dumb jokes",
     metaAuthor: "Lumen",
-    metaKeywords: "Comedy, jokes, writing",                    
+    metaKeywords: "Comedy, jokes, writing",
+    googleAnalyticsCode: "",                        
 };
 
 settings.metaSocialImage = settings.domain + "/media/images/social.png";

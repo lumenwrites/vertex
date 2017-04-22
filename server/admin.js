@@ -4,23 +4,32 @@ const User = require('./models/user');
 // Connect to db.
 mongoose.Promise = global.Promise;
 var MONGO_DB_URL = process.env.MONGO_URL || 'mongodb://localhost:27017/vertex';
-console.log("Connecting to the db at " + MONGO_DB_URL);
 mongoose.connect(MONGO_DB_URL, (error) => {
-    if (error) {
-	console.error('Please make sure Mongodb is installed and running!'); 
-	throw error;
-    }
+    if (error) { throw error; }
     console.log("Connected to the db at " + MONGO_DB_URL + "!");
 });
 
+/* The first arg is the path to nodejs,
+   and the second arg is the location of the script you're executing. */
+const args = process.argv.slice(2);
 
-const email = "email@hello.com";
-const password = "hunter";
+if (args[0] == "createsuperuser") {
+    const email = args[1];
+    const password = args[2];
+    console.log(email)
+    console.log(password)
 
-const user = new User({
-    email: email,
-    password: password
-});
+    const user = new User({
+	email: email,
+	password: password
+    });
+
+    user.save((error, user) => {
+	if (error) { throw error; }
+	console.log("Created user " + JSON.stringify(user) + "!");
+    });
+}
 
 
-user.save()
+
+
