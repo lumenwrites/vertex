@@ -2,13 +2,9 @@ import axios from 'axios';
 import { browserHistory } from 'react-router';
 import { AUTH_USER, UNAUTH_USER, AUTH_ERROR, FETCH_MESSAGE } from './types';
 
-export var API_URL = '/api/v1';
-/* console.log("NODE_ENV " + process.env.NODE_ENV);*/
-if (process.env.NODE_ENV === 'development' || true) {
-    /* console.log("Connecting to API on localhost");*/
-    API_URL = 'http://localhost:3000/api/v1';
-}
-
+/* import {API_URL} from '../utils/apiCaller';*/
+var API_URL = '/api/v1';
+API_URL = 'https://lumenwrites.com/api/v1';
 export function signinUser({username, password}) {
     return function(dispatch) {
 	// send username/password
