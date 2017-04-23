@@ -5,6 +5,7 @@ import { browserHistory } from 'react-router';
 import callApi from '../utils/apiCaller';
 
 import {API_URL} from '../utils/apiCaller';
+console.log("API_URL " + API_URL);
 
 export function updatePostBody(value) {
     return {

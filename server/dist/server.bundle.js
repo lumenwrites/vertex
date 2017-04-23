@@ -113,6 +113,8 @@ var _apiCaller2 = _interopRequireDefault(_apiCaller);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /* Isomorphic api caller. Magically fetches data, both on client and server. */
+console.log("API_URL " + _apiCaller.API_URL);
+
 function updatePostBody(value) {
 			return {
 						type: 'UPDATE_POST_BODY',
@@ -1217,7 +1219,7 @@ var API_URL = 'https://lumenwrites.com/api/v1';
 if (process.env.NODE_ENV === 'development') {
 				API_URL = 'http://localhost:3000/api/v1';
 }
-/* console.log("API_URL " + API_URL);*/
+console.log("API_URL " + API_URL);
 
 function callApi(endpoint) {
 				var method = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'get';
@@ -1247,6 +1249,10 @@ function callApi(endpoint) {
 								return error;
 				});
 }
+
+module.exports = {
+				API_URL: API_URL
+};
 
 /***/ }),
 /* 22 */

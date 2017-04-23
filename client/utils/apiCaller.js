@@ -8,7 +8,7 @@ var API_URL = 'https://lumenwrites.com/api/v1';
 if (process.env.NODE_ENV === 'development') {
     API_URL = 'http://localhost:3000/api/v1';
 }
-/* console.log("API_URL " + API_URL);*/
+console.log("API_URL " + API_URL);
 
 
 export default function callApi(endpoint, method = 'get', body) {
@@ -32,3 +32,6 @@ export default function callApi(endpoint, method = 'get', body) {
 	);
 }
 
+module.exports = {
+    API_URL
+};
