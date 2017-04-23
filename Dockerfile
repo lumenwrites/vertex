@@ -6,6 +6,8 @@ ENV HOMEDIR=/home
 ENV PROJECT_DIR=/home/vertex
 ENV CLIENT_DIR=/home/vertex/client
 ENV SERVER_DIR=/home/vertex/server
+ENV PYTHON=$PYTHON:/usr/bin/python
+
 
 # Install basic apps
 RUN apt-get update && apt-get install -y emacs curl
