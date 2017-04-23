@@ -2,9 +2,8 @@ import axios from 'axios';
 import { browserHistory } from 'react-router';
 import { AUTH_USER, UNAUTH_USER, AUTH_ERROR, FETCH_MESSAGE } from './types';
 
-/* import {API_URL} from '../utils/apiCaller';*/
-var API_URL = '/api/v1';
-API_URL = 'https://lumenwrites.com/api/v1';
+import {API_URL} from '../utils/apiCaller';
+
 export function signinUser({username, password}) {
     return function(dispatch) {
 	// send username/password

@@ -86,8 +86,8 @@ function renderClient(req, res, next) {
        I pass routes to the match, which, in combination with RouterContext,
        makes router work properly, passing the urls sent to the server to react router.*/
     match({ routes, location: req.url }, (err, redirectLocation, renderProps) => {
-	/* if (err) { return res.status(500).end(renderError(err)); }
-	   if (!renderProps) { return next(); }*/
+	if (err) { return res.status(500).end(renderError(err)); }
+	if (!renderProps) { return next(); }
 
 	/* Create a new empty Redux store*/
 	const store = configureStore()

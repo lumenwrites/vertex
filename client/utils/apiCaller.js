@@ -4,25 +4,15 @@ import Config from '../../server/config';
 
 var API_URL = 'https://lumenwrites.com/api/v1';
 
-/* 
+
 if (process.env.NODE_ENV === 'development') {
     API_URL = 'http://localhost:3000/api/v1';
 }
-*/
-
-/* 
- * if (typeof window === 'undefined' || process.env.NODE_ENV === 'test') {
- *     API_URL = process.env.BASE_URL ||
- * 	      (`http://localhost:${process.env.PORT || Config.port}/api/v1`);
- *     
- * }*/
-/* console.log("NODE_ENV " + process.env.NODE_ENV);*/
-
-
+/* console.log("API_URL " + API_URL);*/
 
 
 export default function callApi(endpoint, method = 'get', body) {
-    console.log("Calling api " + endpoint);
+    /* console.log("Calling api " + API_URL+"/"+endpoint);*/
     return fetch(`${API_URL}/${endpoint}`, {
 	headers: { 'content-type': 'application/json' },
 	method,
