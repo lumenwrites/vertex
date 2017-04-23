@@ -18,6 +18,8 @@ class PostDetail extends Component {
 	/* action creator will grab the post with this id from the API   */
 	/* and send it to the reducer */
 	/* reducer will add it to the state */
+	
+	/* console.log("Post Detail " + this.props.params.slug);*/
 	this.props.fetchPost(this.props.params.slug);
 	this.props.fetchSettings();	
     }
@@ -124,10 +126,11 @@ class PostDetail extends Component {
 }
 
 // Actions required to provide data for this component to render in sever side.
-PostDetail.need = [
+PostDetail.need = [ 
     () => { return fetchSettings(); },
-    () => { return fetchPost(); },
+    (params) => { return fetchPost(params.slug); },
 ];
+
 
 function mapStateToProps(state) {
     return { post:state.post,

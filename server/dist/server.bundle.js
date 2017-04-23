@@ -100,21 +100,21 @@ exports.fetchSettings = fetchSettings;
 exports.createSubscriber = createSubscriber;
 exports.subscribedClose = subscribedClose;
 
-var _axios = __webpack_require__(24);
+var _axios = __webpack_require__(23);
 
 var _axios2 = _interopRequireDefault(_axios);
 
 var _reactRouter = __webpack_require__(3);
 
-var _apiCaller = __webpack_require__(21);
+var _apiCaller = __webpack_require__(20);
 
 var _apiCaller2 = _interopRequireDefault(_apiCaller);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-/* Isomorphic api caller. Magically fetches data, both on client and server. */
-console.log("API_URL " + _apiCaller.API_URL);
+/* console.log("API_URL " + API_URL);*/
 
+/* Isomorphic api caller. Magically fetches data, both on client and server. */
 function updatePostBody(value) {
 			return {
 						type: 'UPDATE_POST_BODY',
@@ -162,7 +162,8 @@ function fetchPosts(filter) {
 
 function fetchPost(slug) {
 			/* console.log(">>>> src/actions/index.js:");
-    * console.log("Fetching post.");	    */
+    * console.log("Fetching post. " + slug);	   */
+
 			return function (dispatch) {
 						return (0, _apiCaller2.default)('posts/' + slug).then(function (res) {
 									/* console.log("apiCaller response: " + JSON.stringify(res));*/
@@ -313,10 +314,16 @@ module.exports = require("mongoose");
 /* 7 */
 /***/ (function(module, exports) {
 
-module.exports = require("redux");
+module.exports = require("react-meta-tags");
 
 /***/ }),
 /* 8 */
+/***/ (function(module, exports) {
+
+module.exports = require("redux");
+
+/***/ }),
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -342,10 +349,6 @@ var _remarkable = __webpack_require__(82);
 
 var _remarkable2 = _interopRequireDefault(_remarkable);
 
-var _reactFontawesome = __webpack_require__(12);
-
-var _reactFontawesome2 = _interopRequireDefault(_reactFontawesome);
-
 var _index = __webpack_require__(2);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -355,6 +358,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+/* import FontAwesome from 'react-fontawesome';*/
 
 var Post = function (_Component) {
 	_inherits(Post, _Component);
@@ -560,7 +564,7 @@ var Post = function (_Component) {
 exports.default = (0, _reactRedux.connect)(null, { deletePost: _index.deletePost })(Post);
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -571,7 +575,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -600,37 +604,25 @@ var postSchema = new Schema({
 exports.default = _mongoose2.default.model('Post', postSchema);
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports) {
 
 module.exports = require("passport");
 
 /***/ }),
-/* 12 */
-/***/ (function(module, exports) {
-
-module.exports = require("react-fontawesome");
-
-/***/ }),
 /* 13 */
-/***/ (function(module, exports) {
-
-module.exports = require("react-meta-tags");
-
-/***/ }),
-/* 14 */
 /***/ (function(module, exports) {
 
 module.exports = require("react-router-bootstrap");
 
 /***/ }),
-/* 15 */
+/* 14 */
 /***/ (function(module, exports) {
 
 module.exports = require("redux-form");
 
 /***/ }),
-/* 16 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -729,7 +721,7 @@ var Main = function (_Component) {
 exports.default = Main;
 
 /***/ }),
-/* 17 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -739,9 +731,9 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _redux = __webpack_require__(7);
+var _redux = __webpack_require__(8);
 
-var _reduxForm = __webpack_require__(15);
+var _reduxForm = __webpack_require__(14);
 
 var _posts = __webpack_require__(64);
 
@@ -787,7 +779,7 @@ var rootReducer = (0, _redux.combineReducers)({
 exports.default = rootReducer;
 
 /***/ }),
-/* 18 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -802,7 +794,7 @@ exports.signoutUser = signoutUser;
 exports.authError = authError;
 exports.fetchMessage = fetchMessage;
 
-var _axios = __webpack_require__(24);
+var _axios = __webpack_require__(23);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -810,7 +802,7 @@ var _reactRouter = __webpack_require__(3);
 
 var _types = __webpack_require__(49);
 
-var _apiCaller = __webpack_require__(21);
+var _apiCaller = __webpack_require__(20);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -906,7 +898,7 @@ function fetchMessage() {
 }
 
 /***/ }),
-/* 19 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -922,11 +914,11 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(28);
+var _reactDom = __webpack_require__(27);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _redux = __webpack_require__(7);
+var _redux = __webpack_require__(8);
 
 var _reactRedux = __webpack_require__(1);
 
@@ -936,9 +928,9 @@ var actionCreators = _interopRequireWildcard(_index);
 
 var _reactBootstrap = __webpack_require__(5);
 
-var _reactRouterBootstrap = __webpack_require__(14);
+var _reactRouterBootstrap = __webpack_require__(13);
 
-var _reactSimplemdeEditor = __webpack_require__(29);
+var _reactSimplemdeEditor = __webpack_require__(28);
 
 var _reactSimplemdeEditor2 = _interopRequireDefault(_reactSimplemdeEditor);
 
@@ -1097,7 +1089,7 @@ function mapDispatchToProps(dispatch) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Editor);
 
 /***/ }),
-/* 20 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1115,15 +1107,11 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(1);
 
-var _reactDom = __webpack_require__(28);
+var _reactDom = __webpack_require__(27);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
 var _reactRouter = __webpack_require__(3);
-
-var _reactFontawesome = __webpack_require__(12);
-
-var _reactFontawesome2 = _interopRequireDefault(_reactFontawesome);
 
 var _reactBootstrap = __webpack_require__(5);
 
@@ -1136,6 +1124,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+/* import FontAwesome from 'react-fontawesome';*/
+
 
 var SubscribeForm = function (_Component) {
 	_inherits(SubscribeForm, _Component);
@@ -1176,7 +1167,7 @@ var SubscribeForm = function (_Component) {
 				_react2.default.createElement(
 					'a',
 					{ href: '/feed/posts.atom', className: 'btn rss' },
-					_react2.default.createElement(_reactFontawesome2.default, { name: 'rss' })
+					_react2.default.createElement('i', { className: 'fa fa-rss' })
 				),
 				_react2.default.createElement('div', { className: 'clearfix' })
 			);
@@ -1193,7 +1184,7 @@ function mapStateToProps(state) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps, { createSubscriber: _index.createSubscriber })(SubscribeForm);
 
 /***/ }),
-/* 21 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1209,7 +1200,7 @@ var _isomorphicFetch = __webpack_require__(78);
 
 var _isomorphicFetch2 = _interopRequireDefault(_isomorphicFetch);
 
-var _config = __webpack_require__(9);
+var _config = __webpack_require__(10);
 
 var _config2 = _interopRequireDefault(_config);
 
@@ -1254,7 +1245,7 @@ function callApi(endpoint) {
 exports.API_URL = API_URL;
 
 /***/ }),
-/* 22 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1262,9 +1253,9 @@ exports.API_URL = API_URL;
 
 /* Mongoose is ORM, like models.py in django */
 var mongoose = __webpack_require__(6);
-var validator = __webpack_require__(33);
+var validator = __webpack_require__(32);
 var Schema = mongoose.Schema;
-var bcrypt = __webpack_require__(25);
+var bcrypt = __webpack_require__(24);
 
 // Define model. 
 var userSchema = new Schema({
@@ -1327,7 +1318,7 @@ var ModelClass = mongoose.model('user', userSchema);
 module.exports = ModelClass;
 
 /***/ }),
-/* 23 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1337,12 +1328,12 @@ module.exports = ModelClass;
 // check if user is logged in before accessing controllers(which are like django views)
 // So this is essentially @IsAuthenticated
 
-var passport = __webpack_require__(11);
-var JwtStrategy = __webpack_require__(27).Strategy;
+var passport = __webpack_require__(12);
+var JwtStrategy = __webpack_require__(26).Strategy;
 var LocalStrategy = __webpack_require__(80);
-var ExtractJwt = __webpack_require__(27).ExtractJwt;
-var User = __webpack_require__(22);
-var config = __webpack_require__(9);
+var ExtractJwt = __webpack_require__(26).ExtractJwt;
+var User = __webpack_require__(21);
+var config = __webpack_require__(10);
 
 // by default you send a POST request with username and password
 // here Im telling it to use email instead
@@ -1416,67 +1407,67 @@ passport.use(jwtLogin);
 passport.use(localLogin);
 
 /***/ }),
-/* 24 */
+/* 23 */
 /***/ (function(module, exports) {
 
 module.exports = require("axios");
 
 /***/ }),
-/* 25 */
+/* 24 */
 /***/ (function(module, exports) {
 
 module.exports = require("bcrypt-nodejs");
 
 /***/ }),
-/* 26 */
+/* 25 */
 /***/ (function(module, exports) {
 
 module.exports = require("cuid");
 
 /***/ }),
-/* 27 */
+/* 26 */
 /***/ (function(module, exports) {
 
 module.exports = require("passport-jwt");
 
 /***/ }),
-/* 28 */
+/* 27 */
 /***/ (function(module, exports) {
 
 module.exports = require("react-dom");
 
 /***/ }),
-/* 29 */
+/* 28 */
 /***/ (function(module, exports) {
 
 module.exports = require("react-simplemde-editor");
 
 /***/ }),
-/* 30 */
+/* 29 */
 /***/ (function(module, exports) {
 
 module.exports = require("remove-markdown");
 
 /***/ }),
-/* 31 */
+/* 30 */
 /***/ (function(module, exports) {
 
 module.exports = require("sanitize-html");
 
 /***/ }),
-/* 32 */
+/* 31 */
 /***/ (function(module, exports) {
 
 module.exports = require("slug");
 
 /***/ }),
-/* 33 */
+/* 32 */
 /***/ (function(module, exports) {
 
 module.exports = require("validator");
 
 /***/ }),
-/* 34 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1492,7 +1483,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouter = __webpack_require__(3);
 
-var _Main = __webpack_require__(16);
+var _Main = __webpack_require__(15);
 
 var _Main2 = _interopRequireDefault(_Main);
 
@@ -1504,7 +1495,7 @@ var _PostNew = __webpack_require__(56);
 
 var _PostNew2 = _interopRequireDefault(_PostNew);
 
-var _Editor = __webpack_require__(19);
+var _Editor = __webpack_require__(18);
 
 var _Editor2 = _interopRequireDefault(_Editor);
 
@@ -1573,7 +1564,7 @@ getComponent={(nextState, cb) => {
 */
 
 /***/ }),
-/* 35 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1584,13 +1575,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.configureStore = configureStore;
 
-var _redux = __webpack_require__(7);
+var _redux = __webpack_require__(8);
 
 var _reduxThunk = __webpack_require__(81);
 
 var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
-var _rootReducer = __webpack_require__(17);
+var _rootReducer = __webpack_require__(16);
 
 var _rootReducer2 = _interopRequireDefault(_rootReducer);
 
@@ -1610,7 +1601,7 @@ function configureStore() {
    */
 
 /***/ }),
-/* 36 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1638,7 +1629,7 @@ router.route('/lumen/outbox').get(ActivityPubControllers.outbox);
 exports.default = router;
 
 /***/ }),
-/* 37 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1664,7 +1655,7 @@ router.route('/feed/posts.atom').get(feedsControllers.getFeed);
 exports.default = router;
 
 /***/ }),
-/* 38 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1694,7 +1685,7 @@ router.route('/@lumen.feed').get(OStatusControllers.postStream);
 exports.default = router;
 
 /***/ }),
-/* 39 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1714,8 +1705,8 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 var router = new _express.Router();
 
-var passport = __webpack_require__(11);
-var passportService = __webpack_require__(23);
+var passport = __webpack_require__(12);
+var passportService = __webpack_require__(22);
 var requireAuth = passport.authenticate('jwt', { session: false });
 
 // Get all Posts
@@ -1740,7 +1731,7 @@ router.route('/categories').get(function (req, res) {
 exports.default = router;
 
 /***/ }),
-/* 40 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1754,8 +1745,8 @@ var _express = __webpack_require__(4);
 
 var router = new _express.Router();
 
-var passport = __webpack_require__(11);
-var passportService = __webpack_require__(23);
+var passport = __webpack_require__(12);
+var passportService = __webpack_require__(22);
 
 var requireAuth = passport.authenticate('jwt', { session: false });
 var requireSignin = passport.authenticate('local', { session: false });
@@ -1777,7 +1768,7 @@ router.route('/subscribe').post(profilesControllers.subscribe);
 exports.default = router;
 
 /***/ }),
-/* 41 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1803,7 +1794,7 @@ router.route('/settings').get(SettingsController.about);
 exports.default = router;
 
 /***/ }),
-/* 42 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1830,40 +1821,46 @@ function fetchComponentData(store, components, params) {
   */
 
 /***/ }),
-/* 43 */
+/* 42 */
 /***/ (function(module, exports) {
 
 module.exports = require("body-parser");
 
 /***/ }),
-/* 44 */
+/* 43 */
 /***/ (function(module, exports) {
 
 module.exports = require("compression");
 
 /***/ }),
-/* 45 */
+/* 44 */
 /***/ (function(module, exports) {
 
 module.exports = require("cors");
 
 /***/ }),
-/* 46 */
+/* 45 */
 /***/ (function(module, exports) {
 
 module.exports = require("morgan");
 
 /***/ }),
-/* 47 */
+/* 46 */
 /***/ (function(module, exports) {
 
 module.exports = require("path");
 
 /***/ }),
-/* 48 */
+/* 47 */
 /***/ (function(module, exports) {
 
 module.exports = require("react-dom/server");
+
+/***/ }),
+/* 48 */
+/***/ (function(module, exports) {
+
+module.exports = require("react-meta-tags/server");
 
 /***/ }),
 /* 49 */
@@ -1901,15 +1898,15 @@ var _reactRedux = __webpack_require__(1);
 
 var _index = __webpack_require__(2);
 
-var _reactMetaTags = __webpack_require__(13);
+var _reactMetaTags = __webpack_require__(7);
 
 var _reactMetaTags2 = _interopRequireDefault(_reactMetaTags);
 
-var _removeMarkdown = __webpack_require__(30);
+var _removeMarkdown = __webpack_require__(29);
 
 var _removeMarkdown2 = _interopRequireDefault(_removeMarkdown);
 
-var _Post = __webpack_require__(8);
+var _Post = __webpack_require__(9);
 
 var _Post2 = _interopRequireDefault(_Post);
 
@@ -2025,10 +2022,6 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactFontawesome = __webpack_require__(12);
-
-var _reactFontawesome2 = _interopRequireDefault(_reactFontawesome);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2036,6 +2029,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+/* import FontAwesome from 'react-fontawesome';*/
 
 var Footer = function (_Component) {
 	_inherits(Footer, _Component);
@@ -2047,24 +2042,24 @@ var Footer = function (_Component) {
 	}
 
 	_createClass(Footer, [{
-		key: 'render',
+		key: "render",
 		value: function render() {
 			return _react2.default.createElement(
-				'footer',
-				{ className: 'footer' },
+				"footer",
+				{ className: "footer" },
 				_react2.default.createElement(
-					'div',
-					{ className: 'right credit' },
-					'Made by ',
+					"div",
+					{ className: "right credit" },
+					"Made by ",
 					_react2.default.createElement(
-						'a',
-						{ href: 'http://rayalez.com' },
-						'Ray Alez'
+						"a",
+						{ href: "http://rayalez.com" },
+						"Ray Alez"
 					),
 					_react2.default.createElement(
-						'a',
-						{ href: 'https://github.com/raymestalez/django-react-blog' },
-						_react2.default.createElement(_reactFontawesome2.default, { name: 'github' })
+						"a",
+						{ href: "https://github.com/raymestalez/django-react-blog" },
+						_react2.default.createElement("i", { className: "fa fa-github" })
 					)
 				)
 			);
@@ -2101,7 +2096,7 @@ var _index = __webpack_require__(2);
 
 var _reactBootstrap = __webpack_require__(5);
 
-var _SubscribeForm = __webpack_require__(20);
+var _SubscribeForm = __webpack_require__(19);
 
 var _SubscribeForm2 = _interopRequireDefault(_SubscribeForm);
 
@@ -2431,23 +2426,23 @@ var _reactRedux = __webpack_require__(1);
 
 var _index = __webpack_require__(2);
 
-var _reactMetaTags = __webpack_require__(13);
+var _reactMetaTags = __webpack_require__(7);
 
 var _reactMetaTags2 = _interopRequireDefault(_reactMetaTags);
 
-var _removeMarkdown = __webpack_require__(30);
+var _removeMarkdown = __webpack_require__(29);
 
 var _removeMarkdown2 = _interopRequireDefault(_removeMarkdown);
 
 var _reactBootstrap = __webpack_require__(5);
 
-var _reactRouterBootstrap = __webpack_require__(14);
+var _reactRouterBootstrap = __webpack_require__(13);
 
-var _Post = __webpack_require__(8);
+var _Post = __webpack_require__(9);
 
 var _Post2 = _interopRequireDefault(_Post);
 
-var _SubscribeForm = __webpack_require__(20);
+var _SubscribeForm = __webpack_require__(19);
 
 var _SubscribeForm2 = _interopRequireDefault(_SubscribeForm);
 
@@ -2475,6 +2470,8 @@ var PostDetail = function (_Component) {
 			/* action creator will grab the post with this id from the API   */
 			/* and send it to the reducer */
 			/* reducer will add it to the state */
+
+			/* console.log("Post Detail " + this.props.params.slug);*/
 			this.props.fetchPost(this.props.params.slug);
 			this.props.fetchSettings();
 		}
@@ -2600,8 +2597,8 @@ PostDetail.contextTypes = {
 };
 PostDetail.need = [function () {
 	return (0, _index.fetchSettings)();
-}, function () {
-	return (0, _index.fetchPost)();
+}, function (params) {
+	return (0, _index.fetchPost)(params.slug);
 }];
 
 function mapStateToProps(state) {
@@ -2633,17 +2630,17 @@ var _reactRedux = __webpack_require__(1);
 
 var _reactRouter = __webpack_require__(3);
 
-var _reactMetaTags = __webpack_require__(13);
+var _reactMetaTags = __webpack_require__(7);
 
 var _reactMetaTags2 = _interopRequireDefault(_reactMetaTags);
 
 var _index = __webpack_require__(2);
 
-var _Post = __webpack_require__(8);
+var _Post = __webpack_require__(9);
 
 var _Post2 = _interopRequireDefault(_Post);
 
-var _Editor = __webpack_require__(19);
+var _Editor = __webpack_require__(18);
 
 var _Editor2 = _interopRequireDefault(_Editor);
 
@@ -2840,15 +2837,15 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reduxForm = __webpack_require__(15);
+var _reduxForm = __webpack_require__(14);
 
 var _index = __webpack_require__(2);
 
 var _reactBootstrap = __webpack_require__(5);
 
-var _reactRouterBootstrap = __webpack_require__(14);
+var _reactRouterBootstrap = __webpack_require__(13);
 
-var _reactSimplemdeEditor = __webpack_require__(29);
+var _reactSimplemdeEditor = __webpack_require__(28);
 
 var _reactSimplemdeEditor2 = _interopRequireDefault(_reactSimplemdeEditor);
 
@@ -3099,9 +3096,9 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reduxForm = __webpack_require__(15);
+var _reduxForm = __webpack_require__(14);
 
-var _auth = __webpack_require__(18);
+var _auth = __webpack_require__(17);
 
 var actions = _interopRequireWildcard(_auth);
 
@@ -3223,7 +3220,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(1);
 
-var _auth = __webpack_require__(18);
+var _auth = __webpack_require__(17);
 
 var actions = _interopRequireWildcard(_auth);
 
@@ -3523,19 +3520,19 @@ exports.person = person;
 exports.outbox = outbox;
 exports.inbox = inbox;
 
-var _post = __webpack_require__(10);
+var _post = __webpack_require__(11);
 
 var _post2 = _interopRequireDefault(_post);
 
-var _cuid = __webpack_require__(26);
+var _cuid = __webpack_require__(25);
 
 var _cuid2 = _interopRequireDefault(_cuid);
 
-var _slug = __webpack_require__(32);
+var _slug = __webpack_require__(31);
 
 var _slug2 = _interopRequireDefault(_slug);
 
-var _sanitizeHtml = __webpack_require__(31);
+var _sanitizeHtml = __webpack_require__(30);
 
 var _sanitizeHtml2 = _interopRequireDefault(_sanitizeHtml);
 
@@ -3641,7 +3638,7 @@ var _feed = __webpack_require__(77);
 
 var _feed2 = _interopRequireDefault(_feed);
 
-var _post = __webpack_require__(10);
+var _post = __webpack_require__(11);
 
 var _post2 = _interopRequireDefault(_post);
 
@@ -3828,19 +3825,19 @@ exports.updatePost = updatePost;
 exports.deletePost = deletePost;
 exports.test = test;
 
-var _post = __webpack_require__(10);
+var _post = __webpack_require__(11);
 
 var _post2 = _interopRequireDefault(_post);
 
-var _cuid = __webpack_require__(26);
+var _cuid = __webpack_require__(25);
 
 var _cuid2 = _interopRequireDefault(_cuid);
 
-var _slug = __webpack_require__(32);
+var _slug = __webpack_require__(31);
 
 var _slug2 = _interopRequireDefault(_slug);
 
-var _sanitizeHtml = __webpack_require__(31);
+var _sanitizeHtml = __webpack_require__(30);
 
 var _sanitizeHtml2 = _interopRequireDefault(_sanitizeHtml);
 
@@ -3944,8 +3941,8 @@ function test(req, res) {
 
 
 var jwt = __webpack_require__(79);
-var config = __webpack_require__(9);
-var User = __webpack_require__(22);
+var config = __webpack_require__(10);
+var User = __webpack_require__(21);
 var Subscriber = __webpack_require__(73);
 
 function tokenForUser(user) {
@@ -4063,9 +4060,9 @@ exports.about = function (req, res, next) {
 
 /* Mongoose is ORM, like models.py in django */
 var mongoose = __webpack_require__(6);
-var validator = __webpack_require__(33);
+var validator = __webpack_require__(32);
 var Schema = mongoose.Schema;
-var bcrypt = __webpack_require__(25);
+var bcrypt = __webpack_require__(24);
 
 // Define model. 
 var userSchema = new Schema({
@@ -4104,7 +4101,7 @@ var _express = __webpack_require__(4);
 
 var _express2 = _interopRequireDefault(_express);
 
-var _compression = __webpack_require__(44);
+var _compression = __webpack_require__(43);
 
 var _compression2 = _interopRequireDefault(_compression);
 
@@ -4112,43 +4109,43 @@ var _mongoose = __webpack_require__(6);
 
 var _mongoose2 = _interopRequireDefault(_mongoose);
 
-var _bodyParser = __webpack_require__(43);
+var _bodyParser = __webpack_require__(42);
 
 var _bodyParser2 = _interopRequireDefault(_bodyParser);
 
-var _path = __webpack_require__(47);
+var _path = __webpack_require__(46);
 
 var _path2 = _interopRequireDefault(_path);
 
-var _cors = __webpack_require__(45);
+var _cors = __webpack_require__(44);
 
 var _cors2 = _interopRequireDefault(_cors);
 
-var _morgan = __webpack_require__(46);
+var _morgan = __webpack_require__(45);
 
 var _morgan2 = _interopRequireDefault(_morgan);
 
-var _postsRoutes = __webpack_require__(39);
+var _postsRoutes = __webpack_require__(38);
 
 var _postsRoutes2 = _interopRequireDefault(_postsRoutes);
 
-var _settingsRoutes = __webpack_require__(41);
+var _settingsRoutes = __webpack_require__(40);
 
 var _settingsRoutes2 = _interopRequireDefault(_settingsRoutes);
 
-var _feedsRoutes = __webpack_require__(37);
+var _feedsRoutes = __webpack_require__(36);
 
 var _feedsRoutes2 = _interopRequireDefault(_feedsRoutes);
 
-var _profilesRoutes = __webpack_require__(40);
+var _profilesRoutes = __webpack_require__(39);
 
 var _profilesRoutes2 = _interopRequireDefault(_profilesRoutes);
 
-var _ostatusRoutes = __webpack_require__(38);
+var _ostatusRoutes = __webpack_require__(37);
 
 var _ostatusRoutes2 = _interopRequireDefault(_ostatusRoutes);
 
-var _activitypubRoutes = __webpack_require__(36);
+var _activitypubRoutes = __webpack_require__(35);
 
 var _activitypubRoutes2 = _interopRequireDefault(_activitypubRoutes);
 
@@ -4156,29 +4153,35 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _redux = __webpack_require__(7);
+var _redux = __webpack_require__(8);
 
 var _reactRedux = __webpack_require__(1);
 
-var _server = __webpack_require__(48);
+var _server = __webpack_require__(47);
 
 var _reactRouter = __webpack_require__(3);
 
-var _store = __webpack_require__(35);
+var _server2 = __webpack_require__(48);
 
-var _routes = __webpack_require__(34);
+var _server3 = _interopRequireDefault(_server2);
+
+var _reactMetaTags = __webpack_require__(7);
+
+var _store = __webpack_require__(34);
+
+var _routes = __webpack_require__(33);
 
 var _routes2 = _interopRequireDefault(_routes);
 
-var _Main = __webpack_require__(16);
+var _Main = __webpack_require__(15);
 
 var _Main2 = _interopRequireDefault(_Main);
 
-var _rootReducer = __webpack_require__(17);
+var _rootReducer = __webpack_require__(16);
 
 var _rootReducer2 = _interopRequireDefault(_rootReducer);
 
-var _fetchData = __webpack_require__(42);
+var _fetchData = __webpack_require__(41);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -4246,6 +4249,7 @@ server.get('/bundle.js', function (req, res) {
 server.use(renderClient);
 
 function renderClient(req, res, next) {
+    var metaTagsInstance = (0, _server3.default)();
     /* "routes" load all of my components
        I pass routes to the match, which, in combination with RouterContext,
        makes router work properly, passing the urls sent to the server to react router.*/
@@ -4267,8 +4271,15 @@ function renderClient(req, res, next) {
             var html = (0, _server.renderToString)(_react2.default.createElement(
                 _reactRedux.Provider,
                 { store: store },
-                _react2.default.createElement(_reactRouter.RouterContext, renderProps)
+                _react2.default.createElement(
+                    _reactMetaTags.MetaTagsContext,
+                    { extract: metaTagsInstance.extract },
+                    _react2.default.createElement(_reactRouter.RouterContext, renderProps)
+                )
             ));
+
+            //get all title and metatags as string
+            var meta = metaTagsInstance.renderToString();
 
             // Grab the state from the store
             var initialState = store.getState();
@@ -4276,13 +4287,13 @@ function renderClient(req, res, next) {
 
             /* Take html made from my components, pass it to the function that
                will render the whole page, with header and all */
-            res.send(renderFullPage(html, initialState));
+            res.send(renderFullPage(html, meta, initialState));
         });
     });
 }
 
-function renderFullPage(html, initialState) {
-    return '\n    <!doctype html>\n    <html>\n      <head>\n        <link rel="stylesheet" href="/styles/style.css">\n      </head>\n      <body>\n        <div id="root">' + html + '</div>\n        <script>\n          window.__INITIAL_STATE__ = ' + JSON.stringify(initialState) + ';\n        </script>\n        <script src="/bundle.js"></script>\n       </body>\n    </html>\n    ';
+function renderFullPage(html, meta, initialState) {
+    return '\n    <!doctype html>\n    <html lang="en-us">\n      <head>\n        <meta charset="utf-8"/>\n        <meta name="viewport" content="width=device-width, initial-scale=1">\n        <link rel="shortcut icon" href="/media/images/favicon.png"/>\n        ' + meta + '\n        <link rel="stylesheet" href="/styles/style.css">\n      </head>\n      <body>\n        <div id="root">' + html + '</div>\n        <script>\n          window.__INITIAL_STATE__ = ' + JSON.stringify(initialState) + ';\n        </script>\n\n       </body>\n       <script src="/bundle.js"></script>\n    </html>\n    ';
 }
 
 // start server

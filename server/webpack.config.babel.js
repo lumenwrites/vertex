@@ -1,3 +1,5 @@
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
+
 module.exports = {
   output: {
     publicPath: '/',
@@ -14,14 +16,13 @@ module.exports = {
 	  /* 
           {
               test: /\.scss$/,
-              loaders: ['style', 'css', 'sass']
+              loaders: ['css-loader', 'sass-loader']
           },
 	  {
 	      test: /\.css$/,
 	      loader: 'style-loader!css-loader'
 	  },
-	  */	  
-
+	  */
 	  {
 	      test: /\.(png|woff|woff2|eot|ttf|svg)$/,
 	      loader: 'url-loader?limit=100000'
@@ -29,7 +30,7 @@ module.exports = {
 	  {
 	      test: /\.json$/,
 	      loader: 'json-loader'
-	  }	    
+	  },
     ],
   }
 };

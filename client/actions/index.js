@@ -5,7 +5,7 @@ import { browserHistory } from 'react-router';
 import callApi from '../utils/apiCaller';
 
 import {API_URL} from '../utils/apiCaller';
-console.log("API_URL " + API_URL);
+/* console.log("API_URL " + API_URL);*/
 
 export function updatePostBody(value) {
     return {
@@ -56,7 +56,8 @@ export function fetchPosts(filter) {
 
 export function fetchPost(slug) {
     /* console.log(">>>> src/actions/index.js:");
-     * console.log("Fetching post.");	    */
+     * console.log("Fetching post. " + slug);	   */
+
     return (dispatch) => {
 	return callApi(`posts/${slug}`).then(res => {
 	    /* console.log("apiCaller response: " + JSON.stringify(res));*/

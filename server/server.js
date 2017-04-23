@@ -65,6 +65,9 @@ import { Provider } from 'react-redux'
 import { renderToString } from 'react-dom/server';
 import { match, RouterContext } from 'react-router';
 import { Router } from 'react-router';
+import MetaTagsServer from 'react-meta-tags/server';
+import {MetaTagsContext} from 'react-meta-tags';
+
 
 /* Importing my client */
 /* creates store for both server and client: */
@@ -82,6 +85,7 @@ import { fetchComponentData } from './util/fetchData';
 server.use(renderClient);
 
 function renderClient(req, res, next) {
+    const metaTagsInstance = MetaTagsServer();
     /* "routes" load all of my components
        I pass routes to the match, which, in combination with RouterContext,
        makes router work properly, passing the urls sent to the server to react router.*/
@@ -99,26 +103,35 @@ function renderClient(req, res, next) {
 		/* Pass it to the provider, which will use it to render components. */
 		const html = renderToString(
 		    <Provider store={store}>
-			<RouterContext {...renderProps} />
+			<MetaTagsContext extract={metaTagsInstance.extract}>
+			    <RouterContext {...renderProps} />
+			</MetaTagsContext>
 		    </Provider>
 		)
 
+		//get all title and metatags as string
+		const meta = metaTagsInstance.renderToString();
+		
 		// Grab the state from the store
 		const initialState = store.getState();
 		/* console.log("State after fetching: " + JSON.stringify(initialState));*/
 
 		/* Take html made from my components, pass it to the function that
 		   will render the whole page, with header and all */
-		res.send(renderFullPage(html, initialState))
+		res.send(renderFullPage(html, meta, initialState))
 	    });
     });
 }
 
-function renderFullPage(html, initialState) {
+function renderFullPage(html, meta, initialState) {
     return `
     <!doctype html>
-    <html>
+    <html lang="en-us">
       <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="/media/images/favicon.png"/>
+        ${meta}
         <link rel="stylesheet" href="/styles/style.css">
       </head>
       <body>
@@ -126,11 +139,13 @@ function renderFullPage(html, initialState) {
         <script>
           window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};
         </script>
-        <script src="/bundle.js"></script>
+
        </body>
+       <script src="/bundle.js"></script>
     </html>
     `
 }
+
 
 // start server
 const port = process.env.PORT || 3000;

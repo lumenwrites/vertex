@@ -3,13 +3,9 @@ version: '2'
 services:
   db:
     image: mongo:latest
-    # ports:
-    #   - "27017:27017"
     command: "--smallfiles --logpath=/dev/null"
   web:
     build: .
-    # Taking password, databasename, etc from the env variables file    
-    # env_file: ./backend/config/env
     working_dir: /home/vertex
     command: npm run serve
     depends_on:

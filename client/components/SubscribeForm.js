@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import ReactDOM from 'react-dom';
 import { Link } from 'react-router';
 
-import FontAwesome from 'react-fontawesome';
+/* import FontAwesome from 'react-fontawesome';*/
 import { FormGroup, FieldGroup, FormControl, ControlLabel, Button } from 'react-bootstrap';
 
 import { createSubscriber } from '../actions/index';
@@ -30,7 +30,7 @@ class SubscribeForm extends Component {
 		<Button bsStyle="primary" className="subscribe"
 			type="submit">Subscribe</Button>
 		<a href="/feed/posts.atom" className="btn rss">
-		    <FontAwesome name='rss' />
+		    <i className="fa fa-rss"></i>
 		</a> 
 		<div className="clearfix"></div>
 	    </form>
