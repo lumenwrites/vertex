@@ -131,6 +131,7 @@ function renderFullPage(html, initialState) {
     </html>
     `
 }
+
 // start server
 const port = process.env.PORT || 3000;
 server.listen(port, (error) => {

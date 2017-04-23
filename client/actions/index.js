@@ -4,10 +4,7 @@ import { browserHistory } from 'react-router';
 /* Isomorphic api caller. Magically fetches data, both on client and server. */
 import callApi from '../utils/apiCaller';
 
-/* import {API_URL} from '../utils/apiCaller';*/
-
-var API_URL = '/api/v1';
-API_URL = 'https://lumenwrites.com/api/v1';
+import {API_URL} from '../utils/apiCaller';
 
 export function updatePostBody(value) {
     return {
