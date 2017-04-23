@@ -122,3 +122,43 @@ export function inbox(req, res) {
     
 }
 
+export function sendPostToFollowers(post) {
+    /* Send post to followers */
+    Follower.find().exec((err, followers) => {
+	if (err) { res.status(500).send(err); }
+	console.log("Followers " + JSON.stringify(followers));
+	followers.map((follower)=>{
+	    /* Loop through all followers */
+	    /* Generate post activity */
+	    var postActivity = {
+		"@context": "https://www.w3.org/ns/activitystreams",
+		"type": "Create",
+		"id": "https://lumenwrites.com/post/"+post.slug,
+		"to": [follower.id],
+		"author": "https://lumenwrites.com/lumen/",
+		"object": {
+		    "type": "Post",
+		    "id": "https://lumenwrites.com/post/"+post.slug,    
+		    "attributedTo": "https://lumenwrites.com/lumen/",
+		    "to": [follower.id],
+		    "content": post.body
+		}
+	    }
+
+	    /* Send post to the follower's inbox  */
+	    var inbox = follower.inbox;
+	    console.log("Sending post " + JSON.stringify(postActivity) + " to follower " + inbox);
+	    var options = {
+		uri: inbox,
+		method: 'POST',
+		json: postActivity
+	    };
+	    request(options, (err, res, body)=>{
+		if (err) { console.log("Couldn't send post") }
+		console.log("Post successfully sent! " + body);
+	    });
+	    
+	});
+    });
+
+}
