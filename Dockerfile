@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM node:latest
 MAINTAINER Ray ALez <raymestalez@gmail.com>
 
 # Setup environment variables containing paths
@@ -6,11 +6,11 @@ ENV HOMEDIR=/home
 ENV PROJECT_DIR=/home/vertex
 ENV CLIENT_DIR=/home/vertex/client
 ENV SERVER_DIR=/home/vertex/server
-ENV PYTHON=$PYTHON:/usr/bin/python
+# ENV PYTHON=$PYTHON:/usr/bin/python
 
 
 # Install basic apps
-RUN apt-get update && apt-get install -y nodejs
+# RUN apt-get update && apt-get install -y nodejs
 # && apt-get install -y emacs curl
 
 # Install node 7
@@ -26,13 +26,13 @@ RUN npm install
 # Install dependencies
 # WORKDIR $CLIENT_DIR
 # RUN npm install		
-WORKDIR $SERVER_DIR
+# WORKDIR $SERVER_DIR
 # RUN npm build
     
 # Port to expose
 EXPOSE 3000
 
-CMD [ "npm", "serve" ]
+CMD npm run serve
 
 	
 
