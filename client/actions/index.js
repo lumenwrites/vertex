@@ -38,7 +38,7 @@ export function fetchPosts(filter) {
 	}
 	if (filter.tag) {
 	    /* Posts filtered by tag */
-	    posts_url = `${API_URL}/posts?tag=${filter.tag}`
+	    posts_url = `posts?tag=${filter.tag}`
 	}
     }
     const url = posts_url + page_url;
