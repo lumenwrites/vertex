@@ -51,16 +51,18 @@ const jwtLogin = new JwtStrategy(jwtOptions, function(payload, done){
     // payload is a decoded JWT token, sub and iat from the token.
     // done is a callback, depending on whether auth is successful
 
-    console.log("JWT login");
+    /* console.log("JWT login");*/
     // See if user id from payload exists in our database
     // If it does call 'done' with that user
     // otherwise, call 'done' without a user object
     User.findById(payload.sub, function(err, user){
 	if (err) { return done(err, false); }
-	console.log("JWT login "); 
+	/* console.log("Found user! "); */
 	if (user) {
+	    /* console.log("Login successful! "); */
 	    done(null, user);
 	} else {
+	    /* console.log("Login unsuccessful =( "); */
 	    done(null, false);	    
 	}
     });

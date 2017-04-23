@@ -27,6 +27,7 @@ if (args[0] == "createsuperuser") {
     user.save((error, user) => {
 	if (error) { throw error; }
 	console.log("Created user " + JSON.stringify(user) + "!");
+	mongoose.connection.close();
     });
 }
 

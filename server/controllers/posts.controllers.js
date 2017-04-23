@@ -1,7 +1,9 @@
 import Post from '../models/post';
+import Follower from '../models/follower';
 import cuid from 'cuid';
 import slug from 'slug';
 import sanitizeHtml from 'sanitize-html';
+import request from 'request';
 
 /* Get all posts */
 export function getPosts(req, res) {
@@ -61,7 +63,44 @@ export function createPost(req, res) {
 	if (err) {
 	    res.status(500).send(err);
 	}
+	console.log("Post created " + JSON.stringify(post));
+	/* Send post to followers */
+	Follower.find().exec((err, followers) => {
+	    if (err) { res.status(500).send(err); }
+	    console.log("Followers " + JSON.stringify(followers));
+	    followers.map((follower)=>{
+		var postActivity = {
+			"@context": "https://www.w3.org/ns/activitystreams",
+			"type": "Create",
+			"id": "https://lumenwrites.com/post/"+post.slug,
+			"to": [follower.id],
+			"author": "https://lumenwrites.com/lumen/",
+			"object": {
+			    "type": "Post",
+			    "id": "https://lumenwrites.com/post/"+post.slug,    
+			    "attributedTo": "https://lumenwrites.com/lumen/",
+			    "to": [follower.id],
+			    "content": post.body
+			}
+		}
+		
+		var inbox = follower.inbox;
+		console.log("Sending post " + JSON.stringify(postActivity) + " to follower " + inbox);
+		var options = {
+		    uri: inbox,
+		    method: 'POST',
+		    json: postActivity
+		};
+		request(options, (err, res, body)=>{
+		    if (err) { console.log("Couldn't send post") }
+		    console.log("Post successfully sent! " + body);
+		});
+		
+	    });
+	});
+
 	res.json(post);
+
     });
 }
 

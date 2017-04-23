@@ -13,12 +13,13 @@ router.route('/posts').get(postsControllers.getPosts);
 router.route('/posts/:slug').get(postsControllers.getPost);
 
 // Add a new Post
-router.route('/posts').post(postsControllers.createPost);
+router.route('/posts').post(requireAuth, postsControllers.createPost);
+
 
 // Update post
-router.route('/posts/:slug').post(postsControllers.updatePost);
+router.route('/posts/:slug').post(requireAuth, postsControllers.updatePost);
 // Delete post
-router.route('/posts/:slug').delete(postsControllers.deletePost);
+router.route('/posts/:slug').delete(requireAuth, postsControllers.deletePost);
 
 router.route('/test').get(postsControllers.test);
 router.route('/categories').get((req,res)=> res.send({hi:"Hello!"}));

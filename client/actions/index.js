@@ -73,8 +73,9 @@ export function fetchPost(slug) {
 export function createPost(post) {
     // Get the saved token from local storage
     const config = {
-	headers:  { authorization: 'Token ' + localStorage.getItem('token')}
+	headers:  { authorization: localStorage.getItem('token')}	
     };
+    console.log("Sending token " + JSON.stringify(config));
 
     return function(dispatch) {
 	axios.post(`${API_URL}/posts`, post, config)
@@ -96,7 +97,7 @@ export function updatePost(slug, post) {
 
     /* Get the saved token from local storage */
     const config = {
-	headers:  { authorization: 'Token ' + localStorage.getItem('token')}
+	headers:  { authorization: localStorage.getItem('token')}		
     };
 
     /* console.log("Post Tags: " + post.tags);*/
@@ -120,7 +121,7 @@ export function deletePost(slug) {
     /* console.log(">>>> src/actions/index.js:");
      * console.log("Deleting post.");	    */
     const config = {
-	headers:  { authorization: 'Token ' + localStorage.getItem('token')}
+	headers:  { authorization: localStorage.getItem('token')}		
     };
     
     return function(dispatch) {    

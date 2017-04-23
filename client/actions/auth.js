@@ -25,7 +25,7 @@ export function signinUser({username, password}) {
 		 console.log("Auth action dispatched(to flip auth state to true)");
 		 // - save JWT token
 		 localStorage.setItem('token', response.data.token);
-		 console.log("Token saved!");
+		 console.log("Token saved! " + response.data.token);
 		 // - redirect to /feature
 		 browserHistory.push('/');
 		 console.log("Redirected to /");		 
@@ -89,9 +89,9 @@ export function fetchMessage() {
     };
     
     return function(dispatch) {
-	axios.get(API_URL, config)
+	axios.get('http://localhost:3000/api/v1/auth-test', config)
 	     .then(response => {
-		 /* console.log(response);*/
+		 console.log("Auth test " + JSON.stringify(response));
 		 dispatch({
 		     type: FETCH_MESSAGE,
 		     payload: response.data.message

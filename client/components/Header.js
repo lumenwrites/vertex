@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
 import { fetchCategories, fetchSettings } from '../actions/index';
+import { fetchMessage } from '../actions/auth';
 import { subscribedClose } from '../actions/index';
 
 
@@ -27,6 +28,7 @@ class Header extends Component {
 	/* action creator will grab the post with this id from the API   */
 	/* and send it to the reducer */
 	/* reducer will add it to the state */
+	/* this.props.fetchMessage();	*/
 	this.props.fetchSettings();	
     }
 
@@ -156,4 +158,5 @@ function mapStateToProps(state) {
 	subscribed: state.profiles.subscribed
     };
 }
-export default connect(mapStateToProps, { fetchSettings, subscribedClose })(Header);
+export default connect(mapStateToProps, { fetchSettings, subscribedClose,
+					  fetchMessage})(Header);
