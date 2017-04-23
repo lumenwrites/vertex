@@ -1202,6 +1202,7 @@ exports.default = (0, _reactRedux.connect)(mapStateToProps, { createSubscriber: 
 Object.defineProperty(exports, "__esModule", {
 				value: true
 });
+exports.API_URL = undefined;
 exports.default = callApi;
 
 var _isomorphicFetch = __webpack_require__(78);
@@ -1217,7 +1218,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var API_URL = 'https://lumenwrites.com/api/v1';
 
 if (process.env.NODE_ENV === 'development') {
-				API_URL = 'http://localhost:3000/api/v1';
+				exports.API_URL = API_URL = 'http://localhost:3000/api/v1';
 }
 console.log("API_URL " + API_URL);
 
@@ -1250,9 +1251,7 @@ function callApi(endpoint) {
 				});
 }
 
-module.exports = {
-				API_URL: API_URL
-};
+exports.API_URL = API_URL;
 
 /***/ }),
 /* 22 */
