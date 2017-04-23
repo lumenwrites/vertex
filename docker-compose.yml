@@ -4,6 +4,8 @@ services:
   db:
     image: mongo:latest
     command: "--smallfiles --logpath=/dev/null"
+    volumes:
+      - ./data/db:/data/db    
   web:
     build: .
     working_dir: /home/vertex
