@@ -10,12 +10,12 @@ ENV PYTHON=$PYTHON:/usr/bin/python
 
 
 # Install basic apps
-RUN apt-get update
+RUN apt-get update && apt-get install -y nodejs
 # && apt-get install -y emacs curl
 
 # Install node 7
-RUN curl -sL https://deb.nodesource.com/setup_7.x | bash -
-RUN apt-get install -y nodejs 
+# RUN curl -sL https://deb.nodesource.com/setup_7.x | bash -
+# RUN apt-get install -y nodejs 
 	    	    
 # Copy project files into /home/vertex folder.
 RUN mkdir -p $PROJECT_DIR
