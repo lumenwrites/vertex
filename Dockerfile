@@ -10,7 +10,8 @@ ENV PYTHON=$PYTHON:/usr/bin/python
 
 
 # Install basic apps
-RUN apt-get update && apt-get install -y emacs curl
+RUN apt-get update
+# && apt-get install -y emacs curl
 
 # Install node 7
 RUN curl -sL https://deb.nodesource.com/setup_7.x | bash -
