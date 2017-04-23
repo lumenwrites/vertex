@@ -80,9 +80,11 @@ class PostDetail extends Component {
 		{/* Facebook */}
 		<meta property="og:title" content={title} />
 		<meta property="og:image" content={settings.metaSocialImage} />
+		<meta property="og:description" content={settings.metaDescription} />	
 		{/* Twitter */}
 		<meta property="twitter:card" content="summary_large_image" />
 		<meta property="twitter:image" content={settings.metaSocialImage} />
+		<meta property="twitter:description" content={settings.metaDescription}/>
             </MetaTags>
 	);
     }

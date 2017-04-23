@@ -2538,8 +2538,10 @@ var PostDetail = function (_Component) {
 					content: keywords }),
 				_react2.default.createElement('meta', { property: 'og:title', content: title }),
 				_react2.default.createElement('meta', { property: 'og:image', content: settings.metaSocialImage }),
+				_react2.default.createElement('meta', { property: 'og:description', content: settings.metaDescription }),
 				_react2.default.createElement('meta', { property: 'twitter:card', content: 'summary_large_image' }),
-				_react2.default.createElement('meta', { property: 'twitter:image', content: settings.metaSocialImage })
+				_react2.default.createElement('meta', { property: 'twitter:image', content: settings.metaSocialImage }),
+				_react2.default.createElement('meta', { property: 'twitter:description', content: settings.metaDescription })
 			);
 		}
 	}, {
@@ -2775,8 +2777,10 @@ var PostList = function (_Component) {
 															content: settings.metaKeywords }),
 												_react2.default.createElement('meta', { property: 'og:title', content: settings.metaTitle }),
 												_react2.default.createElement('meta', { property: 'og:image', content: settings.metaSocialImage }),
+												_react2.default.createElement('meta', { property: 'og:description', content: settings.metaDescription }),
 												_react2.default.createElement('meta', { property: 'twitter:card', content: 'summary_large_image' }),
-												_react2.default.createElement('meta', { property: 'twitter:image', content: settings.metaSocialImage })
+												_react2.default.createElement('meta', { property: 'twitter:image', content: settings.metaSocialImage }),
+												_react2.default.createElement('meta', { property: 'twitter:description', content: settings.metaDescription })
 									);
 						}
 			}, {
