@@ -65,12 +65,35 @@ To deploy it online, go to Digital Ocean, create a Docker droplet, point your do
 # Upcoming features
 
 ## Small
-- [ ] Awesome nginx config. Caching, compression, all the fancy stuff.
+- [X] Awesome nginx config. Caching, compression, all the fancy stuff.
+- [ ] Conveniently modify slugs
 - [ ] readmore... for longer posts
 - [ ] Proper nice 404 pages, error messages, etc.
 - [ ] Google Analytics config
 - [ ] Save email subscribers source(?source=hackernews).
 - [ ] author username and url
+- [ ] Post title should be a link.(firstline)
+
+## Bugs
+- [ ] Sets the new posts to draft for some reason sometimes?
+- [ ] combined all the tags into one after editing. But not always?
+- [ ] Error on submitting the post. First few times works, then not?
+- [ ] Tags should be stripped of spaces.
+- [ ] Tab title should not be markdown.
+
+
+## Clean up
+- Pass all the speed tests.  
+  https://developers.google.com/speed/pagespeed/insights/  
+  https://tools.pingdom.com/  
+  https://gtmetrix.com/  
+- Pass all mobile tests  
+  https://search.google.com/search-console/mobile-friendly
+- Pass all SEO tests  
+  https://seositecheckup.com
+- Write tests
+- Migrate automatically. entrypoint.sh?
+
 
 # Decentralization
 
@@ -101,21 +124,6 @@ Advanced:
 Small/Maybe:
 - [ ] Client endpoints. Use AP format for client-server.
 - [ ] README link to demo-video as an image.
-
-# Bugs
-- Use it, test it, find the bugs.
-
-# Clean up
-- Pass all the speed tests.  
-  https://developers.google.com/speed/pagespeed/insights/  
-  https://tools.pingdom.com/  
-  https://gtmetrix.com/  
-- Pass all mobile tests  
-  https://search.google.com/search-console/mobile-friendly
-- Pass all SEO tests  
-  https://seositecheckup.com
-- Write tests
-- Migrate automatically. entrypoint.sh?
 
 # Future/Maybe
 - Proper form validation.
