@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 74);
+/******/ 	return __webpack_require__(__webpack_require__.s = 76);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -100,7 +100,7 @@ exports.fetchSettings = fetchSettings;
 exports.createSubscriber = createSubscriber;
 exports.subscribedClose = subscribedClose;
 
-var _axios = __webpack_require__(23);
+var _axios = __webpack_require__(24);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -178,8 +178,9 @@ function fetchPost(slug) {
 function createPost(post) {
 			// Get the saved token from local storage
 			var config = {
-						headers: { authorization: 'Token ' + localStorage.getItem('token') }
+						headers: { authorization: localStorage.getItem('token') }
 			};
+			console.log("Sending token " + JSON.stringify(config));
 
 			return function (dispatch) {
 						_axios2.default.post(_apiCaller.API_URL + '/posts', post, config).then(function (response) {
@@ -199,7 +200,7 @@ function updatePost(slug, post) {
 
 			/* Get the saved token from local storage */
 			var config = {
-						headers: { authorization: 'Token ' + localStorage.getItem('token') }
+						headers: { authorization: localStorage.getItem('token') }
 			};
 
 			/* console.log("Post Tags: " + post.tags);*/
@@ -222,7 +223,7 @@ function deletePost(slug) {
 			/* console.log(">>>> src/actions/index.js:");
     * console.log("Deleting post.");	    */
 			var config = {
-						headers: { authorization: 'Token ' + localStorage.getItem('token') }
+						headers: { authorization: localStorage.getItem('token') }
 			};
 
 			return function (dispatch) {
@@ -332,6 +333,125 @@ module.exports = require("redux");
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
+exports.signinUser = signinUser;
+exports.signupUser = signupUser;
+exports.signoutUser = signoutUser;
+exports.authError = authError;
+exports.fetchMessage = fetchMessage;
+
+var _axios = __webpack_require__(24);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+var _reactRouter = __webpack_require__(3);
+
+var _types = __webpack_require__(50);
+
+var _apiCaller = __webpack_require__(20);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function signinUser(_ref) {
+	var username = _ref.username,
+	    password = _ref.password;
+
+	return function (dispatch) {
+		// send username/password
+		// .then - success, .catch - fail.
+		console.log(">>>> src/actions/auth.js:");
+		console.log("Sending POST request from signinUser.");
+		/* console.log("Username: " + username);
+     console.log("Password: " + password);	*/
+		var credentials = {
+			"email": username,
+			"password": password
+		};
+		_axios2.default.post(_apiCaller.API_URL + '/auth/login', credentials).then(function (response) {
+			console.log("Successfully signed in!");
+			// if request is good
+			// - update state to indicate that I'm signed in
+			dispatch({ type: 'AUTH_USER' });
+			console.log("Auth action dispatched(to flip auth state to true)");
+			// - save JWT token
+			localStorage.setItem('token', response.data.token);
+			console.log("Token saved! " + response.data.token);
+			// - redirect to /feature
+			_reactRouter.browserHistory.push('/');
+			console.log("Redirected to /");
+		}).catch(function () {
+			// if request is bad
+			dispatch(authError('Bad Login Info'));
+		});
+	};
+}
+
+function signupUser(_ref2) {
+	var username = _ref2.username,
+	    password = _ref2.password;
+
+	return function (dispatch) {
+		// send username/password
+		// .then - success, .catch - fail.
+		_axios2.default.post(_apiCaller.API_URL + '/signup', { username: username, password: password }).then(function (response) {
+			// if request is good
+			// - update state to indicate that I'm signed up
+			dispatch({ type: _types.AUTH_USER });
+			// - save JWT token
+			localStorage.setItem('token', response.data.token);
+			// - redirect to /feature
+			_reactRouter.browserHistory.push('/');
+		}).catch(function () {
+			// if request is bad - add error to the state.
+			dispatch(authError('User with this username already exists'));
+		});
+	};
+}
+
+function signoutUser() {
+	// delete token and signout
+	console.log(">>>> src/actions/auth.js:");
+	console.log("Signing out user, deleting token from localStorage.");
+	localStorage.removeItem('token');
+	console.log("Redirecting to /, and dispatching action UNAUTH_USER.");
+	_reactRouter.browserHistory.push('/');
+	return {
+		type: 'UNAUTH_USER'
+	};
+}
+
+function authError(error) {
+	return {
+		type: _types.AUTH_ERROR,
+		payload: error
+	};
+}
+
+function fetchMessage() {
+	var config = {
+		headers: { authorization: localStorage.getItem('token') }
+	};
+
+	return function (dispatch) {
+		_axios2.default.get('http://localhost:3000/api/v1/auth-test', config).then(function (response) {
+			console.log("Auth test " + JSON.stringify(response));
+			dispatch({
+				type: _types.FETCH_MESSAGE,
+				payload: response.data.message
+			});
+		});
+	};
+}
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -345,7 +465,7 @@ var _reactRouter = __webpack_require__(3);
 
 var _reactBootstrap = __webpack_require__(5);
 
-var _remarkable = __webpack_require__(82);
+var _remarkable = __webpack_require__(83);
 
 var _remarkable2 = _interopRequireDefault(_remarkable);
 
@@ -370,6 +490,11 @@ var Post = function (_Component) {
 	}
 
 	_createClass(Post, [{
+		key: 'componentWillMount',
+		value: function componentWillMount() {
+			this.props.fetchSettings();
+		}
+	}, {
 		key: 'renderPostHeader',
 		value: function renderPostHeader() {
 			/* Return post header */
@@ -452,11 +577,10 @@ var Post = function (_Component) {
 
 			var _props = this.props,
 			    tags = _props.tags,
-			    category = _props.category;
+			    settings = _props.settings;
 
 
 			var tagItems = "";
-			var categoryItem = "";
 
 			/* If there are some tags - generate tag labels  */
 			if (tags && tags.length > 0) {
@@ -478,36 +602,18 @@ var Post = function (_Component) {
 				});
 			}
 
-			/* If there's a category - generate a category label */
-			if (category) {
-				categoryItem = _react2.default.createElement(
-					'span',
-					null,
-					_react2.default.createElement(
-						_reactRouter.Link,
-						{ to: '/category/' + category.slug },
-						_react2.default.createElement(
-							_reactBootstrap.Label,
-							{ bsStyle: 'default', className: 'label-category' },
-							category.title
-						)
-					),
-					'\xA0'
-				);
-			}
-
 			return _react2.default.createElement(
 				'div',
 				{ className: 'post-footer' },
-				categoryItem,
 				tagItems,
 				_react2.default.createElement(
 					'div',
 					{ className: 'right' },
 					_react2.default.createElement(
 						_reactRouter.Link,
-						{ className: 'black', to: 'http://rayalez.com' },
-						'@lumenwrites'
+						{ className: 'black', to: settings.userurl },
+						'@',
+						settings.username
 					),
 					!this.props.published ? _react2.default.createElement(
 						_reactBootstrap.Label,
@@ -561,21 +667,33 @@ var Post = function (_Component) {
 	return Post;
 }(_react.Component);
 
-exports.default = (0, _reactRedux.connect)(null, { deletePost: _index.deletePost })(Post);
+// Actions required to provide data for this component to render in sever side.
+
+
+Post.need = [function () {
+	return (0, _index.fetchSettings)();
+}];
+
+function mapStateToProps(state) {
+	return { settings: state.settings };
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, { deletePost: _index.deletePost, fetchSettings: _index.fetchSettings })(Post);
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 module.exports = {
-    secret: 'asdfsdfsf'
+    secret: 'secret-key',
+    domain: 'https://digitalmind.io'
 };
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -604,25 +722,25 @@ var postSchema = new Schema({
 exports.default = _mongoose2.default.model('Post', postSchema);
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports) {
 
 module.exports = require("passport");
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports) {
 
 module.exports = require("react-router-bootstrap");
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports) {
 
 module.exports = require("redux-form");
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -642,11 +760,11 @@ var _reactRedux = __webpack_require__(1);
 
 var _reactBootstrap = __webpack_require__(5);
 
-var _Header = __webpack_require__(52);
+var _Header = __webpack_require__(53);
 
 var _Header2 = _interopRequireDefault(_Header);
 
-var _Footer = __webpack_require__(51);
+var _Footer = __webpack_require__(52);
 
 var _Footer2 = _interopRequireDefault(_Footer);
 
@@ -721,7 +839,7 @@ var Main = function (_Component) {
 exports.default = Main;
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -733,33 +851,33 @@ Object.defineProperty(exports, "__esModule", {
 
 var _redux = __webpack_require__(8);
 
-var _reduxForm = __webpack_require__(14);
+var _reduxForm = __webpack_require__(15);
 
-var _posts = __webpack_require__(64);
+var _posts = __webpack_require__(65);
 
 var _posts2 = _interopRequireDefault(_posts);
 
-var _post = __webpack_require__(62);
+var _post = __webpack_require__(63);
 
 var _post2 = _interopRequireDefault(_post);
 
-var _postForm = __webpack_require__(63);
+var _postForm = __webpack_require__(64);
 
 var _postForm2 = _interopRequireDefault(_postForm);
 
-var _categories = __webpack_require__(61);
+var _categories = __webpack_require__(62);
 
 var _categories2 = _interopRequireDefault(_categories);
 
-var _settings = __webpack_require__(66);
+var _settings = __webpack_require__(67);
 
 var _settings2 = _interopRequireDefault(_settings);
 
-var _profiles = __webpack_require__(65);
+var _profiles = __webpack_require__(66);
 
 var _profiles2 = _interopRequireDefault(_profiles);
 
-var _auth = __webpack_require__(60);
+var _auth = __webpack_require__(61);
 
 var _auth2 = _interopRequireDefault(_auth);
 
@@ -779,125 +897,6 @@ var rootReducer = (0, _redux.combineReducers)({
 exports.default = rootReducer;
 
 /***/ }),
-/* 17 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-exports.signinUser = signinUser;
-exports.signupUser = signupUser;
-exports.signoutUser = signoutUser;
-exports.authError = authError;
-exports.fetchMessage = fetchMessage;
-
-var _axios = __webpack_require__(23);
-
-var _axios2 = _interopRequireDefault(_axios);
-
-var _reactRouter = __webpack_require__(3);
-
-var _types = __webpack_require__(49);
-
-var _apiCaller = __webpack_require__(20);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function signinUser(_ref) {
-	var username = _ref.username,
-	    password = _ref.password;
-
-	return function (dispatch) {
-		// send username/password
-		// .then - success, .catch - fail.
-		console.log(">>>> src/actions/auth.js:");
-		console.log("Sending POST request from signinUser.");
-		/* console.log("Username: " + username);
-     console.log("Password: " + password);	*/
-		var credentials = {
-			"email": username,
-			"password": password
-		};
-		_axios2.default.post(_apiCaller.API_URL + '/auth/login', credentials).then(function (response) {
-			console.log("Successfully signed in!");
-			// if request is good
-			// - update state to indicate that I'm signed in
-			dispatch({ type: 'AUTH_USER' });
-			console.log("Auth action dispatched(to flip auth state to true)");
-			// - save JWT token
-			localStorage.setItem('token', response.data.token);
-			console.log("Token saved!");
-			// - redirect to /feature
-			_reactRouter.browserHistory.push('/');
-			console.log("Redirected to /");
-		}).catch(function () {
-			// if request is bad
-			dispatch(authError('Bad Login Info'));
-		});
-	};
-}
-
-function signupUser(_ref2) {
-	var username = _ref2.username,
-	    password = _ref2.password;
-
-	return function (dispatch) {
-		// send username/password
-		// .then - success, .catch - fail.
-		_axios2.default.post(_apiCaller.API_URL + '/signup', { username: username, password: password }).then(function (response) {
-			// if request is good
-			// - update state to indicate that I'm signed up
-			dispatch({ type: _types.AUTH_USER });
-			// - save JWT token
-			localStorage.setItem('token', response.data.token);
-			// - redirect to /feature
-			_reactRouter.browserHistory.push('/');
-		}).catch(function () {
-			// if request is bad - add error to the state.
-			dispatch(authError('User with this username already exists'));
-		});
-	};
-}
-
-function signoutUser() {
-	// delete token and signout
-	console.log(">>>> src/actions/auth.js:");
-	console.log("Signing out user, deleting token from localStorage.");
-	localStorage.removeItem('token');
-	console.log("Redirecting to /, and dispatching action UNAUTH_USER.");
-	_reactRouter.browserHistory.push('/');
-	return {
-		type: 'UNAUTH_USER'
-	};
-}
-
-function authError(error) {
-	return {
-		type: _types.AUTH_ERROR,
-		payload: error
-	};
-}
-
-function fetchMessage() {
-	var config = {
-		headers: { authorization: localStorage.getItem('token') }
-	};
-
-	return function (dispatch) {
-		_axios2.default.get(_apiCaller.API_URL, config).then(function (response) {
-			/* console.log(response);*/
-			dispatch({
-				type: _types.FETCH_MESSAGE,
-				payload: response.data.message
-			});
-		});
-	};
-}
-
-/***/ }),
 /* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -914,7 +913,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(27);
+var _reactDom = __webpack_require__(28);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -928,9 +927,9 @@ var actionCreators = _interopRequireWildcard(_index);
 
 var _reactBootstrap = __webpack_require__(5);
 
-var _reactRouterBootstrap = __webpack_require__(13);
+var _reactRouterBootstrap = __webpack_require__(14);
 
-var _reactSimplemdeEditor = __webpack_require__(28);
+var _reactSimplemdeEditor = __webpack_require__(29);
 
 var _reactSimplemdeEditor2 = _interopRequireDefault(_reactSimplemdeEditor);
 
@@ -1107,7 +1106,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(1);
 
-var _reactDom = __webpack_require__(27);
+var _reactDom = __webpack_require__(28);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -1196,17 +1195,17 @@ Object.defineProperty(exports, "__esModule", {
 exports.API_URL = undefined;
 exports.default = callApi;
 
-var _isomorphicFetch = __webpack_require__(78);
+var _isomorphicFetch = __webpack_require__(79);
 
 var _isomorphicFetch2 = _interopRequireDefault(_isomorphicFetch);
 
-var _config = __webpack_require__(10);
+var _config = __webpack_require__(11);
 
 var _config2 = _interopRequireDefault(_config);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var API_URL = 'https://lumenwrites.com/api/v1';
+var API_URL = _config2.default.domain + '/api/v1';
 
 if (process.env.NODE_ENV === 'development') {
 				exports.API_URL = API_URL = 'http://localhost:3000/api/v1';
@@ -1251,11 +1250,210 @@ exports.API_URL = API_URL;
 "use strict";
 
 
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.person = person;
+exports.outbox = outbox;
+exports.inbox = inbox;
+exports.sendPostToFollowers = sendPostToFollowers;
+
+var _post = __webpack_require__(12);
+
+var _post2 = _interopRequireDefault(_post);
+
+var _follower = __webpack_require__(74);
+
+var _follower2 = _interopRequireDefault(_follower);
+
+var _cuid = __webpack_require__(26);
+
+var _cuid2 = _interopRequireDefault(_cuid);
+
+var _slug = __webpack_require__(32);
+
+var _slug2 = _interopRequireDefault(_slug);
+
+var _sanitizeHtml = __webpack_require__(31);
+
+var _sanitizeHtml2 = _interopRequireDefault(_sanitizeHtml);
+
+var _request = __webpack_require__(84);
+
+var _request2 = _interopRequireDefault(_request);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var LUMEN = {
+	"@context": "https://www.w3.org/ns/activitystreams",
+	"type": "Person",
+	"id": "https://lumenwrites.com/lumen/",
+	"name": "Lumen",
+	"preferredUsername": "lumen",
+	"summary": "I make dumb jokes",
+	"inbox": "https://lumenwrites.com/lumen/inbox/",
+	"outbox": "https://lumenwrites.com/lumen/outbox/",
+	"followers": "https://lumenwrites.com/lumen/followers/",
+	"following": "https://lumenwrites.com/lumen/following/",
+	"likes": "https://lumenwrites.com/lumen/likes/"
+};
+
+function person(req, res) {
+	res.json(LUMEN);
+}
+
+/* Post stream example */
+var POST_STREAM = [{
+	"@context": "https://www.w3.org/ns/activitystreams",
+	"type": "Post",
+	"attributedTo": "https://lumenwrites.com/lumen/",
+	"content": "Hello world!"
+}];
+
+/* Outbox of my activities */
+function outbox(req, res) {
+	_post2.default.find().sort('-dateAdded').exec(function (err, posts) {
+		if (err) {
+			res.status(500).send(err);
+		}
+		var activitystream = posts.map(function (post) {
+			var activity = {
+				"@context": "https://www.w3.org/ns/activitystreams",
+				"type": "Post",
+				"attributedTo": "https://lumenwrites.com/lumen/",
+				"content": post.body
+			};
+			return activity;
+		});
+		res.json(activitystream);
+	});
+}
+
+/* Inbox */
+/* Receive objects like this:
+{
+   "@context": "https://www.w3.org/ns/activitystreams",
+   "type": "Create",
+   "id": "https://social.example/alyssa/posts/a29a6843-9feb-4c74-a7f7-081b9c9201d3",
+   "to": ["https://chatty.example/ben/"],
+   "author": "https://social.example/alyssa/",
+   "object": {
+     "type": "Note",
+     "id": "https://social.example/alyssa/posts/49e2d03d-b53a-4c4c-a95c-94a6abf45a19",
+     "attributedTo": "https://social.example/alyssa/",
+     "to": ["https://chatty.example/ben/"],
+     "content": "Say, did you finish reading that book I lent you?"
+   }
+}
+*/
+/* Grab posts out of them and create them. */
+function inbox(req, res) {
+	console.log("Receiving post " + JSON.stringify(req.body));
+	var activity = req.body;
+	if (activity.type == "Create") {
+		var post = activity.object;
+		// Sanitize inputs
+		post.body = (0, _sanitizeHtml2.default)(post.content);
+
+		var firstline = post.body.split('\n')[0];
+		post.slug = (0, _slug2.default)(firstline) + "-" + _cuid2.default.slug();
+		post = new _post2.default(post);
+
+		post.save(function (err, post) {
+			if (err) {
+				res.status(500).send(err);
+			}
+			res.json(post);
+		});
+	}
+
+	if (activity.type == "Follow") {
+		/* When someone follows me */
+		/* Get link to person's info  */
+		console.log("Follow!");
+		var author = activity.author;
+
+		(0, _request2.default)(author, function (error, response, body) {
+			/* Fetch Person object, with all the info about the follower */
+			if (!error && response.statusCode == 200) {
+				/* Find person's inbox */
+				var person = JSON.parse(body);
+				var inbox = person.inbox;
+				console.log("Found Person " + JSON.stringify(person));
+				console.log("Inbox " + inbox);
+				/* Create new follower, and save him */
+				var follower = new _follower2.default({ id: author, inbox: inbox });
+				follower.save(function (err, follower) {
+					if (err) {
+						res.status(500).send(err);
+					}
+					console.log("New follower!!");
+					res.json(follower);
+				});
+
+				if (error) {
+					res.status(500).send(error);
+				}
+			}
+		});
+	}
+}
+
+function sendPostToFollowers(post) {
+	/* Send post to followers */
+	_follower2.default.find().exec(function (err, followers) {
+		if (err) {
+			res.status(500).send(err);
+		}
+		console.log("Followers " + JSON.stringify(followers));
+		followers.map(function (follower) {
+			/* Loop through all followers */
+			/* Generate post activity */
+			var postActivity = {
+				"@context": "https://www.w3.org/ns/activitystreams",
+				"type": "Create",
+				"id": "https://lumenwrites.com/post/" + post.slug,
+				"to": [follower.id],
+				"author": "https://lumenwrites.com/lumen/",
+				"object": {
+					"type": "Post",
+					"id": "https://lumenwrites.com/post/" + post.slug,
+					"attributedTo": "https://lumenwrites.com/lumen/",
+					"to": [follower.id],
+					"content": post.body
+				}
+			};
+
+			/* Send post to the follower's inbox  */
+			var inbox = follower.inbox;
+			console.log("Sending post " + JSON.stringify(postActivity) + " to follower " + inbox);
+			var options = {
+				uri: inbox,
+				method: 'POST',
+				json: postActivity
+			};
+			(0, _request2.default)(options, function (err, res, body) {
+				if (err) {
+					console.log("Couldn't send post");
+				}
+				console.log("Post successfully sent! " + body);
+			});
+		});
+	});
+}
+
+/***/ }),
+/* 22 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
 /* Mongoose is ORM, like models.py in django */
 var mongoose = __webpack_require__(6);
-var validator = __webpack_require__(32);
+var validator = __webpack_require__(33);
 var Schema = mongoose.Schema;
-var bcrypt = __webpack_require__(24);
+var bcrypt = __webpack_require__(25);
 
 // Define model. 
 var userSchema = new Schema({
@@ -1318,7 +1516,7 @@ var ModelClass = mongoose.model('user', userSchema);
 module.exports = ModelClass;
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1328,12 +1526,12 @@ module.exports = ModelClass;
 // check if user is logged in before accessing controllers(which are like django views)
 // So this is essentially @IsAuthenticated
 
-var passport = __webpack_require__(12);
-var JwtStrategy = __webpack_require__(26).Strategy;
-var LocalStrategy = __webpack_require__(80);
-var ExtractJwt = __webpack_require__(26).ExtractJwt;
-var User = __webpack_require__(21);
-var config = __webpack_require__(10);
+var passport = __webpack_require__(13);
+var JwtStrategy = __webpack_require__(27).Strategy;
+var LocalStrategy = __webpack_require__(81);
+var ExtractJwt = __webpack_require__(27).ExtractJwt;
+var User = __webpack_require__(22);
+var config = __webpack_require__(11);
 
 // by default you send a POST request with username and password
 // here Im telling it to use email instead
@@ -1383,7 +1581,7 @@ var jwtLogin = new JwtStrategy(jwtOptions, function (payload, done) {
 				// payload is a decoded JWT token, sub and iat from the token.
 				// done is a callback, depending on whether auth is successful
 
-				console.log("JWT login");
+				/* console.log("JWT login");*/
 				// See if user id from payload exists in our database
 				// If it does call 'done' with that user
 				// otherwise, call 'done' without a user object
@@ -1391,10 +1589,12 @@ var jwtLogin = new JwtStrategy(jwtOptions, function (payload, done) {
 								if (err) {
 												return done(err, false);
 								}
-								console.log("JWT login ");
+								/* console.log("Found user! "); */
 								if (user) {
+												/* console.log("Login successful! "); */
 												done(null, user);
 								} else {
+												/* console.log("Login unsuccessful =( "); */
 												done(null, false);
 								}
 				});
@@ -1407,67 +1607,67 @@ passport.use(jwtLogin);
 passport.use(localLogin);
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports) {
 
 module.exports = require("axios");
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports) {
 
 module.exports = require("bcrypt-nodejs");
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports) {
 
 module.exports = require("cuid");
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports) {
 
 module.exports = require("passport-jwt");
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports) {
 
 module.exports = require("react-dom");
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports) {
 
 module.exports = require("react-simplemde-editor");
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports) {
 
 module.exports = require("remove-markdown");
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports) {
 
 module.exports = require("sanitize-html");
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports) {
 
 module.exports = require("slug");
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports) {
 
 module.exports = require("validator");
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1483,15 +1683,15 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouter = __webpack_require__(3);
 
-var _Main = __webpack_require__(15);
+var _Main = __webpack_require__(16);
 
 var _Main2 = _interopRequireDefault(_Main);
 
-var _PostList = __webpack_require__(55);
+var _PostList = __webpack_require__(56);
 
 var _PostList2 = _interopRequireDefault(_PostList);
 
-var _PostNew = __webpack_require__(56);
+var _PostNew = __webpack_require__(57);
 
 var _PostNew2 = _interopRequireDefault(_PostNew);
 
@@ -1499,23 +1699,23 @@ var _Editor = __webpack_require__(18);
 
 var _Editor2 = _interopRequireDefault(_Editor);
 
-var _PostDetail = __webpack_require__(54);
+var _PostDetail = __webpack_require__(55);
 
 var _PostDetail2 = _interopRequireDefault(_PostDetail);
 
-var _About = __webpack_require__(50);
+var _About = __webpack_require__(51);
 
 var _About2 = _interopRequireDefault(_About);
 
-var _signin = __webpack_require__(58);
+var _signin = __webpack_require__(59);
 
 var _signin2 = _interopRequireDefault(_signin);
 
-var _signout = __webpack_require__(59);
+var _signout = __webpack_require__(60);
 
 var _signout2 = _interopRequireDefault(_signout);
 
-var _require_auth = __webpack_require__(57);
+var _require_auth = __webpack_require__(58);
 
 var _require_auth2 = _interopRequireDefault(_require_auth);
 
@@ -1564,7 +1764,7 @@ getComponent={(nextState, cb) => {
 */
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1577,11 +1777,11 @@ exports.configureStore = configureStore;
 
 var _redux = __webpack_require__(8);
 
-var _reduxThunk = __webpack_require__(81);
+var _reduxThunk = __webpack_require__(82);
 
 var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
-var _rootReducer = __webpack_require__(16);
+var _rootReducer = __webpack_require__(17);
 
 var _rootReducer2 = _interopRequireDefault(_rootReducer);
 
@@ -1601,34 +1801,6 @@ function configureStore() {
    */
 
 /***/ }),
-/* 35 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _express = __webpack_require__(4);
-
-var _activitypub = __webpack_require__(67);
-
-var ActivityPubControllers = _interopRequireWildcard(_activitypub);
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-var router = new _express.Router();
-
-// Get all ActivityPub
-router.route('/lumen/').get(ActivityPubControllers.person);
-router.route('/lumen/inbox').post(ActivityPubControllers.inbox);
-router.route('/lumen/outbox').get(ActivityPubControllers.outbox);
-
-exports.default = router;
-
-/***/ }),
 /* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1641,16 +1813,18 @@ Object.defineProperty(exports, "__esModule", {
 
 var _express = __webpack_require__(4);
 
-var _feeds = __webpack_require__(68);
+var _activitypub = __webpack_require__(21);
 
-var feedsControllers = _interopRequireWildcard(_feeds);
+var ActivityPubControllers = _interopRequireWildcard(_activitypub);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 var router = new _express.Router();
 
-// Get all Posts
-router.route('/feed/posts.atom').get(feedsControllers.getFeed);
+// Get all ActivityPub
+router.route('/lumen/').get(ActivityPubControllers.person);
+router.route('/lumen/inbox').post(ActivityPubControllers.inbox);
+router.route('/lumen/outbox').get(ActivityPubControllers.outbox);
 
 exports.default = router;
 
@@ -1667,7 +1841,33 @@ Object.defineProperty(exports, "__esModule", {
 
 var _express = __webpack_require__(4);
 
-var _ostatus = __webpack_require__(69);
+var _feeds = __webpack_require__(69);
+
+var feedsControllers = _interopRequireWildcard(_feeds);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+var router = new _express.Router();
+
+// Get all Posts
+router.route('/feed/posts.atom').get(feedsControllers.getFeed);
+
+exports.default = router;
+
+/***/ }),
+/* 38 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _express = __webpack_require__(4);
+
+var _ostatus = __webpack_require__(70);
 
 var OStatusControllers = _interopRequireWildcard(_ostatus);
 
@@ -1685,7 +1885,7 @@ router.route('/@lumen.feed').get(OStatusControllers.postStream);
 exports.default = router;
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1697,7 +1897,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _express = __webpack_require__(4);
 
-var _posts = __webpack_require__(70);
+var _posts = __webpack_require__(71);
 
 var postsControllers = _interopRequireWildcard(_posts);
 
@@ -1705,8 +1905,8 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 var router = new _express.Router();
 
-var passport = __webpack_require__(12);
-var passportService = __webpack_require__(22);
+var passport = __webpack_require__(13);
+var passportService = __webpack_require__(23);
 var requireAuth = passport.authenticate('jwt', { session: false });
 
 // Get all Posts
@@ -1716,12 +1916,12 @@ router.route('/posts').get(postsControllers.getPosts);
 router.route('/posts/:slug').get(postsControllers.getPost);
 
 // Add a new Post
-router.route('/posts').post(postsControllers.createPost);
+router.route('/posts').post(requireAuth, postsControllers.createPost);
 
 // Update post
-router.route('/posts/:slug').post(postsControllers.updatePost);
+router.route('/posts/:slug').post(requireAuth, postsControllers.updatePost);
 // Delete post
-router.route('/posts/:slug').delete(postsControllers.deletePost);
+router.route('/posts/:slug').delete(requireAuth, postsControllers.deletePost);
 
 router.route('/test').get(postsControllers.test);
 router.route('/categories').get(function (req, res) {
@@ -1731,7 +1931,7 @@ router.route('/categories').get(function (req, res) {
 exports.default = router;
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1745,13 +1945,13 @@ var _express = __webpack_require__(4);
 
 var router = new _express.Router();
 
-var passport = __webpack_require__(12);
-var passportService = __webpack_require__(22);
+var passport = __webpack_require__(13);
+var passportService = __webpack_require__(23);
 
 var requireAuth = passport.authenticate('jwt', { session: false });
 var requireSignin = passport.authenticate('local', { session: false });
 
-var profilesControllers = __webpack_require__(71);
+var profilesControllers = __webpack_require__(72);
 
 // Make every request go through the passport profilesentication check:
 router.route('/auth-test').get(requireAuth, function (req, res) {
@@ -1768,7 +1968,7 @@ router.route('/subscribe').post(profilesControllers.subscribe);
 exports.default = router;
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1780,7 +1980,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _express = __webpack_require__(4);
 
-var _settings = __webpack_require__(72);
+var _settings = __webpack_require__(73);
 
 var SettingsController = _interopRequireWildcard(_settings);
 
@@ -1789,12 +1989,12 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 var router = new _express.Router();
 
 // Get all Settingss
-router.route('/settings').get(SettingsController.about);
+router.route('/settings').get(SettingsController.settings);
 
 exports.default = router;
 
 /***/ }),
-/* 41 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1805,7 +2005,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.fetchComponentData = fetchComponentData;
 
-var _promiseUtils = __webpack_require__(76);
+var _promiseUtils = __webpack_require__(77);
 
 function fetchComponentData(store, components, params) {
   var needs = components.reduce(function (prev, current) {
@@ -1821,49 +2021,49 @@ function fetchComponentData(store, components, params) {
   */
 
 /***/ }),
-/* 42 */
+/* 43 */
 /***/ (function(module, exports) {
 
 module.exports = require("body-parser");
 
 /***/ }),
-/* 43 */
+/* 44 */
 /***/ (function(module, exports) {
 
 module.exports = require("compression");
 
 /***/ }),
-/* 44 */
+/* 45 */
 /***/ (function(module, exports) {
 
 module.exports = require("cors");
 
 /***/ }),
-/* 45 */
+/* 46 */
 /***/ (function(module, exports) {
 
 module.exports = require("morgan");
 
 /***/ }),
-/* 46 */
+/* 47 */
 /***/ (function(module, exports) {
 
 module.exports = require("path");
 
 /***/ }),
-/* 47 */
+/* 48 */
 /***/ (function(module, exports) {
 
 module.exports = require("react-dom/server");
 
 /***/ }),
-/* 48 */
+/* 49 */
 /***/ (function(module, exports) {
 
 module.exports = require("react-meta-tags/server");
 
 /***/ }),
-/* 49 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1878,7 +2078,7 @@ var AUTH_ERROR = exports.AUTH_ERROR = 'auth_error';
 var FETCH_MESSAGE = exports.FETCH_MESSAGE = 'fetch_message';
 
 /***/ }),
-/* 50 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1902,11 +2102,11 @@ var _reactMetaTags = __webpack_require__(7);
 
 var _reactMetaTags2 = _interopRequireDefault(_reactMetaTags);
 
-var _removeMarkdown = __webpack_require__(29);
+var _removeMarkdown = __webpack_require__(30);
 
 var _removeMarkdown2 = _interopRequireDefault(_removeMarkdown);
 
-var _Post = __webpack_require__(9);
+var _Post = __webpack_require__(10);
 
 var _Post2 = _interopRequireDefault(_Post);
 
@@ -1950,7 +2150,7 @@ var About = function (_Component) {
 									var truncate_length = 160;
 									var description = body.substring(0, truncate_length - 3) + "...";
 
-									if (!settings.title) {
+									if (!settings.metaTitle) {
 												return null;
 									}
 									return _react2.default.createElement(
@@ -1959,13 +2159,13 @@ var About = function (_Component) {
 												_react2.default.createElement(
 															'title',
 															null,
-															"About " + settings.title
+															"About " + settings.metaTitle
 												),
-												_react2.default.createElement('meta', { name: 'author', content: settings.author }),
+												_react2.default.createElement('meta', { name: 'author', content: settings.metaAuthor }),
 												_react2.default.createElement('meta', { name: 'description',
 															content: description }),
 												_react2.default.createElement('meta', { name: 'keywords',
-															content: settings.keywords })
+															content: settings.metaKeywords })
 									);
 						}
 			}, {
@@ -2006,7 +2206,7 @@ function mapStateToProps(state) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps, { fetchSettings: _index.fetchSettings })(About);
 
 /***/ }),
-/* 51 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2072,7 +2272,7 @@ var Footer = function (_Component) {
 exports.default = Footer;
 
 /***/ }),
-/* 52 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2093,6 +2293,8 @@ var _reactRedux = __webpack_require__(1);
 var _reactRouter = __webpack_require__(3);
 
 var _index = __webpack_require__(2);
+
+var _auth = __webpack_require__(9);
 
 var _reactBootstrap = __webpack_require__(5);
 
@@ -2135,6 +2337,7 @@ var Header = function (_Component) {
 			/* action creator will grab the post with this id from the API   */
 			/* and send it to the reducer */
 			/* reducer will add it to the state */
+			/* this.props.fetchMessage();	*/
 			this.props.fetchSettings();
 		}
 	}, {
@@ -2261,9 +2464,9 @@ var Header = function (_Component) {
 							_react2.default.createElement(
 								_reactRouter.Link,
 								{ className: 'logo', to: '/' },
-								_react2.default.createElement('img', { src: '/media/images/logo.png' }),
 								_react2.default.createElement('span', { className: 'title',
-									dangerouslySetInnerHTML: { __html: title } })
+									dangerouslySetInnerHTML: { __html: title } }),
+								_react2.default.createElement('img', { src: '/media/images/logo.png' })
 							)
 						),
 						_react2.default.createElement(
@@ -2318,10 +2521,11 @@ function mapStateToProps(state) {
 		subscribed: state.profiles.subscribed
 	};
 }
-exports.default = (0, _reactRedux.connect)(mapStateToProps, { fetchSettings: _index.fetchSettings, subscribedClose: _index.subscribedClose })(Header);
+exports.default = (0, _reactRedux.connect)(mapStateToProps, { fetchSettings: _index.fetchSettings, subscribedClose: _index.subscribedClose,
+	fetchMessage: _auth.fetchMessage })(Header);
 
 /***/ }),
-/* 53 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2406,7 +2610,7 @@ function mapStateToProps(state) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps, { fetchSettings: _index.fetchSettings })(Pagination);
 
 /***/ }),
-/* 54 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2430,15 +2634,15 @@ var _reactMetaTags = __webpack_require__(7);
 
 var _reactMetaTags2 = _interopRequireDefault(_reactMetaTags);
 
-var _removeMarkdown = __webpack_require__(29);
+var _removeMarkdown = __webpack_require__(30);
 
 var _removeMarkdown2 = _interopRequireDefault(_removeMarkdown);
 
 var _reactBootstrap = __webpack_require__(5);
 
-var _reactRouterBootstrap = __webpack_require__(13);
+var _reactRouterBootstrap = __webpack_require__(14);
 
-var _Post = __webpack_require__(9);
+var _Post = __webpack_require__(10);
 
 var _Post2 = _interopRequireDefault(_Post);
 
@@ -2612,7 +2816,7 @@ function mapStateToProps(state) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps, { fetchPost: _index.fetchPost, fetchSettings: _index.fetchSettings })(PostDetail);
 
 /***/ }),
-/* 55 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2638,7 +2842,7 @@ var _reactMetaTags2 = _interopRequireDefault(_reactMetaTags);
 
 var _index = __webpack_require__(2);
 
-var _Post = __webpack_require__(9);
+var _Post = __webpack_require__(10);
 
 var _Post2 = _interopRequireDefault(_Post);
 
@@ -2646,7 +2850,7 @@ var _Editor = __webpack_require__(18);
 
 var _Editor2 = _interopRequireDefault(_Editor);
 
-var _Pagination = __webpack_require__(53);
+var _Pagination = __webpack_require__(54);
 
 var _Pagination2 = _interopRequireDefault(_Pagination);
 
@@ -2823,7 +3027,7 @@ function mapStateToProps(state) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps, { fetchPosts: _index.fetchPosts, fetchSettings: _index.fetchSettings })(PostList);
 
 /***/ }),
-/* 56 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2841,15 +3045,15 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reduxForm = __webpack_require__(14);
+var _reduxForm = __webpack_require__(15);
 
 var _index = __webpack_require__(2);
 
 var _reactBootstrap = __webpack_require__(5);
 
-var _reactRouterBootstrap = __webpack_require__(13);
+var _reactRouterBootstrap = __webpack_require__(14);
 
-var _reactSimplemdeEditor = __webpack_require__(28);
+var _reactSimplemdeEditor = __webpack_require__(29);
 
 var _reactSimplemdeEditor2 = _interopRequireDefault(_reactSimplemdeEditor);
 
@@ -3009,7 +3213,7 @@ exports.default = (0, _reduxForm.reduxForm)({
 }, null, { createPost: _index.createPost })(PostNew);
 
 /***/ }),
-/* 57 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3082,7 +3286,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 /***/ }),
-/* 58 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3100,9 +3304,9 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reduxForm = __webpack_require__(14);
+var _reduxForm = __webpack_require__(15);
 
-var _auth = __webpack_require__(17);
+var _auth = __webpack_require__(9);
 
 var actions = _interopRequireWildcard(_auth);
 
@@ -3206,7 +3410,7 @@ exports.default = (0, _reduxForm.reduxForm)({
 }, mapStateToProps, actions)(Signin);
 
 /***/ }),
-/* 59 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3224,7 +3428,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(1);
 
-var _auth = __webpack_require__(17);
+var _auth = __webpack_require__(9);
 
 var actions = _interopRequireWildcard(_auth);
 
@@ -3272,7 +3476,7 @@ var Signout = function (_Component) {
 exports.default = (0, _reactRedux.connect)(null, actions)(Signout);
 
 /***/ }),
-/* 60 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3303,7 +3507,7 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 61 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3332,7 +3536,7 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 62 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3360,7 +3564,7 @@ var _index = __webpack_require__(2);
 var INITIAL_STATE = [];
 
 /***/ }),
-/* 63 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3408,7 +3612,7 @@ var INITIAL_STATE = {
 };
 
 /***/ }),
-/* 64 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3453,7 +3657,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 var INITIAL_STATE = [];
 
 /***/ }),
-/* 65 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3484,7 +3688,7 @@ var INITIAL_STATE = {
 };
 
 /***/ }),
-/* 66 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3511,123 +3715,32 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 67 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.person = person;
-exports.outbox = outbox;
-exports.inbox = inbox;
-
-var _post = __webpack_require__(11);
-
-var _post2 = _interopRequireDefault(_post);
-
-var _cuid = __webpack_require__(25);
-
-var _cuid2 = _interopRequireDefault(_cuid);
-
-var _slug = __webpack_require__(31);
-
-var _slug2 = _interopRequireDefault(_slug);
-
-var _sanitizeHtml = __webpack_require__(30);
-
-var _sanitizeHtml2 = _interopRequireDefault(_sanitizeHtml);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var LUMEN = {
-    "@context": "https://www.w3.org/ns/activitystreams",
-    "type": "Person",
-    "id": "https://lumenwrites.com/lumen/",
-    "name": "Lumen",
-    "preferredUsername": "lumen",
-    "summary": "I make dumb jokes",
-    "inbox": "https://lumenwrites.com/lumen/inbox/",
-    "outbox": "https://lumenwrites.com/lumen/outbox/",
-    "followers": "https://lumenwrites.com/lumen/followers/",
-    "following": "https://lumenwrites.com/lumen/following/",
-    "likes": "https://lumenwrites.com/lumen/likes/"
+var settings = {
+    title: "digital<b>mind</b>",
+    domain: "https://digitalmind.io",
+    categories: ["Webdev", "Startup", "Rationality", "AI"],
+    username: "rayalez",
+    userurl: "http://rayalez.com",
+    about: "<img src='/media/images/signature.png' style='float:right; width:120px;'/>Hi! My name is Ray Alez.<br/><br/>On this blog I write about everything I am learning on the path towards my dream - becoming a successful Startup Founder.<br/><br/>The main topics I'm interested in are Web Development, Computer Science, AI, Rationality, and Online Business.<br/><br/>If you like this blog, you probably want to check out the [other projects](http://rayalez.com/) I have created.<br/><br/>If you want to send me a message, my email is **raymestalez@gmail.com**.",
+    metaTitle: "Digital Mind",
+    metaDescription: "Blog about webdev, startups, rationality, and related subjects.",
+    metaAuthor: "Ray Alez",
+    metaKeywords: "Web Development, Webdev, Django, React, Programming, CS, Computer Science, AI, Rationality, Business, Startup.",
+    googleAnalyticsCode: "UA-44003603-16"
 };
 
-function person(req, res) {
-    res.json(LUMEN);
-}
+settings.metaSocialImage = settings.domain + "/media/images/social.png";
 
-/* Post stream example */
-var POST_STREAM = [{
-    "@context": "https://www.w3.org/ns/activitystreams",
-    "type": "Post",
-    "attributedTo": "https://lumenwrites.com/lumen/",
-    "content": "Hello world!"
-}];
-
-/* Outbox of my activities */
-function outbox(req, res) {
-    _post2.default.find().sort('-dateAdded').exec(function (err, posts) {
-        if (err) {
-            res.status(500).send(err);
-        }
-        var activitystream = posts.map(function (post) {
-            var activity = {
-                "@context": "https://www.w3.org/ns/activitystreams",
-                "type": "Post",
-                "attributedTo": "https://lumenwrites.com/lumen/",
-                "content": post.body
-            };
-            return activity;
-        });
-        res.json(activitystream);
-    });
-}
-
-/* Inbox */
-/* Receive objects like this:
-{
-   "@context": "https://www.w3.org/ns/activitystreams",
-   "type": "Create",
-   "id": "https://social.example/alyssa/posts/a29a6843-9feb-4c74-a7f7-081b9c9201d3",
-   "to": ["https://chatty.example/ben/"],
-   "author": "https://social.example/alyssa/",
-   "object": {
-     "type": "Note",
-     "id": "https://social.example/alyssa/posts/49e2d03d-b53a-4c4c-a95c-94a6abf45a19",
-     "attributedTo": "https://social.example/alyssa/",
-     "to": ["https://chatty.example/ben/"],
-     "content": "Say, did you finish reading that book I lent you?"
-   }
-}
-*/
-/* Grab posts out of them and create them. */
-function inbox(req, res) {
-    console.log("Receiving post " + JSON.stringify(req.body));
-    var activity = req.body;
-    if (activity.type == "Create") {
-        var post = activity.object;
-        // Sanitize inputs
-        post.body = (0, _sanitizeHtml2.default)(post.content);
-
-        var firstline = post.body.split('\n')[0];
-        post.slug = (0, _slug2.default)(firstline) + "-" + _cuid2.default.slug();
-        post = new _post2.default(post);
-
-        post.save(function (err, post) {
-            if (err) {
-                res.status(500).send(err);
-            }
-            res.json(post);
-        });
-    }
-}
+module.exports = settings;
 
 /***/ }),
-/* 68 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3638,11 +3751,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.getFeed = getFeed;
 
-var _feed = __webpack_require__(77);
+var _feed = __webpack_require__(78);
 
 var _feed2 = _interopRequireDefault(_feed);
 
-var _post = __webpack_require__(11);
+var _post = __webpack_require__(12);
 
 var _post2 = _interopRequireDefault(_post);
 
@@ -3697,7 +3810,7 @@ function getFeed(req, res) {
 }
 
 /***/ }),
-/* 69 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3813,7 +3926,7 @@ function postStream(req, res) {
 }
 
 /***/ }),
-/* 70 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3829,21 +3942,23 @@ exports.updatePost = updatePost;
 exports.deletePost = deletePost;
 exports.test = test;
 
-var _post = __webpack_require__(11);
+var _post = __webpack_require__(12);
 
 var _post2 = _interopRequireDefault(_post);
 
-var _cuid = __webpack_require__(25);
+var _cuid = __webpack_require__(26);
 
 var _cuid2 = _interopRequireDefault(_cuid);
 
-var _slug = __webpack_require__(31);
+var _slug = __webpack_require__(32);
 
 var _slug2 = _interopRequireDefault(_slug);
 
-var _sanitizeHtml = __webpack_require__(30);
+var _sanitizeHtml = __webpack_require__(31);
 
 var _sanitizeHtml2 = _interopRequireDefault(_sanitizeHtml);
+
+var _activitypubControllers = __webpack_require__(21);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -3873,6 +3988,9 @@ function getPosts(req, res) {
 }
 
 /* Get a single post */
+
+
+/* ActivityPub */
 function getPost(req, res) {
    console.log("Fetching post by slug " + req.params.slug);
    _post2.default.findOne({ slug: req.params.slug }).exec(function (err, post) {
@@ -3904,6 +4022,8 @@ function createPost(req, res) {
       if (err) {
          res.status(500).send(err);
       }
+      console.log("Post created " + JSON.stringify(post));
+      /* sendPostToFollowers(post)*/
       res.json(post);
    });
 }
@@ -3938,16 +4058,16 @@ function test(req, res) {
 }
 
 /***/ }),
-/* 71 */
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var jwt = __webpack_require__(79);
-var config = __webpack_require__(10);
-var User = __webpack_require__(21);
-var Subscriber = __webpack_require__(73);
+var jwt = __webpack_require__(80);
+var config = __webpack_require__(11);
+var User = __webpack_require__(22);
+var Subscriber = __webpack_require__(75);
 
 function tokenForUser(user) {
 				// sub means subject. a property describing who it is about
@@ -4043,20 +4163,20 @@ exports.subscribe = function (req, res, next) {
 };
 
 /***/ }),
-/* 72 */
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var settings = __webpack_require__(75);
+var settings = __webpack_require__(68);
 
-exports.about = function (req, res, next) {
+exports.settings = function (req, res, next) {
     return res.send(settings);
 };
 
 /***/ }),
-/* 73 */
+/* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4064,9 +4184,42 @@ exports.about = function (req, res, next) {
 
 /* Mongoose is ORM, like models.py in django */
 var mongoose = __webpack_require__(6);
-var validator = __webpack_require__(32);
 var Schema = mongoose.Schema;
-var bcrypt = __webpack_require__(24);
+
+// Define model. 
+var followerSchema = new Schema({
+			id: {
+						type: String,
+						unique: true,
+						required: true,
+						trim: true,
+						minlength: 1
+			},
+			inbox: {
+						type: String,
+						required: true,
+						minlength: 1
+			}
+});
+
+// Create model class
+var ModelClass = mongoose.model('follower', followerSchema);
+
+// Export model
+module.exports = ModelClass;
+
+/***/ }),
+/* 75 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/* Mongoose is ORM, like models.py in django */
+var mongoose = __webpack_require__(6);
+var validator = __webpack_require__(33);
+var Schema = mongoose.Schema;
+var bcrypt = __webpack_require__(25);
 
 // Define model. 
 var userSchema = new Schema({
@@ -4091,7 +4244,7 @@ var ModelClass = mongoose.model('subscriber', userSchema);
 module.exports = ModelClass;
 
 /***/ }),
-/* 74 */
+/* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4105,7 +4258,7 @@ var _express = __webpack_require__(4);
 
 var _express2 = _interopRequireDefault(_express);
 
-var _compression = __webpack_require__(43);
+var _compression = __webpack_require__(44);
 
 var _compression2 = _interopRequireDefault(_compression);
 
@@ -4113,43 +4266,43 @@ var _mongoose = __webpack_require__(6);
 
 var _mongoose2 = _interopRequireDefault(_mongoose);
 
-var _bodyParser = __webpack_require__(42);
+var _bodyParser = __webpack_require__(43);
 
 var _bodyParser2 = _interopRequireDefault(_bodyParser);
 
-var _path = __webpack_require__(46);
+var _path = __webpack_require__(47);
 
 var _path2 = _interopRequireDefault(_path);
 
-var _cors = __webpack_require__(44);
+var _cors = __webpack_require__(45);
 
 var _cors2 = _interopRequireDefault(_cors);
 
-var _morgan = __webpack_require__(45);
+var _morgan = __webpack_require__(46);
 
 var _morgan2 = _interopRequireDefault(_morgan);
 
-var _postsRoutes = __webpack_require__(38);
+var _postsRoutes = __webpack_require__(39);
 
 var _postsRoutes2 = _interopRequireDefault(_postsRoutes);
 
-var _settingsRoutes = __webpack_require__(40);
+var _settingsRoutes = __webpack_require__(41);
 
 var _settingsRoutes2 = _interopRequireDefault(_settingsRoutes);
 
-var _feedsRoutes = __webpack_require__(36);
+var _feedsRoutes = __webpack_require__(37);
 
 var _feedsRoutes2 = _interopRequireDefault(_feedsRoutes);
 
-var _profilesRoutes = __webpack_require__(39);
+var _profilesRoutes = __webpack_require__(40);
 
 var _profilesRoutes2 = _interopRequireDefault(_profilesRoutes);
 
-var _ostatusRoutes = __webpack_require__(37);
+var _ostatusRoutes = __webpack_require__(38);
 
 var _ostatusRoutes2 = _interopRequireDefault(_ostatusRoutes);
 
-var _activitypubRoutes = __webpack_require__(35);
+var _activitypubRoutes = __webpack_require__(36);
 
 var _activitypubRoutes2 = _interopRequireDefault(_activitypubRoutes);
 
@@ -4161,31 +4314,31 @@ var _redux = __webpack_require__(8);
 
 var _reactRedux = __webpack_require__(1);
 
-var _server = __webpack_require__(47);
+var _server = __webpack_require__(48);
 
 var _reactRouter = __webpack_require__(3);
 
-var _server2 = __webpack_require__(48);
+var _server2 = __webpack_require__(49);
 
 var _server3 = _interopRequireDefault(_server2);
 
 var _reactMetaTags = __webpack_require__(7);
 
-var _store = __webpack_require__(34);
+var _store = __webpack_require__(35);
 
-var _routes = __webpack_require__(33);
+var _routes = __webpack_require__(34);
 
 var _routes2 = _interopRequireDefault(_routes);
 
-var _Main = __webpack_require__(15);
+var _Main = __webpack_require__(16);
 
 var _Main2 = _interopRequireDefault(_Main);
 
-var _rootReducer = __webpack_require__(16);
+var _rootReducer = __webpack_require__(17);
 
 var _rootReducer2 = _interopRequireDefault(_rootReducer);
 
-var _fetchData = __webpack_require__(41);
+var _fetchData = __webpack_require__(42);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -4314,30 +4467,7 @@ exports.default = server;
 /* WEBPACK VAR INJECTION */}.call(exports, ""))
 
 /***/ }),
-/* 75 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var settings = {
-    title: "lumen<b>writes</b>",
-    domain: "https://lumenwrites.com",
-    categories: ["jokes", "meta", "other"],
-    about: "I make dumb jokes.",
-    metaTitle: "Lumen Writes",
-    metaDescription: "I make dumb jokes",
-    metaAuthor: "Lumen",
-    metaKeywords: "Comedy, jokes, writing",
-    googleAnalyticsCode: ""
-};
-
-settings.metaSocialImage = settings.domain + "/media/images/social.png";
-
-module.exports = settings;
-
-/***/ }),
-/* 76 */
+/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4368,40 +4498,46 @@ function sequence(items, consumer) {
 }
 
 /***/ }),
-/* 77 */
+/* 78 */
 /***/ (function(module, exports) {
 
 module.exports = require("feed");
 
 /***/ }),
-/* 78 */
+/* 79 */
 /***/ (function(module, exports) {
 
 module.exports = require("isomorphic-fetch");
 
 /***/ }),
-/* 79 */
+/* 80 */
 /***/ (function(module, exports) {
 
 module.exports = require("jwt-simple");
 
 /***/ }),
-/* 80 */
+/* 81 */
 /***/ (function(module, exports) {
 
 module.exports = require("passport-local");
 
 /***/ }),
-/* 81 */
+/* 82 */
 /***/ (function(module, exports) {
 
 module.exports = require("redux-thunk");
 
 /***/ }),
-/* 82 */
+/* 83 */
 /***/ (function(module, exports) {
 
 module.exports = require("remarkable");
+
+/***/ }),
+/* 84 */
+/***/ (function(module, exports) {
+
+module.exports = require("request");
 
 /***/ })
 /******/ ])));
