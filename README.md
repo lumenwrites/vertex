@@ -65,10 +65,12 @@ To deploy it online, go to Digital Ocean, create a Docker droplet, point your do
 # Upcoming features
 
 ## Small
+- [ ] Awesome nginx config. Caching, compression, all the fancy stuff.
+- [ ] readmore... for longer posts
 - [ ] Proper nice 404 pages, error messages, etc.
 - [ ] Google Analytics config
 - [ ] Save email subscribers source(?source=hackernews).
-- [ ] 
+- [ ] author username and url
 
 # Decentralization
 
