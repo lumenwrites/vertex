@@ -100,7 +100,7 @@ exports.fetchSettings = fetchSettings;
 exports.createSubscriber = createSubscriber;
 exports.subscribedClose = subscribedClose;
 
-var _axios = __webpack_require__(24);
+var _axios = __webpack_require__(25);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -339,13 +339,13 @@ exports.signoutUser = signoutUser;
 exports.authError = authError;
 exports.fetchMessage = fetchMessage;
 
-var _axios = __webpack_require__(24);
+var _axios = __webpack_require__(25);
 
 var _axios2 = _interopRequireDefault(_axios);
 
 var _reactRouter = __webpack_require__(3);
 
-var _types = __webpack_require__(50);
+var _types = __webpack_require__(51);
 
 var _apiCaller = __webpack_require__(20);
 
@@ -760,11 +760,11 @@ var _reactRedux = __webpack_require__(1);
 
 var _reactBootstrap = __webpack_require__(5);
 
-var _Header = __webpack_require__(53);
+var _Header = __webpack_require__(54);
 
 var _Header2 = _interopRequireDefault(_Header);
 
-var _Footer = __webpack_require__(52);
+var _Footer = __webpack_require__(53);
 
 var _Footer2 = _interopRequireDefault(_Footer);
 
@@ -853,31 +853,31 @@ var _redux = __webpack_require__(8);
 
 var _reduxForm = __webpack_require__(15);
 
-var _posts = __webpack_require__(65);
+var _posts = __webpack_require__(66);
 
 var _posts2 = _interopRequireDefault(_posts);
 
-var _post = __webpack_require__(63);
+var _post = __webpack_require__(64);
 
 var _post2 = _interopRequireDefault(_post);
 
-var _postForm = __webpack_require__(64);
+var _postForm = __webpack_require__(65);
 
 var _postForm2 = _interopRequireDefault(_postForm);
 
-var _categories = __webpack_require__(62);
+var _categories = __webpack_require__(63);
 
 var _categories2 = _interopRequireDefault(_categories);
 
-var _settings = __webpack_require__(67);
+var _settings = __webpack_require__(68);
 
 var _settings2 = _interopRequireDefault(_settings);
 
-var _profiles = __webpack_require__(66);
+var _profiles = __webpack_require__(67);
 
 var _profiles2 = _interopRequireDefault(_profiles);
 
-var _auth = __webpack_require__(61);
+var _auth = __webpack_require__(62);
 
 var _auth2 = _interopRequireDefault(_auth);
 
@@ -913,7 +913,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(28);
+var _reactDom = __webpack_require__(29);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -929,7 +929,7 @@ var _reactBootstrap = __webpack_require__(5);
 
 var _reactRouterBootstrap = __webpack_require__(14);
 
-var _reactSimplemdeEditor = __webpack_require__(29);
+var _reactSimplemdeEditor = __webpack_require__(30);
 
 var _reactSimplemdeEditor2 = _interopRequireDefault(_reactSimplemdeEditor);
 
@@ -1106,7 +1106,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(1);
 
-var _reactDom = __webpack_require__(28);
+var _reactDom = __webpack_require__(29);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -1250,6 +1250,32 @@ exports.API_URL = API_URL;
 "use strict";
 
 
+var settings = {
+    title: "digital<b>mind</b>",
+    domain: "https://digitalmind.io",
+    categories: ["Webdev", "Startup", "Rationality", "AI"],
+    username: "rayalez",
+    userurl: "http://rayalez.com",
+    about: "<img src='/media/images/signature.png' style='float:right; width:120px;'/>Hi! My name is Ray Alez.<br/><br/>On this blog I write about everything I am learning on the path towards my dream - becoming a successful Startup Founder.<br/><br/>The main topics I'm interested in are Web Development, Computer Science, AI, Rationality, and Online Business.<br/><br/>If you like this blog, you probably want to check out the [other projects](http://rayalez.com/) I have created.<br/><br/>If you want to send me a message, my email is **raymestalez@gmail.com**.",
+    metaTitle: "Digital Mind",
+    metaDescription: "Blog about webdev, startups, rationality, and related subjects.",
+    metaAuthor: "Ray Alez",
+    metaEmail: "raymestalez@gmail.com",
+    metaKeywords: "Web Development, Webdev, Django, React, Programming, CS, Computer Science, AI, Rationality, Business, Startup.",
+    googleAnalyticsCode: "UA-44003603-16"
+};
+
+settings.metaSocialImage = settings.domain + "/media/images/social.png";
+
+module.exports = settings;
+
+/***/ }),
+/* 22 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
@@ -1266,15 +1292,15 @@ var _follower = __webpack_require__(74);
 
 var _follower2 = _interopRequireDefault(_follower);
 
-var _cuid = __webpack_require__(26);
+var _cuid = __webpack_require__(27);
 
 var _cuid2 = _interopRequireDefault(_cuid);
 
-var _slug = __webpack_require__(32);
+var _slug = __webpack_require__(33);
 
 var _slug2 = _interopRequireDefault(_slug);
 
-var _sanitizeHtml = __webpack_require__(31);
+var _sanitizeHtml = __webpack_require__(32);
 
 var _sanitizeHtml2 = _interopRequireDefault(_sanitizeHtml);
 
@@ -1443,7 +1469,7 @@ function sendPostToFollowers(post) {
 }
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1451,9 +1477,9 @@ function sendPostToFollowers(post) {
 
 /* Mongoose is ORM, like models.py in django */
 var mongoose = __webpack_require__(6);
-var validator = __webpack_require__(33);
+var validator = __webpack_require__(34);
 var Schema = mongoose.Schema;
-var bcrypt = __webpack_require__(25);
+var bcrypt = __webpack_require__(26);
 
 // Define model. 
 var userSchema = new Schema({
@@ -1516,7 +1542,7 @@ var ModelClass = mongoose.model('user', userSchema);
 module.exports = ModelClass;
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1527,10 +1553,10 @@ module.exports = ModelClass;
 // So this is essentially @IsAuthenticated
 
 var passport = __webpack_require__(13);
-var JwtStrategy = __webpack_require__(27).Strategy;
+var JwtStrategy = __webpack_require__(28).Strategy;
 var LocalStrategy = __webpack_require__(81);
-var ExtractJwt = __webpack_require__(27).ExtractJwt;
-var User = __webpack_require__(22);
+var ExtractJwt = __webpack_require__(28).ExtractJwt;
+var User = __webpack_require__(23);
 var config = __webpack_require__(11);
 
 // by default you send a POST request with username and password
@@ -1607,67 +1633,67 @@ passport.use(jwtLogin);
 passport.use(localLogin);
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports) {
 
 module.exports = require("axios");
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports) {
 
 module.exports = require("bcrypt-nodejs");
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports) {
 
 module.exports = require("cuid");
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports) {
 
 module.exports = require("passport-jwt");
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports) {
 
 module.exports = require("react-dom");
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports) {
 
 module.exports = require("react-simplemde-editor");
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports) {
 
 module.exports = require("remove-markdown");
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports) {
 
 module.exports = require("sanitize-html");
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports) {
 
 module.exports = require("slug");
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports) {
 
 module.exports = require("validator");
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1687,11 +1713,11 @@ var _Main = __webpack_require__(16);
 
 var _Main2 = _interopRequireDefault(_Main);
 
-var _PostList = __webpack_require__(56);
+var _PostList = __webpack_require__(57);
 
 var _PostList2 = _interopRequireDefault(_PostList);
 
-var _PostNew = __webpack_require__(57);
+var _PostNew = __webpack_require__(58);
 
 var _PostNew2 = _interopRequireDefault(_PostNew);
 
@@ -1699,23 +1725,23 @@ var _Editor = __webpack_require__(18);
 
 var _Editor2 = _interopRequireDefault(_Editor);
 
-var _PostDetail = __webpack_require__(55);
+var _PostDetail = __webpack_require__(56);
 
 var _PostDetail2 = _interopRequireDefault(_PostDetail);
 
-var _About = __webpack_require__(51);
+var _About = __webpack_require__(52);
 
 var _About2 = _interopRequireDefault(_About);
 
-var _signin = __webpack_require__(59);
+var _signin = __webpack_require__(60);
 
 var _signin2 = _interopRequireDefault(_signin);
 
-var _signout = __webpack_require__(60);
+var _signout = __webpack_require__(61);
 
 var _signout2 = _interopRequireDefault(_signout);
 
-var _require_auth = __webpack_require__(58);
+var _require_auth = __webpack_require__(59);
 
 var _require_auth2 = _interopRequireDefault(_require_auth);
 
@@ -1764,7 +1790,7 @@ getComponent={(nextState, cb) => {
 */
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1801,7 +1827,7 @@ function configureStore() {
    */
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1813,7 +1839,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _express = __webpack_require__(4);
 
-var _activitypub = __webpack_require__(21);
+var _activitypub = __webpack_require__(22);
 
 var ActivityPubControllers = _interopRequireWildcard(_activitypub);
 
@@ -1829,7 +1855,7 @@ router.route('/lumen/outbox').get(ActivityPubControllers.outbox);
 exports.default = router;
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1855,7 +1881,7 @@ router.route('/feed/posts.atom').get(feedsControllers.getFeed);
 exports.default = router;
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1885,7 +1911,7 @@ router.route('/@lumen.feed').get(OStatusControllers.postStream);
 exports.default = router;
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1906,7 +1932,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 var router = new _express.Router();
 
 var passport = __webpack_require__(13);
-var passportService = __webpack_require__(23);
+var passportService = __webpack_require__(24);
 var requireAuth = passport.authenticate('jwt', { session: false });
 
 // Get all Posts
@@ -1931,7 +1957,7 @@ router.route('/categories').get(function (req, res) {
 exports.default = router;
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1946,7 +1972,7 @@ var _express = __webpack_require__(4);
 var router = new _express.Router();
 
 var passport = __webpack_require__(13);
-var passportService = __webpack_require__(23);
+var passportService = __webpack_require__(24);
 
 var requireAuth = passport.authenticate('jwt', { session: false });
 var requireSignin = passport.authenticate('local', { session: false });
@@ -1968,7 +1994,7 @@ router.route('/subscribe').post(profilesControllers.subscribe);
 exports.default = router;
 
 /***/ }),
-/* 41 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1994,7 +2020,7 @@ router.route('/settings').get(SettingsController.settings);
 exports.default = router;
 
 /***/ }),
-/* 42 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2021,49 +2047,49 @@ function fetchComponentData(store, components, params) {
   */
 
 /***/ }),
-/* 43 */
+/* 44 */
 /***/ (function(module, exports) {
 
 module.exports = require("body-parser");
 
 /***/ }),
-/* 44 */
+/* 45 */
 /***/ (function(module, exports) {
 
 module.exports = require("compression");
 
 /***/ }),
-/* 45 */
+/* 46 */
 /***/ (function(module, exports) {
 
 module.exports = require("cors");
 
 /***/ }),
-/* 46 */
+/* 47 */
 /***/ (function(module, exports) {
 
 module.exports = require("morgan");
 
 /***/ }),
-/* 47 */
+/* 48 */
 /***/ (function(module, exports) {
 
 module.exports = require("path");
 
 /***/ }),
-/* 48 */
+/* 49 */
 /***/ (function(module, exports) {
 
 module.exports = require("react-dom/server");
 
 /***/ }),
-/* 49 */
+/* 50 */
 /***/ (function(module, exports) {
 
 module.exports = require("react-meta-tags/server");
 
 /***/ }),
-/* 50 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2078,7 +2104,7 @@ var AUTH_ERROR = exports.AUTH_ERROR = 'auth_error';
 var FETCH_MESSAGE = exports.FETCH_MESSAGE = 'fetch_message';
 
 /***/ }),
-/* 51 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2102,7 +2128,7 @@ var _reactMetaTags = __webpack_require__(7);
 
 var _reactMetaTags2 = _interopRequireDefault(_reactMetaTags);
 
-var _removeMarkdown = __webpack_require__(30);
+var _removeMarkdown = __webpack_require__(31);
 
 var _removeMarkdown2 = _interopRequireDefault(_removeMarkdown);
 
@@ -2206,7 +2232,7 @@ function mapStateToProps(state) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps, { fetchSettings: _index.fetchSettings })(About);
 
 /***/ }),
-/* 52 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2272,7 +2298,7 @@ var Footer = function (_Component) {
 exports.default = Footer;
 
 /***/ }),
-/* 53 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2525,7 +2551,7 @@ exports.default = (0, _reactRedux.connect)(mapStateToProps, { fetchSettings: _in
 	fetchMessage: _auth.fetchMessage })(Header);
 
 /***/ }),
-/* 54 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2610,7 +2636,7 @@ function mapStateToProps(state) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps, { fetchSettings: _index.fetchSettings })(Pagination);
 
 /***/ }),
-/* 55 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2634,7 +2660,7 @@ var _reactMetaTags = __webpack_require__(7);
 
 var _reactMetaTags2 = _interopRequireDefault(_reactMetaTags);
 
-var _removeMarkdown = __webpack_require__(30);
+var _removeMarkdown = __webpack_require__(31);
 
 var _removeMarkdown2 = _interopRequireDefault(_removeMarkdown);
 
@@ -2816,7 +2842,7 @@ function mapStateToProps(state) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps, { fetchPost: _index.fetchPost, fetchSettings: _index.fetchSettings })(PostDetail);
 
 /***/ }),
-/* 56 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2850,7 +2876,7 @@ var _Editor = __webpack_require__(18);
 
 var _Editor2 = _interopRequireDefault(_Editor);
 
-var _Pagination = __webpack_require__(54);
+var _Pagination = __webpack_require__(55);
 
 var _Pagination2 = _interopRequireDefault(_Pagination);
 
@@ -3027,7 +3053,7 @@ function mapStateToProps(state) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps, { fetchPosts: _index.fetchPosts, fetchSettings: _index.fetchSettings })(PostList);
 
 /***/ }),
-/* 57 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3053,7 +3079,7 @@ var _reactBootstrap = __webpack_require__(5);
 
 var _reactRouterBootstrap = __webpack_require__(14);
 
-var _reactSimplemdeEditor = __webpack_require__(29);
+var _reactSimplemdeEditor = __webpack_require__(30);
 
 var _reactSimplemdeEditor2 = _interopRequireDefault(_reactSimplemdeEditor);
 
@@ -3213,7 +3239,7 @@ exports.default = (0, _reduxForm.reduxForm)({
 }, null, { createPost: _index.createPost })(PostNew);
 
 /***/ }),
-/* 58 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3286,7 +3312,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 /***/ }),
-/* 59 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3410,7 +3436,7 @@ exports.default = (0, _reduxForm.reduxForm)({
 }, mapStateToProps, actions)(Signin);
 
 /***/ }),
-/* 60 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3476,7 +3502,7 @@ var Signout = function (_Component) {
 exports.default = (0, _reactRedux.connect)(null, actions)(Signout);
 
 /***/ }),
-/* 61 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3507,7 +3533,7 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 62 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3536,7 +3562,7 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 63 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3564,7 +3590,7 @@ var _index = __webpack_require__(2);
 var INITIAL_STATE = [];
 
 /***/ }),
-/* 64 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3612,7 +3638,7 @@ var INITIAL_STATE = {
 };
 
 /***/ }),
-/* 65 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3657,7 +3683,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 var INITIAL_STATE = [];
 
 /***/ }),
-/* 66 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3688,7 +3714,7 @@ var INITIAL_STATE = {
 };
 
 /***/ }),
-/* 67 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3715,31 +3741,6 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 68 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var settings = {
-    title: "digital<b>mind</b>",
-    domain: "https://digitalmind.io",
-    categories: ["Webdev", "Startup", "Rationality", "AI"],
-    username: "rayalez",
-    userurl: "http://rayalez.com",
-    about: "<img src='/media/images/signature.png' style='float:right; width:120px;'/>Hi! My name is Ray Alez.<br/><br/>On this blog I write about everything I am learning on the path towards my dream - becoming a successful Startup Founder.<br/><br/>The main topics I'm interested in are Web Development, Computer Science, AI, Rationality, and Online Business.<br/><br/>If you like this blog, you probably want to check out the [other projects](http://rayalez.com/) I have created.<br/><br/>If you want to send me a message, my email is **raymestalez@gmail.com**.",
-    metaTitle: "Digital Mind",
-    metaDescription: "Blog about webdev, startups, rationality, and related subjects.",
-    metaAuthor: "Ray Alez",
-    metaKeywords: "Web Development, Webdev, Django, React, Programming, CS, Computer Science, AI, Rationality, Business, Startup.",
-    googleAnalyticsCode: "UA-44003603-16"
-};
-
-settings.metaSocialImage = settings.domain + "/media/images/social.png";
-
-module.exports = settings;
-
-/***/ }),
 /* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3759,20 +3760,24 @@ var _post = __webpack_require__(12);
 
 var _post2 = _interopRequireDefault(_post);
 
+var _settings = __webpack_require__(21);
+
+var _settings2 = _interopRequireDefault(_settings);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var feed = new _feed2.default({
-			title: 'Lumen Writes',
-			description: 'New posts from Lumen Writes',
-			id: 'http://lumenwrites.com/',
-			link: 'http://lumenwrites.com/',
-			image: 'http://example.com/image.png',
+			title: _settings2.default.metaTitle,
+			description: _settings2.default.metaDescription,
+			id: _settings2.default.domain,
+			link: _settings2.default.domain + "/feed/posts.atom",
+			image: _settings2.default.metaSocialImage,
 			// updated: new Date(2013, 06, 14), // optional, default = today 
 
 			author: {
-						name: 'Lumen Writes',
-						email: 'lumenwrites@gmail.com',
-						link: 'http://lumenwrites.com/'
+						name: _settings2.default.metaAuthor,
+						email: _settings2.default.metaEmail,
+						link: _settings2.default.userurl
 			}
 });
 
@@ -3790,16 +3795,16 @@ function getFeed(req, res) {
 						}
 
 						posts.forEach(function (post) {
-									var link = "http://lumenwrites.com/post/" + post.slug;
+									var link = _settings2.default.domain + "/post/" + post.slug;
 									feed.addItem({
 												title: post.body,
 												id: link,
 												link: link,
 												description: post.body,
 												author: [{
-															name: 'Lumen Writes',
-															email: 'lumenwries@gmail.com',
-															link: 'http://lumenwrites.com/'
+															name: _settings2.default.metaAuthor,
+															email: _settings2.default.metaEmail,
+															link: _settings2.default.userurl
 												}],
 												date: post.dateAdded
 									});
@@ -3946,19 +3951,19 @@ var _post = __webpack_require__(12);
 
 var _post2 = _interopRequireDefault(_post);
 
-var _cuid = __webpack_require__(26);
+var _cuid = __webpack_require__(27);
 
 var _cuid2 = _interopRequireDefault(_cuid);
 
-var _slug = __webpack_require__(32);
+var _slug = __webpack_require__(33);
 
 var _slug2 = _interopRequireDefault(_slug);
 
-var _sanitizeHtml = __webpack_require__(31);
+var _sanitizeHtml = __webpack_require__(32);
 
 var _sanitizeHtml2 = _interopRequireDefault(_sanitizeHtml);
 
-var _activitypubControllers = __webpack_require__(21);
+var _activitypubControllers = __webpack_require__(22);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -4066,7 +4071,7 @@ function test(req, res) {
 
 var jwt = __webpack_require__(80);
 var config = __webpack_require__(11);
-var User = __webpack_require__(22);
+var User = __webpack_require__(23);
 var Subscriber = __webpack_require__(75);
 
 function tokenForUser(user) {
@@ -4169,7 +4174,7 @@ exports.subscribe = function (req, res, next) {
 "use strict";
 
 
-var settings = __webpack_require__(68);
+var settings = __webpack_require__(21);
 
 exports.settings = function (req, res, next) {
     return res.send(settings);
@@ -4217,9 +4222,9 @@ module.exports = ModelClass;
 
 /* Mongoose is ORM, like models.py in django */
 var mongoose = __webpack_require__(6);
-var validator = __webpack_require__(33);
+var validator = __webpack_require__(34);
 var Schema = mongoose.Schema;
-var bcrypt = __webpack_require__(25);
+var bcrypt = __webpack_require__(26);
 
 // Define model. 
 var userSchema = new Schema({
@@ -4258,7 +4263,7 @@ var _express = __webpack_require__(4);
 
 var _express2 = _interopRequireDefault(_express);
 
-var _compression = __webpack_require__(44);
+var _compression = __webpack_require__(45);
 
 var _compression2 = _interopRequireDefault(_compression);
 
@@ -4266,43 +4271,43 @@ var _mongoose = __webpack_require__(6);
 
 var _mongoose2 = _interopRequireDefault(_mongoose);
 
-var _bodyParser = __webpack_require__(43);
+var _bodyParser = __webpack_require__(44);
 
 var _bodyParser2 = _interopRequireDefault(_bodyParser);
 
-var _path = __webpack_require__(47);
+var _path = __webpack_require__(48);
 
 var _path2 = _interopRequireDefault(_path);
 
-var _cors = __webpack_require__(45);
+var _cors = __webpack_require__(46);
 
 var _cors2 = _interopRequireDefault(_cors);
 
-var _morgan = __webpack_require__(46);
+var _morgan = __webpack_require__(47);
 
 var _morgan2 = _interopRequireDefault(_morgan);
 
-var _postsRoutes = __webpack_require__(39);
+var _postsRoutes = __webpack_require__(40);
 
 var _postsRoutes2 = _interopRequireDefault(_postsRoutes);
 
-var _settingsRoutes = __webpack_require__(41);
+var _settingsRoutes = __webpack_require__(42);
 
 var _settingsRoutes2 = _interopRequireDefault(_settingsRoutes);
 
-var _feedsRoutes = __webpack_require__(37);
+var _feedsRoutes = __webpack_require__(38);
 
 var _feedsRoutes2 = _interopRequireDefault(_feedsRoutes);
 
-var _profilesRoutes = __webpack_require__(40);
+var _profilesRoutes = __webpack_require__(41);
 
 var _profilesRoutes2 = _interopRequireDefault(_profilesRoutes);
 
-var _ostatusRoutes = __webpack_require__(38);
+var _ostatusRoutes = __webpack_require__(39);
 
 var _ostatusRoutes2 = _interopRequireDefault(_ostatusRoutes);
 
-var _activitypubRoutes = __webpack_require__(36);
+var _activitypubRoutes = __webpack_require__(37);
 
 var _activitypubRoutes2 = _interopRequireDefault(_activitypubRoutes);
 
@@ -4314,19 +4319,19 @@ var _redux = __webpack_require__(8);
 
 var _reactRedux = __webpack_require__(1);
 
-var _server = __webpack_require__(48);
+var _server = __webpack_require__(49);
 
 var _reactRouter = __webpack_require__(3);
 
-var _server2 = __webpack_require__(49);
+var _server2 = __webpack_require__(50);
 
 var _server3 = _interopRequireDefault(_server2);
 
 var _reactMetaTags = __webpack_require__(7);
 
-var _store = __webpack_require__(35);
+var _store = __webpack_require__(36);
 
-var _routes = __webpack_require__(34);
+var _routes = __webpack_require__(35);
 
 var _routes2 = _interopRequireDefault(_routes);
 
@@ -4338,7 +4343,7 @@ var _rootReducer = __webpack_require__(17);
 
 var _rootReducer2 = _interopRequireDefault(_rootReducer);
 
-var _fetchData = __webpack_require__(42);
+var _fetchData = __webpack_require__(43);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

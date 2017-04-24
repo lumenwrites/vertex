@@ -2,18 +2,20 @@ import Feed from 'feed';
 
 import Post from '../models/post';
 
+import settings from '../../config/settings';
+
 let feed = new Feed({
-    title: 'Lumen Writes',
-    description: 'New posts from Lumen Writes',
-    id: 'http://lumenwrites.com/',
-    link: 'http://lumenwrites.com/',
-    image: 'http://example.com/image.png',
+    title: settings.metaTitle,
+    description: settings.metaDescription,
+    id: settings.domain,
+    link: settings.domain+"/feed/posts.atom",
+    image: settings.metaSocialImage,
     // updated: new Date(2013, 06, 14), // optional, default = today 
     
     author: {
-	name: 'Lumen Writes',
-	email: 'lumenwrites@gmail.com',
-	link: 'http://lumenwrites.com/'
+	name: settings.metaAuthor,
+	email: settings.metaEmail,
+	link: settings.userurl
     }
 })
 
@@ -31,16 +33,16 @@ export function getFeed(req, res) {
 	}
 
 	posts.forEach(post => {
-	    var link = "http://lumenwrites.com/post/" + post.slug;
+	    var link = settings.domain + "/post/" + post.slug;
 	    feed.addItem({
 		title: post.body,
 		id: link,
 		link: link,
 		description: post.body,
 		author: [{
-		    name: 'Lumen Writes',
-		    email: 'lumenwries@gmail.com',
-		    link: 'http://lumenwrites.com/'
+		    name: settings.metaAuthor,
+		    email: settings.metaEmail,
+		    link: settings.userurl		    
 		}],
 		date: post.dateAdded,
 		//image: post.image

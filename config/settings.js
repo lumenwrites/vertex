@@ -8,6 +8,7 @@ var settings = {
     metaTitle: "Digital Mind",
     metaDescription: "Blog about webdev, startups, rationality, and related subjects.",
     metaAuthor: "Ray Alez",
+    metaEmail: "raymestalez@gmail.com",    
     metaKeywords: "Web Development, Webdev, Django, React, Programming, CS, Computer Science, AI, Rationality, Business, Startup.",
     googleAnalyticsCode: "UA-44003603-16",
 };
