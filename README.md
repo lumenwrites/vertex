@@ -25,17 +25,16 @@ After that, the blog will be running on the localhost:3000. Isn't Docker amazing
 
 You will also need to create a user for yourself:
 
-	docker exec -i -t vertex_web_1  /bin/bash
-	node ./server/admin.js createsuperuser youremail@gmail.com yourpassword
+	docker-compose run --rm web node ./server/admin.js createsuperuser youremail@gmail.com yourpassword
 
 
 Now you can go to `localhost:3000/login`, login and begin blogging!
 
 To deploy it online, go to Digital Ocean, create a Docker droplet, point your domain to it, and repeat the same commands.
 
-For security, you will need to enter a unique secret key into `server/config.js`.
+For security, you will need to enter a unique secret key into `config/config.js`.
 
-You can modify the file `server/settings.js` to enter the information about your site - title, description, about page, etc.
+You can modify the file `config/settings.js` to enter the information about your site - title, description, about page, etc.
 
 To serve the blog on the port 80, I recommend setting up nginx to proxy all the requests to port 3000. You can see an example of nginx config [here](https://github.com/raymestalez/vertex/blob/master/config/vertex_nginx.conf). This config is setup to serve the blog over https, so you will also need to follow [this simple tutorial](http://digitalmind.io/post/setting-up-ssl-aa14b) to configure SSL for your domain.
 
@@ -51,7 +50,27 @@ You can also run these commands to export things from db:
 
 That will generate the file `data/db/posts_backup.json` containing all of your posts.
 
-To deploy it online, go to Digital Ocean, create a Docker droplet, point your domain to it, and repeat the same commands. 
+## Modifying posts
+
+To modify posts or edit db, you can sh into the db container:
+
+	docker exec -i -t vertex_db_1  /bin/bash
+
+then open mongo shell:
+
+	mongo
+
+switch to our db:
+
+	use vertex
+
+And execute [mongo shell](https://docs.mongodb.com/manual/tutorial/update-documents/) commands. For example this one will find a post by slug and modify it:
+
+	db.posts.updateOne(
+		{slug:"old-ugly-slug-sadfopij"},
+		{ $set: { "slug": "new-handsome-sexy-slug"},
+	)
+
 
 # Todo
 
@@ -68,7 +87,7 @@ To deploy it online, go to Digital Ocean, create a Docker droplet, point your do
 
 ## Small
 - [X] Awesome nginx config. Caching, compression, all the fancy stuff.
-- [ ] Conveniently modify slugs
+- [X] Conveniently modify slugs
 - [ ] readmore... for longer posts
 - [ ] Proper nice 404 pages, error messages, etc.
 - [ ] Google Analytics config
