@@ -27,15 +27,15 @@ class About extends Component {
 	const truncate_length = 160;
 	const description = body.substring(0, truncate_length - 3) + "...";
 
-	if (!settings.title) { return null; }
+	if (!settings.metaTitle) { return null; }
 	return (
             <MetaTags>
-		<title>{"About " + settings.title}</title>
-		<meta name="author" content={settings.author} />  
+		<title>{"About " + settings.metaTitle}</title>
+		<meta name="author" content={settings.metaAuthor} />  
 		<meta name="description"
 		      content={description} />
 		<meta name="keywords"
-		      content={settings.keywords} />		
+		      content={settings.metaKeywords} />		
             </MetaTags>
 	);
     }

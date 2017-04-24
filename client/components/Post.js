@@ -3,12 +3,18 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { Panel, Label } from 'react-bootstrap';
 
+
 import Remarkable from 'remarkable';
 /* import FontAwesome from 'react-fontawesome';*/
 
-import { deletePost } from '../actions/index';
+import { deletePost, fetchSettings } from '../actions/index';
+import {  } from '../actions/index';
 
 class Post extends Component {
+    componentWillMount() {
+	this.props.fetchSettings();		    
+    }
+
     renderPostHeader () {
 	/* Return post header */
 	if (this.props.link ) {
@@ -81,10 +87,9 @@ class Post extends Component {
     }
 
     renderFooter () {
-	const { tags, category } = this.props;
+	const { tags, settings } = this.props;
 
 	var tagItems = "";
-	var categoryItem = "";
 
 	/* If there are some tags - generate tag labels  */
 	if (tags && tags.length > 0) {
@@ -102,27 +107,15 @@ class Post extends Component {
 	    });
 	}
 
-	/* If there's a category - generate a category label */
-	if (category) {
-	    categoryItem = (
-		<span>
-		    <Link to={'/category/' + category.slug}>
-			<Label bsStyle="default" className="label-category">
-			    {category.title}
-			</Label>
-		    </Link>
-		    &nbsp;
-		</span>
-	    );
-	}
+
+
 
 	return (
 	    <div className="post-footer">
-		{ categoryItem }		
 		{ tagItems }
 		<div className="right">
-		    <Link className="black" to={'http://rayalez.com'} >
-			@lumenwrites
+		    <Link className="black" to={settings.userurl} >
+			@{ settings.username }
 		    </Link>
 		    {/*  
 		    <span className="icon">
@@ -180,5 +173,13 @@ class Post extends Component {
     }
 }
 
+// Actions required to provide data for this component to render in sever side.
+Post.need = [() => { return fetchSettings(); }];
 
-export default connect(null, { deletePost })(Post);
+
+function mapStateToProps(state) {
+    return { settings: state.settings };
+}
+
+
+export default connect(mapStateToProps, { deletePost, fetchSettings })(Post);

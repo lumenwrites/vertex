@@ -1,5 +1,5 @@
-const settings = require('../settings');
+const settings = require('../../config/settings');
 
-exports.about = function (req, res, next) {
+exports.settings = function (req, res, next) {
     return res.send(settings);
 }

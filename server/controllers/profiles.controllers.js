@@ -1,5 +1,5 @@
 const jwt =  require('jwt-simple');
-const config = require('../config');
+const config = require('../../config/config.js');
 const User = require('../models/user');
 const Subscriber = require('../models/subscriber');
 

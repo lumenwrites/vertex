@@ -1,8 +1,8 @@
 import fetch from 'isomorphic-fetch';
-import Config from '../../server/config';
+import Config from '../../config/config.js';
 
 
-var API_URL = 'https://lumenwrites.com/api/v1';
+var API_URL = Config.domain+'/api/v1';
 
 
 if (process.env.NODE_ENV === 'development') {
