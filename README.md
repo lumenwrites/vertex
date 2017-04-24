@@ -2,7 +2,9 @@ This is a simple blog built with Node/React/Redux. It is Dockerized, has server-
 
 It can be useful as an example of integrating these technologies, as a starter project, or as a beautiful and simple blogging tool =)
 
-![](https://raw.githubusercontent.com/raymestalez/vertex/master/assets/screenshot1.png)
+![](https://raw.githubusercontent.com/raymestalez/vertex/master/assets/digitalmind-screenshot1.png)
+![](https://raw.githubusercontent.com/raymestalez/vertex/master/assets/digitalmind-screenshot2.png)
+![](https://raw.githubusercontent.com/raymestalez/vertex/master/assets/digitalmind-screenshot3.png)
 
 I have tried to extensively comment the code, so you could easily understand what's going on, and apply it to your own projects.
 
