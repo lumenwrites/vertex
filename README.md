@@ -8,7 +8,7 @@ I have tried to extensively comment the code, so you could easily understand wha
 
 This is my first project built with all this tech, so if you have suggestions on how to improve it - I'd really appreciate them. I will keep gradually improving this blog and adding more features. Feel free to  contribute to this project, report bugs, or fork it and use it for your purposes. I hope you will find it useful!
 
-You can always contact me at **raymestalez@gmail.com**, and you can check out the other stuff I'm working on [over here](http://rayalez.com).
+You can always contact me at raymestalez@gmail.com, and you can check out the other stuff I'm working on [over here](http://rayalez.com).
 
 
 
@@ -27,17 +27,101 @@ You will also need to create a user for yourself:
 	node ./server/admin.js createsuperuser youremail@gmail.com yourpassword
 
 
-Now you can go to localhost:3000/login url, login and begin blogging!
+Now you can go to `localhost:3000/login`, login and begin blogging!
 
 To deploy it online, go to Digital Ocean, create a Docker droplet, point your domain to it, and repeat the same commands.
 
-For security, it is important to enter a unique secret key into `server/config.js`.
+For security, you will need to enter a unique secret key into `server/config.js`.
 
+You can modify the file `server/settings.js` to enter the information about your site - title, description, about page, etc.
 
+To serve the blog on the port 80, I recommend setting up nginx to proxy all the requests to port 3000. You can see an example of nginx config [here](https://github.com/raymestalez/vertex/blob/master/config/vertex_nginx.conf). This config is setup to serve the blog over https, so you will also need to follow [this simple tutorial](http://digitalmind.io/post/setting-up-ssl-aa14b) to configure SSL for your domain.
 
 
 ## Backup
 
+The database data is configured as a volume, so you can see it in the folder `/data/db/`.
 
+You can also run these commands to export things from db:
+
+	docker exec -i -t vertex_db_1  /bin/bash
+	mongoexport --db vertex --collection posts --out /data/db/posts_backup.json --host=127.0.0.1:27017
+
+That will generate the file `data/db/posts_backup.json` containing all of your posts.
 
 To deploy it online, go to Digital Ocean, create a Docker droplet, point your domain to it, and repeat the same commands. 
+
+# Todo
+
+# Basic features
+- [X] Basic Node/React blog. Auth, Create/Update/Delete posts, About page. Pagination.
+- [X] Email/RSS subscriptions.
+- [X] Filter by tags. Main categories dropdown in the header.
+- [X] Configure about page, meta info, etc. with settings.js
+- [X] Drafts.
+- [X] Dockerize.
+- [X] Server-side rendering.
+
+# Upcoming features
+
+## Small
+- [ ] Proper nice 404 pages, error messages, etc.
+- [ ] Google Analytics config
+- [ ] Save email subscribers source(?source=hackernews).
+- [ ] 
+
+# Decentralization
+
+## MVP
+- [X] ActivityPub prototype.  
+      Person, inbox, outbox.  
+      Save followers, notify them of new posts.
+- [ ] Clean AP utility functions.  
+      Like lookup info about person, send a message, generate activity, all that.  
+- [ ] ActivityPub [checklist](https://github.com/tootsuite/mastodon/issues/1557), and [test](https://activitypub.rocks/test/) that it works. 
+- [ ] Federate with Mastodon.  
+      People can find me by my url, follow me, see my posts in their home feed.
+
+## Future
+Basic:
+- [ ] Receive likes and reposts info.
+- [ ] Receive comments. ++ threaded
+
+Advanced:
+- [ ] Home feed. I can subscribe to other blogs and see them in my home feed.  
+      ++ Rankable by likes.
+- [ ] Follow me by clicking a button on my site(“Remote follow”).
+- [ ] Favorite, reblog, my posts by using buttons on my site.
+- [ ] Comment on my site, federated(?). I can reply to comments.
+- [ ] Many users may have a common publicInbox(hub). You post to it once, and it notifies all the users that follow it.
+	  
+
+Small/Maybe:
+- [ ] Client endpoints. Use AP format for client-server.
+- [ ] README link to demo-video as an image.
+
+# Bugs
+- Use it, test it, find the bugs.
+
+# Clean up
+- Pass all the speed tests.  
+  https://developers.google.com/speed/pagespeed/insights/  
+  https://tools.pingdom.com/  
+  https://gtmetrix.com/  
+- Pass all mobile tests  
+  https://search.google.com/search-console/mobile-friendly
+- Pass all SEO tests  
+  https://seositecheckup.com
+- Write tests
+- Migrate automatically. entrypoint.sh?
+
+# Future/Maybe
+- Proper form validation.
+- Auto Saving.
+- Code syntax highlighting? IPython? MathJax?  
+- Create page that allows you to just send emails to subscribers?  
+  Or just automatically notify them of new posts. SendGrid settings in config.js
+- Themes
+- Add nested comments?
+- Image upload.  
+  Upload image, automatically insert markdown link, periodically remove unused images.
