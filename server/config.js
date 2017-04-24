@@ -1,3 +1,3 @@
 module.exports = {
-    secret: 'asdfsdfsf',
+    secret: 'secret-key',
 };

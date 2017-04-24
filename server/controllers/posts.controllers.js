@@ -65,7 +65,7 @@ export function createPost(req, res) {
 	    res.status(500).send(err);
 	}
 	console.log("Post created " + JSON.stringify(post));
-	sendPostToFollowers(post)
+	/* sendPostToFollowers(post)*/
 	res.json(post);
 
     });
