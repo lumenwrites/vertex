@@ -77,13 +77,13 @@ class PostDetail extends Component {
 	/* Find images in the post */
 	const md = new Remarkable({html: true});
 	var html = md.render(post.body);
-	var elem= document.createElement("div");
-	elem.innerHTML = html;
-	var images = elem.getElementsByTagName("img");
-	if (images[0]){
-	    /* If there's an image in a post, set it as preview. */
-	    socialImage = images[0].src;   
+	var regexp = /<img src\s*=\s*"(.+?)"/;
+	var src = regexp.exec(html);
+	if (src) {
+	    console.log(src[1]);
+	    socialImage = src[1];
 	}
+
 	return (
             <MetaTags>
 		{/* Main */}

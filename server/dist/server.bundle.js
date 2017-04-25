@@ -2794,6 +2794,16 @@ var PostDetail = function (_Component) {
 			}
 
 			var socialImage = settings.metaSocialImage;
+			/* Find images in the post */
+			var md = new _remarkable2.default({ html: true });
+			var html = md.render(post.body);
+			var regexp = /<img src\s*=\s*"(.+?)"/;
+			var src = regexp.exec(html);
+			if (src) {
+				console.log(src[1]);
+				socialImage = src[1];
+			}
+
 			return _react2.default.createElement(
 				_reactMetaTags2.default,
 				null,
