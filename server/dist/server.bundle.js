@@ -2794,16 +2794,6 @@ var PostDetail = function (_Component) {
 			}
 
 			var socialImage = settings.metaSocialImage;
-			/* Find images in the post */
-			var md = new _remarkable2.default({ html: true });
-			var html = md.render(post.body);
-			var elem = document.createElement("div");
-			elem.innerHTML = html;
-			var images = elem.getElementsByTagName("img");
-			if (images[0]) {
-				/* If there's an image in a post, set it as preview. */
-				socialImage = images[0].src;
-			}
 			return _react2.default.createElement(
 				_reactMetaTags2.default,
 				null,
