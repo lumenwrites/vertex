@@ -17,13 +17,11 @@ const store = configureStore(window.__INITIAL_STATE__);
 /* Google analytics */
 import settings from '../config/settings.js';
 import ReactGA from "react-ga";
-if (settings.googleAnalyticsCode) {
-    ReactGA.initialize(settings.googleAnalyticsCode);
-    function logPageView() {
-	ReactGA.set({ page: window.location.pathname });
-	ReactGA.pageview(window.location.pathname);
-	window.scrollTo(0, 0);
-    }
+ReactGA.initialize(settings.googleAnalyticsCode);
+function logPageView() {
+    ReactGA.set({ page: window.location.pathname });
+    ReactGA.pageview(window.location.pathname);
+    window.scrollTo(0, 0);
 }
 
 
@@ -39,7 +37,7 @@ if (token) {
 
 render(
     <Provider store={store}>
-	<Router history={browserHistory} routes={routes}>
+	<Router history={browserHistory} routes={routes} onUpdate={logPageView}>
 	</Router>
     </Provider>,
     document.getElementById('root')
