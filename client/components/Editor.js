@@ -72,7 +72,8 @@ class Editor extends Component {
 			placeholder: "Write here... (can use markdown)",
 			initialValue: this.props.postForm.body,
 			indentWithTabs: false,
-			tabSize: 4
+			tabSize: 4,
+			autoDownloadFontAwesome: false			
 		    }}/>
 		{/* Tags.
 		    If there are no categories - I'm not rendering

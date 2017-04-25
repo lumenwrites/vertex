@@ -12,7 +12,11 @@ import {  } from '../actions/index';
 
 class Post extends Component {
     componentWillMount() {
-	this.props.fetchSettings();		    
+        /* Fetch settings if there aren't any.
+           Not sure if this does anything, maybe Im just fetching them from header.*/
+        if (!this.props.settings.metaTitle){
+	    this.props.fetchSettings();		   
+        }
     }
 
     renderPostHeader () {
