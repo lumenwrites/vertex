@@ -74,6 +74,12 @@ export function createPost(req, res) {
 /* Update post  */
 export function updatePost(req, res) {
     var post = req.body;
+    console.log(JSON.stringify(post));
+    if (typeof post.tags === 'string') {
+	/* When I edit tags, it sends me a string I need to parse again.
+	   Otherwise it'd just send me array I've parsed when created the post. */
+	post.tags = post.tags.replace(/\s/g, '').split(",");
+    }
     Post.findOneAndUpdate({ slug: req.params.slug }, post, (err, post) => {
 	if (err) { return next(err); }
 	console.log("Updated post! " + JSON.stringify(post));
