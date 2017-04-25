@@ -86,7 +86,7 @@ And execute [mongo shell](https://docs.mongodb.com/manual/tutorial/update-docume
 # Upcoming features
 
 ## Small
-- [ ] Nginx proxy caching.
+- [X] Awesome Nginx settings. Compression, caching, etc.
 - [X] Conveniently modify slugs
 - [ ] readmore... for longer posts
 - [ ] Proper nice 404 pages, error messages, etc.
@@ -105,16 +105,18 @@ And execute [mongo shell](https://docs.mongodb.com/manual/tutorial/update-docume
 - [ ] Used to get errors on submitting posts sometimes. Can't replicate?
 
 ## Clean up
-- Pass all the speed tests.  
+- [X] Pass all the speed tests.  
   https://developers.google.com/speed/pagespeed/insights/  
   https://tools.pingdom.com/  
   https://gtmetrix.com/  
-- Pass all mobile tests  
+- [X] Pass all mobile tests  
   https://search.google.com/search-console/mobile-friendly
-- Pass all SEO tests  
+- [X] Pass all SEO tests  
   https://seositecheckup.com
+- [X] Test social media cards.
+  https://cards-dev.twitter.com/validator
+  https://developers.facebook.com/tools/debug/
 - Write tests
-- Migrate automatically. entrypoint.sh?
 
 
 # Decentralization
