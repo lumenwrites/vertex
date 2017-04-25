@@ -94,7 +94,7 @@ And execute [mongo shell](https://docs.mongodb.com/manual/tutorial/update-docume
 - [ ] Save email subscribers source(?source=hackernews).
 - [ ] author username and url
 - [ ] Post title should be a link.(firstline)
-
+- [ ] If post has an image, use it as social media image.
 
 ## Bugs
 - [X] Sets the new posts to draft for some reason sometimes?

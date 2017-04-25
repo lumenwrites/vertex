@@ -566,8 +566,6 @@ var Post = function (_Component) {
 						' Read more...'
 					)
 				);
-			} else {
-				return _react2.default.createElement('div', null);
 			}
 		}
 	}, {
@@ -633,11 +631,11 @@ var Post = function (_Component) {
 							className: 'icon' },
 						_react2.default.createElement('i', { className: 'fa fa-trash' })
 					) : null,
-					_react2.default.createElement(
+					this.props.link ? _react2.default.createElement(
 						_reactRouter.Link,
-						{ to: "/post/" + this.props.slug, className: 'icon' },
+						{ to: this.props.link, className: 'icon' },
 						_react2.default.createElement('i', { className: 'fa fa-link' })
-					)
+					) : null
 				),
 				_react2.default.createElement('div', { className: 'clearfix' })
 			);
@@ -675,7 +673,10 @@ Post.need = [function () {
 }];
 
 function mapStateToProps(state) {
-	return { settings: state.settings };
+	return {
+		settings: state.settings,
+		authenticated: state.auth.authenticated
+	};
 }
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, { deletePost: _index.deletePost, fetchSettings: _index.fetchSettings })(Post);
@@ -1584,7 +1585,7 @@ var localLogin = new LocalStrategy(localOptions, function (email, password, done
 												}
 												// if passwords don't match
 												if (!isMatch) {
-																return done(null, flase);
+																return done(null, false);
 												}
 
 												// return user without errors
@@ -2170,6 +2171,7 @@ var About = function (_Component) {
 									/* Remove markdown from post body, and truncate it to 160 chars. */
 
 									var body = "";
+									var title = "";
 									if (settings.about) {
 												body = (0, _removeMarkdown2.default)(settings.about);
 									}
@@ -2284,7 +2286,7 @@ var Footer = function (_Component) {
 					),
 					_react2.default.createElement(
 						"a",
-						{ href: "https://github.com/raymestalez/django-react-blog" },
+						{ href: "https://github.com/raymestalez/vertex" },
 						_react2.default.createElement("i", { className: "fa fa-github" })
 					)
 				)
@@ -2733,10 +2735,15 @@ var PostDetail = function (_Component) {
 			/* Remove markdown from post body, and truncate it to 160 chars. */
 			var body = (0, _removeMarkdown2.default)(this.props.post.body);
 			var truncate_length = 160;
-			var description = body.substring(0, truncate_length - 3) + "...";
+			var description = body.substring(0, truncate_length - 3);
+			if (description.length < body.length) {
+				description += "...";
+			}
+			description = (0, _removeMarkdown2.default)(description);
 
 			var firstline = post.body.split('\n')[0];
-			var title = firstline.substring(0, 80);
+			var metaTitle = firstline.substring(0, 80);
+			metaTitle = (0, _removeMarkdown2.default)(metaTitle);
 
 			/* Keywords */
 			var post_tags = "";
@@ -2759,19 +2766,19 @@ var PostDetail = function (_Component) {
 				_react2.default.createElement(
 					'title',
 					null,
-					title
+					metaTitle
 				),
 				_react2.default.createElement('meta', { name: 'author', content: settings.metaAuthor }),
 				_react2.default.createElement('meta', { name: 'description',
 					content: description }),
 				_react2.default.createElement('meta', { name: 'keywords',
 					content: keywords }),
-				_react2.default.createElement('meta', { property: 'og:title', content: title }),
+				_react2.default.createElement('meta', { property: 'og:title', content: metaTitle }),
 				_react2.default.createElement('meta', { property: 'og:image', content: settings.metaSocialImage }),
-				_react2.default.createElement('meta', { property: 'og:description', content: settings.metaDescription }),
+				_react2.default.createElement('meta', { property: 'og:description', content: description }),
 				_react2.default.createElement('meta', { property: 'twitter:card', content: 'summary_large_image' }),
 				_react2.default.createElement('meta', { property: 'twitter:image', content: settings.metaSocialImage }),
-				_react2.default.createElement('meta', { property: 'twitter:description', content: settings.metaDescription })
+				_react2.default.createElement('meta', { property: 'twitter:description', content: description })
 			);
 		}
 	}, {
@@ -2788,13 +2795,10 @@ var PostDetail = function (_Component) {
 				'div',
 				null,
 				this.renderMetaInfo(),
-				_react2.default.createElement(_Post2.default, { title: post.title,
-					slug: post.slug,
+				_react2.default.createElement(_Post2.default, { slug: post.slug,
 					body: post.body,
 					published: post.published,
-					authenticated: this.props.authenticated,
-					tags: post.tags,
-					category: post.category }),
+					tags: post.tags }),
 				_react2.default.createElement(
 					'div',
 					{ className: 'panel subscription-box' },
@@ -2972,11 +2976,9 @@ var PostList = function (_Component) {
 															/* Published posts are visible to everyone,
                   authenticated user can see both published and drafts */
 															return _react2.default.createElement(_Post2.default, { key: post.slug,
-																		title: post.title,
 																		slug: post.slug,
 																		body: post.body,
 																		published: post.published,
-																		authenticated: _this2.props.authenticated,
 																		tags: post.tags,
 																		truncate: 100,
 																		link: '/post/' + post.slug });
@@ -3616,6 +3618,12 @@ exports.default = function () {
 												var tags = action.payload;
 												return _extends({}, state, { tags: tags });
 								case 'CREATE_POST':
+												var post = action.payload;
+												var cleanForm = INITIAL_STATE;
+												/* If the created post is published by default,
+               then I've submitted it from timeline, so I want to reset the form to
+               published by default. */
+												cleanForm.published = post.published;
 												return INITIAL_STATE;
 								case 'SET_PUBLISHED':
 												/* console.log("Editing form " + JSON.stringify(state));*/
@@ -4036,6 +4044,12 @@ function createPost(req, res) {
 /* Update post  */
 function updatePost(req, res) {
    var post = req.body;
+   console.log(JSON.stringify(post));
+   if (typeof post.tags === 'string') {
+      /* When I edit tags, it sends me a string I need to parse again.
+         Otherwise it'd just send me array I've parsed when created the post. */
+      post.tags = post.tags.replace(/\s/g, '').split(",");
+   }
    _post2.default.findOneAndUpdate({ slug: req.params.slug }, post, function (err, post) {
       if (err) {
          return next(err);
