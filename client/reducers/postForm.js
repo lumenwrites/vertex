@@ -18,6 +18,12 @@ export default function(state=INITIAL_STATE, action) {
 	    var tags = action.payload;
 	    return {...state, tags: tags };		
 	case 'CREATE_POST':
+	    var post = action.payload;
+	    var cleanForm = INITIAL_STATE;
+	    /* If the created post is published by default,
+	       then I've submitted it from timeline, so I want to reset the form to
+	       published by default. */
+	    cleanForm.published = post.published;
 	    return INITIAL_STATE;
 	case 'SET_PUBLISHED':
 	    /* console.log("Editing form " + JSON.stringify(state));*/

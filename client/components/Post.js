@@ -78,12 +78,7 @@ class Post extends Component {
 			  className="readMore"> Read more...</Link>
 		</div>
 	    );
-	} else {
-	    return (
-		<div>
-		</div>
-	    );
-	}
+	} 
     }
 
     renderFooter () {
@@ -139,17 +134,18 @@ class Post extends Component {
 			  <i className="fa fa-pencil"></i>
 		      </Link>
 		      : null }
-		    { this.props.authenticated ?
+                    { this.props.authenticated ?
 		      <a onClick={()=>this.props.deletePost(this.props.slug)}
 			 className="icon">
 			  <i className="fa fa-trash"></i>
 		      </a>
-		      : null }
-		    <Link to={"/post/"+this.props.slug} className="icon">
-			<i className="fa fa-link"></i>
-		    </Link>
-		
-
+        	    : null }
+                    { this.props.link ?
+        	      <Link to={this.props.link} className="icon">
+        		  <i className="fa fa-link"></i>
+        	      </Link>
+        	    : null }		
+        
 		</div>
 		<div className="clearfix"></div>
 	    </div>
@@ -178,7 +174,10 @@ Post.need = [() => { return fetchSettings(); }];
 
 
 function mapStateToProps(state) {
-    return { settings: state.settings };
+    return {
+        settings: state.settings,
+        authenticated: state.auth.authenticated
+    };
 }
 
 

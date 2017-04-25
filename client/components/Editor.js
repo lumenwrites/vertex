@@ -26,7 +26,7 @@ class Editor extends Component {
 	if (this.props.autopublish) {
 	    /* If I'm writing a new post from the timeline, it's published by default.*/
 	    this.props.setPublished(true);
-	}
+	} 
 
 	if (this.props.params.slug) {
 	    /* If there's slug - that means I'm editing a post,

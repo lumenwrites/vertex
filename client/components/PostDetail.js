@@ -49,11 +49,16 @@ class PostDetail extends Component {
 	/* Remove markdown from post body, and truncate it to 160 chars. */
 	const body = removeMd(this.props.post.body);	
 	const truncate_length = 160;
-	const description = body.substring(0, truncate_length - 3) + "...";
+	var description = body.substring(0, truncate_length - 3);
+	if (description.length < body.length) {
+	    description += "...";
+	}
+	description = removeMd(description);
 
 	var firstline = post.body.split('\n')[0];
-	var title = firstline.substring(0, 80);	
-	
+	var metaTitle = firstline.substring(0, 80);
+	metaTitle = removeMd(metaTitle);
+
 	/* Keywords */
 	var post_tags = "";
 	if (post.tags) {
@@ -71,20 +76,20 @@ class PostDetail extends Component {
 	return (
             <MetaTags>
 		{/* Main */}
-		<title>{title}</title>
+		<title>{metaTitle}</title>
 		<meta name="author" content={settings.metaAuthor} />  
 		<meta name="description"
 		      content={description} />
 		<meta name="keywords"
 		      content={keywords} />		
 		{/* Facebook */}
-		<meta property="og:title" content={title} />
+		<meta property="og:title" content={metaTitle} />
 		<meta property="og:image" content={settings.metaSocialImage} />
-		<meta property="og:description" content={settings.metaDescription} />	
+		<meta property="og:description" content={description} />	
 		{/* Twitter */}
 		<meta property="twitter:card" content="summary_large_image" />
 		<meta property="twitter:image" content={settings.metaSocialImage} />
-		<meta property="twitter:description" content={settings.metaDescription}/>
+		<meta property="twitter:description" content={description}/>
             </MetaTags>
 	);
     }
@@ -103,13 +108,10 @@ class PostDetail extends Component {
 	    <div>
 		{ this.renderMetaInfo() }
 		{/* this.renderEditButton() */}
-		<Post title={post.title}
-		      slug={post.slug}		      
+		<Post slug={post.slug}		      
 		      body={post.body}
 		      published={post.published}
-		      authenticated={this.props.authenticated}
-		      tags={post.tags}
-		      category={post.category}/>
+		      tags={post.tags} />
 		<div className="panel subscription-box">
 		    <div className="row">      
 			<div className="col-xs-12 col-sm-6 subscribe-cta">

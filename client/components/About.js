@@ -21,6 +21,7 @@ class About extends Component {
 	/* Remove markdown from post body, and truncate it to 160 chars. */
 
 	var body = ""
+	var title = ""	
 	if (settings.about) {
 	    body = removeMd(settings.about);
 	}

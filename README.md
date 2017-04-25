@@ -86,7 +86,7 @@ And execute [mongo shell](https://docs.mongodb.com/manual/tutorial/update-docume
 # Upcoming features
 
 ## Small
-- [X] Awesome nginx config. Caching, compression, all the fancy stuff.
+- [ ] Nginx proxy caching.
 - [X] Conveniently modify slugs
 - [ ] readmore... for longer posts
 - [ ] Proper nice 404 pages, error messages, etc.
@@ -95,13 +95,14 @@ And execute [mongo shell](https://docs.mongodb.com/manual/tutorial/update-docume
 - [ ] author username and url
 - [ ] Post title should be a link.(firstline)
 
+
 ## Bugs
-- [ ] Sets the new posts to draft for some reason sometimes?
+- [X] Sets the new posts to draft for some reason sometimes?
 - [ ] combined all the tags into one after editing. But not always?
 - [ ] Error on submitting the post. First few times works, then not?
 - [ ] Tags should be stripped of spaces.
-- [ ] Tab title should not be markdown.
-
+- [X] Tab title should not be markdown.
+- [X] Remove link from About page.
 
 ## Clean up
 - Pass all the speed tests.  
@@ -156,3 +157,4 @@ Small/Maybe:
 - Add nested comments?
 - Image upload.  
   Upload image, automatically insert markdown link, periodically remove unused images.
+- Custom easily editable style for themes.

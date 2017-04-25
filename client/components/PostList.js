@@ -69,11 +69,9 @@ class PostList extends Component {
 		   authenticated user can see both published and drafts */
 		return (
 		    <Post key={post.slug}
-			  title={post.title}
 			  slug={post.slug}			  
 			  body={post.body}
 			  published={post.published}
-			  authenticated={this.props.authenticated}
 			  tags={post.tags}
 			  truncate={100}
 			  link={`/post/${post.slug}`}/>

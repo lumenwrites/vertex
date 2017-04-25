@@ -29,7 +29,7 @@ const localLogin = new LocalStrategy(localOptions, function(email,password,done)
 	user.comparePassword(password, function(err, isMatch){
 	    if (err) { return done(err); }
 	    // if passwords don't match
-	    if (!isMatch) { return done(null, flase); }
+	    if (!isMatch) { return done(null, false); }
 
 	    // return user without errors
 	    return done(null, user);
