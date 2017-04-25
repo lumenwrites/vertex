@@ -50,6 +50,13 @@ h2, h2 a, h2 a:hover {
     text-decoration: none;
 }
 
+a {
+    cursor: pointer;
+}
+a:hover {
+    text-decoration: none;
+}
+
 
 header {
     margin-bottom: 0;
@@ -79,9 +86,6 @@ header {
 	}
     }
 
-    a {
-	cursor: pointer;
-    }
     .menu {
 	float: right;
 	word-wrap: break-word;

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { fetchSettings, fetchPost, deletePost } from '../actions/index';
 import MetaTags from 'react-meta-tags';
 
+import Remarkable from 'remarkable';
 import removeMd from 'remove-markdown';
 
 import { PageHeader, Panel, Label, Button } from 'react-bootstrap';
@@ -72,7 +73,17 @@ class PostDetail extends Component {
 
 	if (!settings.metaTitle ) { return null; }
 
-
+	var socialImage = settings.metaSocialImage;
+	/* Find images in the post */
+	const md = new Remarkable({html: true});
+	var html = md.render(post.body);
+	var elem= document.createElement("div");
+	elem.innerHTML = html;
+	var images = elem.getElementsByTagName("img");
+	if (images[0]){
+	    /* If there's an image in a post, set it as preview. */
+	    socialImage = images[0].src;   
+	}
 	return (
             <MetaTags>
 		{/* Main */}
@@ -84,11 +95,11 @@ class PostDetail extends Component {
 		      content={keywords} />		
 		{/* Facebook */}
 		<meta property="og:title" content={metaTitle} />
-		<meta property="og:image" content={settings.metaSocialImage} />
+		<meta property="og:image" content={socialImage} />
 		<meta property="og:description" content={description} />	
 		{/* Twitter */}
 		<meta property="twitter:card" content="summary_large_image" />
-		<meta property="twitter:image" content={settings.metaSocialImage} />
+		<meta property="twitter:image" content={socialImage} />
 		<meta property="twitter:description" content={description}/>
             </MetaTags>
 	);

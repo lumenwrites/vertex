@@ -88,13 +88,14 @@ And execute [mongo shell](https://docs.mongodb.com/manual/tutorial/update-docume
 ## Small
 - [X] Awesome Nginx settings. Compression, caching, etc.
 - [X] Conveniently modify slugs
-- [ ] readmore... for longer posts
+- [X] readmore... for longer posts
+- [X] Google Analytics config
+- [X] author username and url
+- [X] Post title should be a link.(firstline)
+- [X] If post has an image, use it as social media image.
 - [ ] Proper nice 404 pages, error messages, etc.
-- [ ] Google Analytics config
 - [ ] Save email subscribers source(?source=hackernews).
-- [ ] author username and url
-- [ ] Post title should be a link.(firstline)
-- [ ] If post has an image, use it as social media image.
+
 
 ## Bugs
 - [X] Sets the new posts to draft for some reason sometimes?

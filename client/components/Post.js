@@ -64,9 +64,27 @@ class Post extends Component {
 
 	/* Turn markdown into html */
 	const md = new Remarkable({html: true});
-	const markdown = md.render(body);
+	const html = md.render(body);
+
+        /* If the first line is header, turn it into a link to the post */
+        if (this.props.link) {
+            var firstline = html.split('\n')[0];
+            var rest = html.split('\n').slice(1).join("");
+            /* console.log("rest " + rest);*/
+            if (firstline.indexOf('<h1>') > -1) {
+                return (
+                    <div>
+                        <Link to={this.props.link}
+                              dangerouslySetInnerHTML={{__html:firstline}} 
+                        ></Link>
+	                <div dangerouslySetInnerHTML={{__html:rest}} />   
+                    </div>
+                );
+            }
+        }
+
 	return (
-	    <div dangerouslySetInnerHTML={{__html:markdown}} />
+	    <div dangerouslySetInnerHTML={{__html:html}} />
 	);
     }
 
