@@ -10,6 +10,8 @@ import PostDetail from './components/PostDetail';
 
 import About from './components/About';
 
+import NotFound from './components/NotFound';
+
 import Signin from './components/auth/signin';
 import Signout from './components/auth/signout';
 import RequireAuth from './components/auth/require_auth';
@@ -34,7 +36,8 @@ export default (
 	<Route path="post/:slug/edit" component={RequireAuth(Editor)} />
 	<Route path="about" component={About} />
 	<Route path="login" component={Signin} />
-	<Route path="logout" component={Signout} />        		
+	<Route path="logout" component={Signout} />
+	<Route path="*" component={NotFound} />
   </Route>
 );
 

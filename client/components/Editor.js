@@ -46,6 +46,8 @@ class Editor extends Component {
     render() {
 	/* Grabbing the post from the redux state */
 	const { postForm } = this.props;
+	if (!postForm) { return (<div></div>);}
+	
 	/* Calculate post length for character counter */
 	var postLength = postForm.body.length + postForm.tags.length;
 

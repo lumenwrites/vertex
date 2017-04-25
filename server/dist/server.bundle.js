@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 77);
+/******/ 	return __webpack_require__(__webpack_require__.s = 78);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -876,31 +876,31 @@ var _redux = __webpack_require__(8);
 
 var _reduxForm = __webpack_require__(15);
 
-var _posts = __webpack_require__(67);
+var _posts = __webpack_require__(68);
 
 var _posts2 = _interopRequireDefault(_posts);
 
-var _post = __webpack_require__(65);
+var _post = __webpack_require__(66);
 
 var _post2 = _interopRequireDefault(_post);
 
-var _postForm = __webpack_require__(66);
+var _postForm = __webpack_require__(67);
 
 var _postForm2 = _interopRequireDefault(_postForm);
 
-var _categories = __webpack_require__(64);
+var _categories = __webpack_require__(65);
 
 var _categories2 = _interopRequireDefault(_categories);
 
-var _settings = __webpack_require__(69);
+var _settings = __webpack_require__(70);
 
 var _settings2 = _interopRequireDefault(_settings);
 
-var _profiles = __webpack_require__(68);
+var _profiles = __webpack_require__(69);
 
 var _profiles2 = _interopRequireDefault(_profiles);
 
-var _auth = __webpack_require__(63);
+var _auth = __webpack_require__(64);
 
 var _auth2 = _interopRequireDefault(_auth);
 
@@ -1016,8 +1016,12 @@ var Editor = function (_Component) {
 
 			/* Grabbing the post from the redux state */
 			var postForm = this.props.postForm;
-			/* Calculate post length for character counter */
 
+			if (!postForm) {
+				return _react2.default.createElement('div', null);
+			}
+
+			/* Calculate post length for character counter */
 			var postLength = postForm.body.length + postForm.tags.length;
 
 			/* Customize toolbar for simplemde */
@@ -1219,7 +1223,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.API_URL = undefined;
 exports.default = callApi;
 
-var _isomorphicFetch = __webpack_require__(80);
+var _isomorphicFetch = __webpack_require__(81);
 
 var _isomorphicFetch2 = _interopRequireDefault(_isomorphicFetch);
 
@@ -1312,7 +1316,7 @@ var _post = __webpack_require__(12);
 
 var _post2 = _interopRequireDefault(_post);
 
-var _follower = __webpack_require__(75);
+var _follower = __webpack_require__(76);
 
 var _follower2 = _interopRequireDefault(_follower);
 
@@ -1328,7 +1332,7 @@ var _sanitizeHtml = __webpack_require__(33);
 
 var _sanitizeHtml2 = _interopRequireDefault(_sanitizeHtml);
 
-var _request = __webpack_require__(84);
+var _request = __webpack_require__(85);
 
 var _request2 = _interopRequireDefault(_request);
 
@@ -1578,7 +1582,7 @@ module.exports = ModelClass;
 
 var passport = __webpack_require__(13);
 var JwtStrategy = __webpack_require__(28).Strategy;
-var LocalStrategy = __webpack_require__(82);
+var LocalStrategy = __webpack_require__(83);
 var ExtractJwt = __webpack_require__(28).ExtractJwt;
 var User = __webpack_require__(23);
 var config = __webpack_require__(11);
@@ -1743,11 +1747,11 @@ var _Main = __webpack_require__(16);
 
 var _Main2 = _interopRequireDefault(_Main);
 
-var _PostList = __webpack_require__(58);
+var _PostList = __webpack_require__(59);
 
 var _PostList2 = _interopRequireDefault(_PostList);
 
-var _PostNew = __webpack_require__(59);
+var _PostNew = __webpack_require__(60);
 
 var _PostNew2 = _interopRequireDefault(_PostNew);
 
@@ -1755,7 +1759,7 @@ var _Editor = __webpack_require__(18);
 
 var _Editor2 = _interopRequireDefault(_Editor);
 
-var _PostDetail = __webpack_require__(57);
+var _PostDetail = __webpack_require__(58);
 
 var _PostDetail2 = _interopRequireDefault(_PostDetail);
 
@@ -1763,15 +1767,19 @@ var _About = __webpack_require__(53);
 
 var _About2 = _interopRequireDefault(_About);
 
-var _signin = __webpack_require__(61);
+var _NotFound = __webpack_require__(56);
+
+var _NotFound2 = _interopRequireDefault(_NotFound);
+
+var _signin = __webpack_require__(62);
 
 var _signin2 = _interopRequireDefault(_signin);
 
-var _signout = __webpack_require__(62);
+var _signout = __webpack_require__(63);
 
 var _signout2 = _interopRequireDefault(_signout);
 
-var _require_auth = __webpack_require__(60);
+var _require_auth = __webpack_require__(61);
 
 var _require_auth2 = _interopRequireDefault(_require_auth);
 
@@ -1797,7 +1805,8 @@ exports.default = _react2.default.createElement(
     _react2.default.createElement(_reactRouter.Route, { path: 'post/:slug/edit', component: (0, _require_auth2.default)(_Editor2.default) }),
     _react2.default.createElement(_reactRouter.Route, { path: 'about', component: _About2.default }),
     _react2.default.createElement(_reactRouter.Route, { path: 'login', component: _signin2.default }),
-    _react2.default.createElement(_reactRouter.Route, { path: 'logout', component: _signout2.default })
+    _react2.default.createElement(_reactRouter.Route, { path: 'logout', component: _signout2.default }),
+    _react2.default.createElement(_reactRouter.Route, { path: '*', component: _NotFound2.default })
 );
 
 /* 
@@ -1833,7 +1842,7 @@ exports.configureStore = configureStore;
 
 var _redux = __webpack_require__(8);
 
-var _reduxThunk = __webpack_require__(83);
+var _reduxThunk = __webpack_require__(84);
 
 var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
@@ -1897,7 +1906,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _express = __webpack_require__(4);
 
-var _feeds = __webpack_require__(70);
+var _feeds = __webpack_require__(71);
 
 var feedsControllers = _interopRequireWildcard(_feeds);
 
@@ -1923,7 +1932,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _express = __webpack_require__(4);
 
-var _ostatus = __webpack_require__(71);
+var _ostatus = __webpack_require__(72);
 
 var OStatusControllers = _interopRequireWildcard(_ostatus);
 
@@ -1953,7 +1962,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _express = __webpack_require__(4);
 
-var _posts = __webpack_require__(72);
+var _posts = __webpack_require__(73);
 
 var postsControllers = _interopRequireWildcard(_posts);
 
@@ -2007,7 +2016,7 @@ var passportService = __webpack_require__(24);
 var requireAuth = passport.authenticate('jwt', { session: false });
 var requireSignin = passport.authenticate('local', { session: false });
 
-var profilesControllers = __webpack_require__(73);
+var profilesControllers = __webpack_require__(74);
 
 // Make every request go through the passport profilesentication check:
 router.route('/auth-test').get(requireAuth, function (req, res) {
@@ -2036,7 +2045,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _express = __webpack_require__(4);
 
-var _settings = __webpack_require__(74);
+var _settings = __webpack_require__(75);
 
 var SettingsController = _interopRequireWildcard(_settings);
 
@@ -2061,7 +2070,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.fetchComponentData = fetchComponentData;
 
-var _promiseUtils = __webpack_require__(78);
+var _promiseUtils = __webpack_require__(79);
 
 function fetchComponentData(store, components, params) {
   var needs = components.reduce(function (prev, current) {
@@ -2589,6 +2598,37 @@ exports.default = (0, _reactRedux.connect)(mapStateToProps, { fetchSettings: _in
 
 
 Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var NotFound = function NotFound() {
+  return _react2.default.createElement(
+    'div',
+    null,
+    _react2.default.createElement(
+      'h3',
+      null,
+      '404 page not found'
+    )
+  );
+};
+
+exports.default = NotFound;
+
+/***/ }),
+/* 57 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
@@ -2667,14 +2707,14 @@ function mapStateToProps(state) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps, { fetchSettings: _index.fetchSettings })(Pagination);
 
 /***/ }),
-/* 57 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+			value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -2720,177 +2760,179 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var PostDetail = function (_Component) {
-	_inherits(PostDetail, _Component);
+			_inherits(PostDetail, _Component);
 
-	function PostDetail() {
-		_classCallCheck(this, PostDetail);
+			function PostDetail() {
+						_classCallCheck(this, PostDetail);
 
-		return _possibleConstructorReturn(this, (PostDetail.__proto__ || Object.getPrototypeOf(PostDetail)).apply(this, arguments));
-	}
-
-	_createClass(PostDetail, [{
-		key: 'componentWillMount',
-		value: function componentWillMount() {
-			/* call action creator */
-			/* action creator will grab the post with this id from the API   */
-			/* and send it to the reducer */
-			/* reducer will add it to the state */
-
-			/* console.log("Post Detail " + this.props.params.slug);*/
-			this.props.fetchPost(this.props.params.slug);
-			this.props.fetchSettings();
-		}
-	}, {
-		key: 'renderEditButton',
-		value: function renderEditButton() {
-			/* Render "Edit Post" button if user is logged in */
-			if (this.props.authenticated) {
-				return _react2.default.createElement(
-					_reactRouterBootstrap.LinkContainer,
-					{ to: { pathname: "/post/" + this.props.params.slug + "/edit" } },
-					_react2.default.createElement(
-						_reactBootstrap.Button,
-						{ className: 'right' },
-						'Edit Post'
-					)
-				);
-			}
-		}
-	}, {
-		key: 'renderMetaInfo',
-		value: function renderMetaInfo() {
-			var settings = this.props.settings;
-			var post = this.props.post;
-
-			if (!post) {
-				return null;
-			}
-			/* Remove markdown from post body, and truncate it to 160 chars. */
-			var body = (0, _removeMarkdown2.default)(this.props.post.body);
-			var truncate_length = 160;
-			var description = body.substring(0, truncate_length - 3);
-			if (description.length < body.length) {
-				description += "...";
-			}
-			description = (0, _removeMarkdown2.default)(description);
-
-			var firstline = post.body.split('\n')[0];
-			var metaTitle = firstline.substring(0, 80);
-			metaTitle = (0, _removeMarkdown2.default)(metaTitle);
-
-			/* Keywords */
-			var post_tags = "";
-			if (post.tags) {
-				post_tags = post.tags.map(function (tag) {
-					return tag.title;
-				}).join(",");
-			}
-			var keywords = settings.metaKeywords + ',' + post_tags;
-
-			/* console.log("Meta" + JSON.stringify(settings));*/
-
-			if (!settings.metaTitle) {
-				return null;
+						return _possibleConstructorReturn(this, (PostDetail.__proto__ || Object.getPrototypeOf(PostDetail)).apply(this, arguments));
 			}
 
-			var socialImage = settings.metaSocialImage;
-			/* Find images in the post */
-			var md = new _remarkable2.default({ html: true });
-			var html = md.render(post.body);
-			var regexp = /<img src\s*=\s*"(.+?)"/;
-			var src = regexp.exec(html);
-			if (src) {
-				console.log(src[1]);
-				socialImage = src[1];
-			}
+			_createClass(PostDetail, [{
+						key: 'componentWillMount',
+						value: function componentWillMount() {
+									/* call action creator */
+									/* action creator will grab the post with this id from the API   */
+									/* and send it to the reducer */
+									/* reducer will add it to the state */
 
-			return _react2.default.createElement(
-				_reactMetaTags2.default,
-				null,
-				_react2.default.createElement(
-					'title',
-					null,
-					metaTitle
-				),
-				_react2.default.createElement('meta', { name: 'author', content: settings.metaAuthor }),
-				_react2.default.createElement('meta', { name: 'description',
-					content: description }),
-				_react2.default.createElement('meta', { name: 'keywords',
-					content: keywords }),
-				_react2.default.createElement('meta', { property: 'og:title', content: metaTitle }),
-				_react2.default.createElement('meta', { property: 'og:image', content: socialImage }),
-				_react2.default.createElement('meta', { property: 'og:description', content: description }),
-				_react2.default.createElement('meta', { property: 'twitter:card', content: 'summary_large_image' }),
-				_react2.default.createElement('meta', { property: 'twitter:image', content: socialImage }),
-				_react2.default.createElement('meta', { property: 'twitter:description', content: description })
-			);
-		}
-	}, {
-		key: 'render',
-		value: function render() {
-			var post = this.props.post;
+									/* console.log("Post Detail " + this.props.params.slug);*/
+									this.props.fetchPost(this.props.params.slug);
+									this.props.fetchSettings();
+						}
+			}, {
+						key: 'renderEditButton',
+						value: function renderEditButton() {
+									/* Render "Edit Post" button if user is logged in */
+									if (this.props.authenticated) {
+												return _react2.default.createElement(
+															_reactRouterBootstrap.LinkContainer,
+															{ to: { pathname: "/post/" + this.props.params.slug + "/edit" } },
+															_react2.default.createElement(
+																		_reactBootstrap.Button,
+																		{ className: 'right' },
+																		'Edit Post'
+															)
+												);
+									}
+						}
+			}, {
+						key: 'renderMetaInfo',
+						value: function renderMetaInfo() {
+									var settings = this.props.settings;
+									var post = this.props.post;
 
-			if (!post.body) {
-				return _react2.default.createElement('div', null);
-			}
-			/* console.log("Rendering post " + post);*/
+									if (!post) {
+												return null;
+									}
+									/* Remove markdown from post body, and truncate it to 160 chars. */
+									var body = (0, _removeMarkdown2.default)(this.props.post.body);
+									var truncate_length = 160;
+									var description = body.substring(0, truncate_length - 3);
+									if (description.length < body.length) {
+												description += "...";
+									}
+									description = (0, _removeMarkdown2.default)(description);
 
-			return _react2.default.createElement(
-				'div',
-				null,
-				this.renderMetaInfo(),
-				_react2.default.createElement(_Post2.default, { slug: post.slug,
-					body: post.body,
-					published: post.published,
-					tags: post.tags }),
-				_react2.default.createElement(
-					'div',
-					{ className: 'panel subscription-box' },
-					_react2.default.createElement(
-						'div',
-						{ className: 'row' },
-						_react2.default.createElement(
-							'div',
-							{ className: 'col-xs-12 col-sm-6 subscribe-cta' },
-							'Liked this post? Subscribe to the updates!'
-						),
-						_react2.default.createElement(
-							'div',
-							{ className: 'col-xs-12 col-sm-6' },
-							_react2.default.createElement(_SubscribeForm2.default, null)
-						)
-					)
-				),
-				_react2.default.createElement('br', null)
-			);
-		}
-	}]);
+									var firstline = post.body.split('\n')[0];
+									var metaTitle = firstline.substring(0, 80);
+									metaTitle = (0, _removeMarkdown2.default)(metaTitle);
 
-	return PostDetail;
+									/* Keywords */
+									var post_tags = "";
+									if (post.tags) {
+												post_tags = post.tags.map(function (tag) {
+															return tag.title;
+												}).join(",");
+									}
+									var keywords = settings.metaKeywords + ',' + post_tags;
+
+									/* console.log("Meta" + JSON.stringify(settings));*/
+
+									if (!settings.metaTitle) {
+												return null;
+									}
+
+									var socialImage = settings.metaSocialImage;
+									/* Find images in the post */
+									var md = new _remarkable2.default({ html: true });
+									var html = md.render(post.body);
+									var regexp = /<img src\s*=\s*"(.+?)"/;
+									var src = regexp.exec(html);
+									if (src) {
+												/* If there's an image in a post, set it as social media image. */
+												/* console.log(src[1]);*/
+												socialImage = src[1];
+									}
+
+									return _react2.default.createElement(
+												_reactMetaTags2.default,
+												null,
+												_react2.default.createElement(
+															'title',
+															null,
+															metaTitle
+												),
+												_react2.default.createElement('meta', { name: 'author', content: settings.metaAuthor }),
+												_react2.default.createElement('meta', { name: 'description',
+															content: description }),
+												_react2.default.createElement('meta', { name: 'keywords',
+															content: keywords }),
+												_react2.default.createElement('meta', { property: 'og:title', content: metaTitle }),
+												_react2.default.createElement('meta', { property: 'og:image', content: socialImage }),
+												_react2.default.createElement('meta', { property: 'og:description', content: description }),
+												_react2.default.createElement('meta', { property: 'twitter:card', content: 'summary_large_image' }),
+												_react2.default.createElement('meta', { property: 'twitter:image', content: socialImage }),
+												_react2.default.createElement('meta', { property: 'twitter:description', content: description })
+									);
+						}
+			}, {
+						key: 'render',
+						value: function render() {
+									var post = this.props.post;
+
+									if (!post || !post.body) {
+												return _react2.default.createElement('div', null);
+									}
+
+									/* console.log("Rendering post " + post);*/
+
+									return _react2.default.createElement(
+												'div',
+												null,
+												this.renderMetaInfo(),
+												_react2.default.createElement(_Post2.default, { slug: post.slug,
+															body: post.body,
+															published: post.published,
+															tags: post.tags }),
+												_react2.default.createElement(
+															'div',
+															{ className: 'panel subscription-box' },
+															_react2.default.createElement(
+																		'div',
+																		{ className: 'row' },
+																		_react2.default.createElement(
+																					'div',
+																					{ className: 'col-xs-12 col-sm-6 subscribe-cta' },
+																					'Liked this post? Subscribe to the updates!'
+																		),
+																		_react2.default.createElement(
+																					'div',
+																					{ className: 'col-xs-12 col-sm-6' },
+																					_react2.default.createElement(_SubscribeForm2.default, null)
+																		)
+															)
+												),
+												_react2.default.createElement('br', null)
+									);
+						}
+			}]);
+
+			return PostDetail;
 }(_react.Component);
 
 // Actions required to provide data for this component to render in sever side.
 
 
 PostDetail.contextTypes = {
-	router: _react.PropTypes.object
+			router: _react.PropTypes.object
 };
 PostDetail.need = [function () {
-	return (0, _index.fetchSettings)();
+			return (0, _index.fetchSettings)();
 }, function (params) {
-	return (0, _index.fetchPost)(params.slug);
+			return (0, _index.fetchPost)(params.slug);
 }];
 
 function mapStateToProps(state) {
-	return { post: state.post,
-		settings: state.settings,
-		authenticated: state.auth.authenticated };
+			return { post: state.post,
+						settings: state.settings,
+						authenticated: state.auth.authenticated };
 }
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, { fetchPost: _index.fetchPost, fetchSettings: _index.fetchSettings })(PostDetail);
 
 /***/ }),
-/* 58 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2924,7 +2966,7 @@ var _Editor = __webpack_require__(18);
 
 var _Editor2 = _interopRequireDefault(_Editor);
 
-var _Pagination = __webpack_require__(56);
+var _Pagination = __webpack_require__(57);
 
 var _Pagination2 = _interopRequireDefault(_Pagination);
 
@@ -3099,7 +3141,7 @@ function mapStateToProps(state) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps, { fetchPosts: _index.fetchPosts, fetchSettings: _index.fetchSettings })(PostList);
 
 /***/ }),
-/* 59 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3285,7 +3327,7 @@ exports.default = (0, _reduxForm.reduxForm)({
 }, null, { createPost: _index.createPost })(PostNew);
 
 /***/ }),
-/* 60 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3358,7 +3400,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 /***/ }),
-/* 61 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3482,7 +3524,7 @@ exports.default = (0, _reduxForm.reduxForm)({
 }, mapStateToProps, actions)(Signin);
 
 /***/ }),
-/* 62 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3548,7 +3590,7 @@ var Signout = function (_Component) {
 exports.default = (0, _reactRedux.connect)(null, actions)(Signout);
 
 /***/ }),
-/* 63 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3579,7 +3621,7 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 64 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3608,7 +3650,7 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 65 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3636,7 +3678,7 @@ var _index = __webpack_require__(2);
 var INITIAL_STATE = [];
 
 /***/ }),
-/* 66 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3690,7 +3732,7 @@ var INITIAL_STATE = {
 };
 
 /***/ }),
-/* 67 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3735,7 +3777,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 var INITIAL_STATE = [];
 
 /***/ }),
-/* 68 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3766,7 +3808,7 @@ var INITIAL_STATE = {
 };
 
 /***/ }),
-/* 69 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3793,7 +3835,7 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 70 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3804,7 +3846,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.getFeed = getFeed;
 
-var _feed = __webpack_require__(79);
+var _feed = __webpack_require__(80);
 
 var _feed2 = _interopRequireDefault(_feed);
 
@@ -3867,7 +3909,7 @@ function getFeed(req, res) {
 }
 
 /***/ }),
-/* 71 */
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3983,7 +4025,7 @@ function postStream(req, res) {
 }
 
 /***/ }),
-/* 72 */
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4121,16 +4163,16 @@ function test(req, res) {
 }
 
 /***/ }),
-/* 73 */
+/* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var jwt = __webpack_require__(81);
+var jwt = __webpack_require__(82);
 var config = __webpack_require__(11);
 var User = __webpack_require__(23);
-var Subscriber = __webpack_require__(76);
+var Subscriber = __webpack_require__(77);
 
 function tokenForUser(user) {
 				// sub means subject. a property describing who it is about
@@ -4226,7 +4268,7 @@ exports.subscribe = function (req, res, next) {
 };
 
 /***/ }),
-/* 74 */
+/* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4239,7 +4281,7 @@ exports.settings = function (req, res, next) {
 };
 
 /***/ }),
-/* 75 */
+/* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4272,7 +4314,7 @@ var ModelClass = mongoose.model('follower', followerSchema);
 module.exports = ModelClass;
 
 /***/ }),
-/* 76 */
+/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4307,7 +4349,7 @@ var ModelClass = mongoose.model('subscriber', userSchema);
 module.exports = ModelClass;
 
 /***/ }),
-/* 77 */
+/* 78 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4530,7 +4572,7 @@ exports.default = server;
 /* WEBPACK VAR INJECTION */}.call(exports, ""))
 
 /***/ }),
-/* 78 */
+/* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4561,37 +4603,37 @@ function sequence(items, consumer) {
 }
 
 /***/ }),
-/* 79 */
+/* 80 */
 /***/ (function(module, exports) {
 
 module.exports = require("feed");
 
 /***/ }),
-/* 80 */
+/* 81 */
 /***/ (function(module, exports) {
 
 module.exports = require("isomorphic-fetch");
 
 /***/ }),
-/* 81 */
+/* 82 */
 /***/ (function(module, exports) {
 
 module.exports = require("jwt-simple");
 
 /***/ }),
-/* 82 */
+/* 83 */
 /***/ (function(module, exports) {
 
 module.exports = require("passport-local");
 
 /***/ }),
-/* 83 */
+/* 84 */
 /***/ (function(module, exports) {
 
 module.exports = require("redux-thunk");
 
 /***/ }),
-/* 84 */
+/* 85 */
 /***/ (function(module, exports) {
 
 module.exports = require("request");

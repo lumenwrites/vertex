@@ -80,7 +80,8 @@ class PostDetail extends Component {
 	var regexp = /<img src\s*=\s*"(.+?)"/;
 	var src = regexp.exec(html);
 	if (src) {
-	    console.log(src[1]);
+	    /* If there's an image in a post, set it as social media image. */
+	    /* console.log(src[1]);*/
 	    socialImage = src[1];
 	}
 
@@ -108,11 +109,8 @@ class PostDetail extends Component {
 
     render() {
 	const { post } = this.props;
-	if (!post.body) {
-	    return (
-		<div></div>
-	    );
-	}
+	if (!post || !post.body) { return <div></div> }
+	
 	/* console.log("Rendering post " + post);*/
 
 	return (
