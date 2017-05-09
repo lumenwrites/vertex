@@ -712,7 +712,7 @@ exports.default = (0, _reactRedux.connect)(mapStateToProps, { deletePost: _index
 
 module.exports = {
     secret: 'secret-key',
-    domain: 'https://lumenwrites.io'
+    domain: 'https://lumenwrites.com'
 };
 
 /***/ }),

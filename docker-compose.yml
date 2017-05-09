@@ -15,7 +15,7 @@ services:
     links:
       - db
     ports:
-      - "3000:3000"
+      - "3200:3000"
     volumes:
       - ./client:/home/vertex/client
       - ./server:/home/vertex/server      
