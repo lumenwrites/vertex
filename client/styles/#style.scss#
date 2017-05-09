@@ -96,7 +96,7 @@ header {
     .logo img {
 	width: 50px;
 	/* margin-right: 5px; */
-	margin-right: 5px;	
+	margin-left: 5px;	
 	margin-top: -16px;
 	margin-bottom: -8px;
 	@media  (max-width: 768px) {	

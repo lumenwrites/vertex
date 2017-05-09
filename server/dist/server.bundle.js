@@ -712,7 +712,7 @@ exports.default = (0, _reactRedux.connect)(mapStateToProps, { deletePost: _index
 
 module.exports = {
     secret: 'secret-key',
-    domain: 'https://digitalmind.io'
+    domain: 'https://lumenwrites.io'
 };
 
 /***/ }),
@@ -1279,18 +1279,18 @@ exports.API_URL = API_URL;
 
 
 var settings = {
-    title: "digital<b>mind</b>",
-    domain: "https://digitalmind.io",
-    categories: ["Webdev", "Startup", "Rationality", "AI"],
-    username: "rayalez",
-    userurl: "http://rayalez.com",
-    about: "<img src='/media/images/signature.png' style='float:right; width:120px;'/>Hi! My name is Ray Alez.<br/><br/>On this blog I write about everything I am learning on the path towards my dream - becoming a successful Startup Founder.<br/><br/>The main topics I'm interested in are Web Development, Computer Science, AI, Rationality, and Online Business.<br/><br/>If you like this blog, you probably want to check out the [other projects](http://rayalez.com/) I have created.<br/><br/>If you want to send me a message, my email is **raymestalez@gmail.com**.",
-    metaTitle: "Digital Mind",
-    metaDescription: "Blog about webdev, startups, rationality, and related subjects.",
-    metaAuthor: "Ray Alez",
-    metaEmail: "raymestalez@gmail.com",
-    metaKeywords: "Web Development, Webdev, Django, React, Programming, CS, Computer Science, AI, Rationality, Business, Startup.",
-    googleAnalyticsCode: "UA-44003603-16"
+    title: "lumen<b>writes</b>",
+    domain: "https://lumenwrites.com",
+    categories: ["fiction", "jokes", "meta"],
+    username: "lumen",
+    about: "I make dumb jokes.",
+    userurl: "https://lumenwrites.com",
+    metaTitle: "Lumen Writes",
+    metaDescription: "I make dumb jokes",
+    metaAuthor: "Lumen",
+    metaEmail: "lumenwrites@gmail.com",
+    metaKeywords: "Comedy, fiction, jokes, writing",
+    googleAnalyticsCode: ""
 };
 
 settings.metaSocialImage = settings.domain + "/media/images/social.png";
@@ -2530,9 +2530,9 @@ var Header = function (_Component) {
 							_react2.default.createElement(
 								_reactRouter.Link,
 								{ className: 'logo', to: '/' },
+								_react2.default.createElement('img', { src: '/media/images/logo.png' }),
 								_react2.default.createElement('span', { className: 'title',
-									dangerouslySetInnerHTML: { __html: title } }),
-								_react2.default.createElement('img', { src: '/media/images/logo.png' })
+									dangerouslySetInnerHTML: { __html: title } })
 							)
 						),
 						_react2.default.createElement(
