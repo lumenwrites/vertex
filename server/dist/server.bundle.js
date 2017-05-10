@@ -712,7 +712,7 @@ exports.default = (0, _reactRedux.connect)(mapStateToProps, { deletePost: _index
 
 module.exports = {
     secret: 'secret-key',
-    domain: 'https://lumenwrites.com'
+    domain: 'https://nulis.io/blog'
 };
 
 /***/ }),
@@ -1279,17 +1279,17 @@ exports.API_URL = API_URL;
 
 
 var settings = {
-    title: "lumen<b>writes</b>",
-    domain: "https://lumenwrites.com",
-    categories: ["fiction", "jokes", "meta"],
-    username: "lumen",
-    about: "I make dumb jokes.",
-    userurl: "https://lumenwrites.com",
-    metaTitle: "Lumen Writes",
-    metaDescription: "I make dumb jokes",
-    metaAuthor: "Lumen",
-    metaEmail: "lumenwrites@gmail.com",
-    metaKeywords: "Comedy, fiction, jokes, writing",
+    title: "nulis",
+    domain: "https://nulis.io",
+    categories: ["fiction", "creativity", "productivity", "meta"],
+    username: "rayalez",
+    about: "An outline editor for writers that makes the process of outlining stoires and articles easy, fun, and convenient.",
+    userurl: "https://nulis.io",
+    metaTitle: "Nulis",
+    metaDescription: "An outline editor for writers that makes the process of outlining stoires and articles easy, fun, and convenient.",
+    metaAuthor: "Ray Alez",
+    metaEmail: "raymestalez@gmail.com",
+    metaKeywords: "Comedy, Ceativity, Fiction, Jokes, Writing, Text Editor, Mind Mapping",
     googleAnalyticsCode: ""
 };
 

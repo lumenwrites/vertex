@@ -24,7 +24,6 @@ function logPageView() {
     window.scrollTo(0, 0);
 }
 
-
 // Sign in
 const token = localStorage.getItem('token');
 // if user has a token - sign him in

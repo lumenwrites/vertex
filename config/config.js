@@ -1,4 +1,4 @@
 module.exports = {
     secret: 'secret-key',
-    domain: 'https://lumenwrites.com',
+    domain: 'https://nulis.io/blog',
 };
