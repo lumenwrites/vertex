@@ -115,7 +115,7 @@ class Post extends Component {
 	    tagItems = tags.map((tag) => {
 		return (
 		    <span key={tag}>
-			<Link to={`${config.domain}/tag/` + tag}>
+			<Link to={`/tag/` + tag}>
 			    <Label bsStyle="default">
 				{tag}
 			    </Label>
