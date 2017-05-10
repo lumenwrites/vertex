@@ -31,7 +31,7 @@ class SubscribeForm extends Component {
 			     ref="email" />
 		<Button bsStyle="primary" className="subscribe"
 			type="submit">Subscribe</Button>
-		<a href="${config.domain}/feed/posts.atom" className="btn rss">
+		<a href={`${config.domain}/feed/posts.atom`} className="btn rss">
 		    <i className="fa fa-rss"></i>
 		</a> 
 		<div className="clearfix"></div>

@@ -80,7 +80,7 @@ export function createPost(post) {
     return function(dispatch) {
 	axios.post(`${API_URL}/posts`, post, config)
 	     .then(response => {
-		 browserHistory.push('/');
+		 browserHistory.push('/blog');
 		 /* console.log(response);*/
 		 dispatch({
 		     type: 'CREATE_POST',
@@ -107,7 +107,7 @@ export function updatePost(slug, post) {
 	     .then(response => {
 		 console.log(">>>> src/actions/index.js:");
 		 console.log("Updated a post. Redirecting to it. " + response.data.body ); 
-		 browserHistory.push('/post/' + response.data.slug);
+		 browserHistory.push('/blog/post/' + response.data.slug);
 		 /* console.log(response);*/
 		 dispatch({
 		     type: 'UPDATE_POST',
@@ -129,7 +129,7 @@ export function deletePost(slug) {
 	     .then(response => {
 		 console.log(">>>> src/actions/index.js (promise):");
 		 console.log("Successfully deleted post. Dispatching action DELETE_POST.");
-		 browserHistory.push('/');
+		 browserHistory.push('/blog');
 
 		 dispatch({
 		     type: 'DELETE_POST',

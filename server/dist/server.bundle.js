@@ -104,7 +104,7 @@ var _axios = __webpack_require__(25);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _reactRouter = __webpack_require__(3);
+var _reactRouter = __webpack_require__(4);
 
 var _apiCaller = __webpack_require__(20);
 
@@ -184,7 +184,7 @@ function createPost(post) {
 
 			return function (dispatch) {
 						_axios2.default.post(_apiCaller.API_URL + '/posts', post, config).then(function (response) {
-									_reactRouter.browserHistory.push('/');
+									_reactRouter.browserHistory.push('/blog');
 									/* console.log(response);*/
 									dispatch({
 												type: 'CREATE_POST',
@@ -209,7 +209,7 @@ function updatePost(slug, post) {
 						_axios2.default.post(_apiCaller.API_URL + '/posts/' + slug, post, config).then(function (response) {
 									console.log(">>>> src/actions/index.js:");
 									console.log("Updated a post. Redirecting to it. " + response.data.body);
-									_reactRouter.browserHistory.push('/post/' + response.data.slug);
+									_reactRouter.browserHistory.push('/blog/post/' + response.data.slug);
 									/* console.log(response);*/
 									dispatch({
 												type: 'UPDATE_POST',
@@ -230,7 +230,7 @@ function deletePost(slug) {
 						_axios2.default.delete(_apiCaller.API_URL + '/posts/' + slug, config).then(function (response) {
 									console.log(">>>> src/actions/index.js (promise):");
 									console.log("Successfully deleted post. Dispatching action DELETE_POST.");
-									_reactRouter.browserHistory.push('/');
+									_reactRouter.browserHistory.push('/blog');
 
 									dispatch({
 												type: 'DELETE_POST',
@@ -289,12 +289,6 @@ function subscribedClose() {
 
 /***/ }),
 /* 3 */
-/***/ (function(module, exports) {
-
-module.exports = require("react-router");
-
-/***/ }),
-/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -304,6 +298,12 @@ module.exports = {
     secret: 'secret-key',
     domain: 'https://nulis.io/blog'
 };
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports) {
+
+module.exports = require("react-router");
 
 /***/ }),
 /* 5 */
@@ -355,7 +355,7 @@ var _axios = __webpack_require__(25);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _reactRouter = __webpack_require__(3);
+var _reactRouter = __webpack_require__(4);
 
 var _types = __webpack_require__(52);
 
@@ -473,7 +473,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(1);
 
-var _reactRouter = __webpack_require__(3);
+var _reactRouter = __webpack_require__(4);
 
 var _reactBootstrap = __webpack_require__(6);
 
@@ -483,7 +483,7 @@ var _remarkable2 = _interopRequireDefault(_remarkable);
 
 var _index = __webpack_require__(2);
 
-var _config = __webpack_require__(4);
+var _config = __webpack_require__(3);
 
 var _config2 = _interopRequireDefault(_config);
 
@@ -1142,11 +1142,15 @@ var _reactDom = __webpack_require__(29);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _reactRouter = __webpack_require__(3);
+var _reactRouter = __webpack_require__(4);
 
 var _reactBootstrap = __webpack_require__(6);
 
 var _index = __webpack_require__(2);
+
+var _config = __webpack_require__(3);
+
+var _config2 = _interopRequireDefault(_config);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1197,7 +1201,7 @@ var SubscribeForm = function (_Component) {
 				),
 				_react2.default.createElement(
 					'a',
-					{ href: '/blog/feed/posts.atom', className: 'btn rss' },
+					{ href: _config2.default.domain + '/feed/posts.atom', className: 'btn rss' },
 					_react2.default.createElement('i', { className: 'fa fa-rss' })
 				),
 				_react2.default.createElement('div', { className: 'clearfix' })
@@ -1231,7 +1235,7 @@ var _isomorphicFetch = __webpack_require__(81);
 
 var _isomorphicFetch2 = _interopRequireDefault(_isomorphicFetch);
 
-var _config = __webpack_require__(4);
+var _config = __webpack_require__(3);
 
 var _config2 = _interopRequireDefault(_config);
 
@@ -1282,7 +1286,7 @@ exports.API_URL = API_URL;
 "use strict";
 
 
-var _config = __webpack_require__(4);
+var _config = __webpack_require__(3);
 
 var _config2 = _interopRequireDefault(_config);
 
@@ -1595,7 +1599,7 @@ var JwtStrategy = __webpack_require__(28).Strategy;
 var LocalStrategy = __webpack_require__(83);
 var ExtractJwt = __webpack_require__(28).ExtractJwt;
 var User = __webpack_require__(23);
-var config = __webpack_require__(4);
+var config = __webpack_require__(3);
 
 // by default you send a POST request with username and password
 // here Im telling it to use email instead
@@ -1751,7 +1755,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRouter = __webpack_require__(3);
+var _reactRouter = __webpack_require__(4);
 
 var _Main = __webpack_require__(16);
 
@@ -2366,7 +2370,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(1);
 
-var _reactRouter = __webpack_require__(3);
+var _reactRouter = __webpack_require__(4);
 
 var _index = __webpack_require__(2);
 
@@ -2374,7 +2378,7 @@ var _auth = __webpack_require__(10);
 
 var _reactBootstrap = __webpack_require__(6);
 
-var _config = __webpack_require__(4);
+var _config = __webpack_require__(3);
 
 var _config2 = _interopRequireDefault(_config);
 
@@ -2544,7 +2548,7 @@ var Header = function (_Component) {
 							_react2.default.createElement(
 								_reactRouter.Link,
 								{ className: 'logo', to: '/' },
-								_react2.default.createElement('img', { src: '/media/images/logo.png' }),
+								_react2.default.createElement('img', { src: _config2.default.domain + '/media/images/logo.png' }),
 								_react2.default.createElement('span', { className: 'title',
 									dangerouslySetInnerHTML: { __html: title } })
 							)
@@ -2656,7 +2660,7 @@ var _reactRedux = __webpack_require__(1);
 
 var _index = __webpack_require__(2);
 
-var _reactRouter = __webpack_require__(3);
+var _reactRouter = __webpack_require__(4);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2964,7 +2968,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(1);
 
-var _reactRouter = __webpack_require__(3);
+var _reactRouter = __webpack_require__(4);
 
 var _reactMetaTags = __webpack_require__(8);
 
@@ -2984,7 +2988,7 @@ var _Pagination = __webpack_require__(57);
 
 var _Pagination2 = _interopRequireDefault(_Pagination);
 
-var _config = __webpack_require__(4);
+var _config = __webpack_require__(3);
 
 var _config2 = _interopRequireDefault(_config);
 
@@ -4188,7 +4192,7 @@ function test(req, res) {
 
 
 var jwt = __webpack_require__(82);
-var config = __webpack_require__(4);
+var config = __webpack_require__(3);
 var User = __webpack_require__(23);
 var Subscriber = __webpack_require__(77);
 
@@ -4429,7 +4433,7 @@ var _activitypubRoutes = __webpack_require__(38);
 
 var _activitypubRoutes2 = _interopRequireDefault(_activitypubRoutes);
 
-var _config = __webpack_require__(4);
+var _config = __webpack_require__(3);
 
 var _config2 = _interopRequireDefault(_config);
 
@@ -4443,7 +4447,7 @@ var _reactRedux = __webpack_require__(1);
 
 var _server = __webpack_require__(50);
 
-var _reactRouter = __webpack_require__(3);
+var _reactRouter = __webpack_require__(4);
 
 var _server2 = __webpack_require__(51);
 
