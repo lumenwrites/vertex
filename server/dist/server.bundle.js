@@ -4494,19 +4494,19 @@ server.use(_bodyParser2.default.urlencoded({ limit: '20mb', extended: false }));
 server.use((0, _cors2.default)());
 
 /* API Routes */
-server.use('/api/v1', _postsRoutes2.default);
-server.use('/api/v1', _settingsRoutes2.default);
-server.use('/api/v1', _profilesRoutes2.default);
+server.use('/blog/api/v1', _postsRoutes2.default);
+server.use('/blog/api/v1', _settingsRoutes2.default);
+server.use('/blog/api/v1', _profilesRoutes2.default);
 
 /* OStatus Routes */
-server.use('/', _ostatusRoutes2.default);
-server.use('/', _activitypubRoutes2.default);
-server.use('/', _feedsRoutes2.default);
+server.use('/blog/', _ostatusRoutes2.default);
+server.use('/blog/', _activitypubRoutes2.default);
+server.use('/blog/', _feedsRoutes2.default);
 
 /* Serve static files */
-server.use('/styles', _express2.default.static(_path2.default.resolve(__dirname, '../client/styles')));
-server.use('/media', _express2.default.static(_path2.default.resolve(__dirname, '../client/media')));
-server.get('/bundle.js', function (req, res) {
+server.use('/blog/styles', _express2.default.static(_path2.default.resolve(__dirname, '../client/styles')));
+server.use('/blog/media', _express2.default.static(_path2.default.resolve(__dirname, '../client/media')));
+server.get('/blog/bundle.js', function (req, res) {
     res.sendFile(_path2.default.resolve(__dirname, '../client/dist/bundle.js'));
 });
 
