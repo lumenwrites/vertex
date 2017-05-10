@@ -4560,7 +4560,7 @@ function renderClient(req, res, next) {
         if (!renderProps) {
             return next();
         }
-
+        console.log("Accessing page " + req.url);
         /* Create a new empty Redux store*/
         var store = (0, _store.configureStore)();
         /* This function will execute all the action creators I need,

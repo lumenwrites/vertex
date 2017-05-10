@@ -97,7 +97,7 @@ function renderClient(req, res, next) {
     match({ routes, location: req.url}, (err, redirectLocation, renderProps) => {
 	if (err) { return res.status(500).end(renderError(err)); }
 	if (!renderProps) { return next(); }
-
+	console.log("Accessing page " + req.url);
 	/* Create a new empty Redux store*/
 	const store = configureStore()
 	/* This function will execute all the action creators I need,
