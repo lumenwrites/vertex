@@ -120,6 +120,10 @@ console.log("config.domain " + _config2.default.domain);
 /* console.log("API_URL " + API_URL);*/
 
 /* Isomorphic api caller. Magically fetches data, both on client and server. */
+
+
+var domain = "https://nulis.io/blog";
+
 function updatePostBody(value) {
 			return {
 						type: 'UPDATE_POST_BODY',
@@ -189,7 +193,7 @@ function createPost(post) {
 
 			return function (dispatch) {
 						_axios2.default.post(_apiCaller.API_URL + '/posts', post, config).then(function (response) {
-									_reactRouter.browserHistory.push('' + config.domain);
+									_reactRouter.browserHistory.push(domain);
 									/* console.log(response);*/
 									dispatch({
 												type: 'CREATE_POST',
@@ -213,7 +217,7 @@ function updatePost(slug, post) {
 			return function (dispatch) {
 						_axios2.default.post(_apiCaller.API_URL + '/posts/' + slug, post, config).then(function (response) {
 									console.log(">>>> src/actions/index.js:");
-									var post_url = config.domain + "/post/" + response.data.slug;
+									var post_url = domain + "/post/" + response.data.slug;
 									console.log("Updated a post. Redirecting to " + post_url);
 									_reactRouter.browserHistory.push(post_url);
 									/* console.log(response);*/
@@ -236,7 +240,7 @@ function deletePost(slug) {
 						_axios2.default.delete(_apiCaller.API_URL + '/posts/' + slug, config).then(function (response) {
 									console.log(">>>> src/actions/index.js (promise):");
 									console.log("Successfully deleted post. Dispatching action DELETE_POST.");
-									_reactRouter.browserHistory.push('' + config.domain);
+									_reactRouter.browserHistory.push(domain);
 
 									dispatch({
 												type: 'DELETE_POST',

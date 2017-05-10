@@ -11,6 +11,8 @@ import config from '../../config/config.js';
 
 console.log("config.domain " + config.domain);
 
+var domain = "https://nulis.io/blog"
+
 export function updatePostBody(value) {
     return {
 	type: 'UPDATE_POST_BODY',
@@ -84,7 +86,7 @@ export function createPost(post) {
     return function(dispatch) {
 	axios.post(`${API_URL}/posts`, post, config)
 	     .then(response => {
-		 browserHistory.push(`${config.domain}`);
+		 browserHistory.push(domain);
 		 /* console.log(response);*/
 		 dispatch({
 		     type: 'CREATE_POST',
@@ -110,7 +112,7 @@ export function updatePost(slug, post) {
 	axios.post(`${API_URL}/posts/${slug}`, post, config)
 	     .then(response => {
 		 console.log(">>>> src/actions/index.js:");
-		 var post_url = config.domain+"/post/"+response.data.slug;
+		 var post_url = domain+"/post/"+response.data.slug;
 		 console.log("Updated a post. Redirecting to " + post_url); 
 		 browserHistory.push(post_url);
 		 /* console.log(response);*/
@@ -134,7 +136,7 @@ export function deletePost(slug) {
 	     .then(response => {
 		 console.log(">>>> src/actions/index.js (promise):");
 		 console.log("Successfully deleted post. Dispatching action DELETE_POST.");
-		 browserHistory.push(`${config.domain}`);
+		 browserHistory.push(domain);
 
 		 dispatch({
 		     type: 'DELETE_POST',
