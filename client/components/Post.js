@@ -115,7 +115,7 @@ class Post extends Component {
 	    tagItems = tags.map((tag) => {
 		return (
 		    <span key={tag}>
-			<Link to={`/tag/` + tag}>
+			<Link to={`${config.domain}/tag/` + tag}>
 			    <Label bsStyle="default">
 				{tag}
 			    </Label>
@@ -154,7 +154,7 @@ class Post extends Component {
 		      </Label>
 		      : null }		    
 		    { this.props.authenticated ?
-		      <Link to={`/post/`+this.props.slug+"/edit"} className="icon">
+		      <Link to={`${config.domain}/post/`+this.props.slug+"/edit"} className="icon">
 			  <i className="fa fa-pencil"></i>
 		      </Link>
 		      : null }

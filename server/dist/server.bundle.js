@@ -428,7 +428,7 @@ function signoutUser() {
 	console.log("Signing out user, deleting token from localStorage.");
 	localStorage.removeItem('authtoken');
 	console.log("Redirecting to /, and dispatching action UNAUTH_USER.");
-	_reactRouter.browserHistory.push('${config.domain}');
+	_reactRouter.browserHistory.push('${config.domain}/blog');
 	return {
 		type: 'UNAUTH_USER'
 	};
@@ -629,7 +629,7 @@ var Post = function (_Component) {
 						{ key: tag },
 						_react2.default.createElement(
 							_reactRouter.Link,
-							{ to: '/tag/' + tag },
+							{ to: _config2.default.domain + '/tag/' + tag },
 							_react2.default.createElement(
 								_reactBootstrap.Label,
 								{ bsStyle: 'default' },
@@ -661,7 +661,7 @@ var Post = function (_Component) {
 					) : null,
 					this.props.authenticated ? _react2.default.createElement(
 						_reactRouter.Link,
-						{ to: '/post/' + this.props.slug + "/edit", className: 'icon' },
+						{ to: _config2.default.domain + '/post/' + this.props.slug + "/edit", className: 'icon' },
 						_react2.default.createElement('i', { className: 'fa fa-pencil' })
 					) : null,
 					this.props.authenticated ? _react2.default.createElement(
@@ -2497,7 +2497,7 @@ var Header = function (_Component) {
 					{ key: category },
 					_react2.default.createElement(
 						_reactRouter.Link,
-						{ to: '/tag/' + category },
+						{ to: _config2.default.domain + '/tag/' + category },
 						capitalized
 					)
 				);
@@ -2508,7 +2508,7 @@ var Header = function (_Component) {
 				{ className: 'dropdown' },
 				_react2.default.createElement(
 					_reactRouter.Link,
-					{ to: '/' },
+					{ to: '' + _config2.default.domain },
 					'Browse'
 				),
 				_react2.default.createElement(
@@ -2519,7 +2519,7 @@ var Header = function (_Component) {
 						null,
 						_react2.default.createElement(
 							_reactRouter.Link,
-							{ to: '/' },
+							{ to: _config2.default.domain + '/' },
 							'All'
 						)
 					),
@@ -2557,7 +2557,7 @@ var Header = function (_Component) {
 							_react2.default.createElement(
 								_reactRouter.Link,
 								{ className: 'logo', to: '/' },
-								_react2.default.createElement('img', { src: '/media/images/logo.png' }),
+								_react2.default.createElement('img', { src: _config2.default.domain + '/media/images/logo.png' }),
 								_react2.default.createElement('span', { className: 'title',
 									dangerouslySetInnerHTML: { __html: title } })
 							)
@@ -2576,12 +2576,12 @@ var Header = function (_Component) {
 								),
 								_react2.default.createElement(
 									_reactRouter.Link,
-									{ to: '/about/' },
+									{ to: _config2.default.domain + '/about/' },
 									'About'
 								),
 								this.props.authenticated ? _react2.default.createElement(
 									_reactRouter.Link,
-									{ key: 2, to: { pathname: '/logout' } },
+									{ key: 2, to: { pathname: _config2.default.domain + '/logout' } },
 									_react2.default.createElement('i', { className: 'fa fa-sign-out' })
 								) : null
 							)

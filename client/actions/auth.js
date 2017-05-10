@@ -70,7 +70,7 @@ export function signoutUser() {
     console.log("Signing out user, deleting token from localStorage.");		    
     localStorage.removeItem('authtoken');
     console.log("Redirecting to /, and dispatching action UNAUTH_USER.");
-    browserHistory.push('${config.domain}');    
+    browserHistory.push('${config.domain}/blog');    
     return {
 	type: 'UNAUTH_USER'
     };
