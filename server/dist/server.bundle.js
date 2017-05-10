@@ -629,7 +629,7 @@ var Post = function (_Component) {
 						{ key: tag },
 						_react2.default.createElement(
 							_reactRouter.Link,
-							{ to: '/tag/' + tag },
+							{ to: _config2.default.domain + '/tag/' + tag },
 							_react2.default.createElement(
 								_reactBootstrap.Label,
 								{ bsStyle: 'default' },
