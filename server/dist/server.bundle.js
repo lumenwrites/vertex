@@ -299,7 +299,7 @@ function subscribedClose() {
 
 module.exports = {
     secret: 'secret-key',
-    domain: 'https://nulis.io'
+    domain: 'https://nulis.io/blog'
 };
 
 /***/ }),
