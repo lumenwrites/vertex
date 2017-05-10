@@ -3,7 +3,7 @@ import fetch from 'isomorphic-fetch';
 import Config from '../../config/config.js';
 
 
-var API_URL = '/blog/api/v1';
+var API_URL = 'https://nulis.io/blog/api/v1';
 
 
 if (process.env.NODE_ENV === 'development') {
