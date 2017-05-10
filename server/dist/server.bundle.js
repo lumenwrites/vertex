@@ -633,7 +633,7 @@ var Post = function (_Component) {
 						{ key: tag },
 						_react2.default.createElement(
 							_reactRouter.Link,
-							{ to: '/tag/' + tag },
+							{ to: _config2.default.domain + '/tag/' + tag },
 							_react2.default.createElement(
 								_reactBootstrap.Label,
 								{ bsStyle: 'default' },
@@ -1815,6 +1815,8 @@ if (false) {
 
 var path = "/blog";
 if (typeof window === 'undefined') {
+    /* Using nginx rewrite, so client router should pick up /blog,
+       but on ssr I want to use /*/
     path = "/";
 }
 // react-router setup with code-splitting

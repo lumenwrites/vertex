@@ -26,6 +26,8 @@ if (typeof require.ensure !== 'function') {
 
 var path = "/blog";
 if (typeof window === 'undefined'){
+    /* Using nginx rewrite, so client router should pick up /blog,
+       but on ssr I want to use /*/
     path = "/";
 }
 // react-router setup with code-splitting
