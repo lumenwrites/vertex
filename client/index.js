@@ -2,10 +2,16 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Router, browserHistory } from 'react-router';
+import { useRouterHistory } from 'react-router'
+import { createHistory } from 'history'
 import { Provider } from 'react-redux';
 
 /* Reducers */
 import rootReducer from './reducers/rootReducer';
+
+/* Config */
+
+import config from '../config/config.js';
 
 // Import Routes
 import routes from './routes';
@@ -33,10 +39,13 @@ if (token) {
      * console.log("localStorage contains token, so sign user in.");   */
 }
 
+const history = useRouterHistory(createHistory)({
+    basename: "/blog"
+})
 
 render(
     <Provider store={store}>
-	<Router history={browserHistory} routes={routes} onUpdate={logPageView}>
+	<Router history={history} routes={routes} onUpdate={logPageView}  basename={config.domain}>
 	</Router>
     </Provider>,
     document.getElementById('root')
