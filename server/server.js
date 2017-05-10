@@ -38,20 +38,20 @@ server.use(bodyParser.urlencoded({ limit: '20mb', extended: false }));
 server.use(cors());
 
 /* API Routes */
-server.use('/blog/api/v1', postsRoutes);
-server.use('/blog/api/v1', settingsRoutes);
-server.use('/blog/api/v1', profilesRoutes);
+server.use('/api/v1', postsRoutes);
+server.use('/api/v1', settingsRoutes);
+server.use('/api/v1', profilesRoutes);
 
 
 /* OStatus Routes */
-server.use('/blog/', ostatusRoutes);
-server.use('/blog/', activitypubRoutes);
-server.use('/blog/', feedsRoutes);
+server.use('/', ostatusRoutes);
+server.use('/', activitypubRoutes);
+server.use('/', feedsRoutes);
 
 /* Serve static files */
-server.use('/blog/styles', Express.static(path.resolve(__dirname, '../client/styles')));
-server.use('/blog/media', Express.static(path.resolve(__dirname, '../client/media')));
-server.get('/blog/bundle.js',(req,res) => {
+server.use('/styles', Express.static(path.resolve(__dirname, '../client/styles')));
+server.use('/media', Express.static(path.resolve(__dirname, '../client/media')));
+server.get('/bundle.js',(req,res) => {
     res.sendFile(path.resolve(__dirname, '../client/dist/bundle.js'));
 });
 
@@ -67,6 +67,8 @@ import { Provider } from 'react-redux'
 import { renderToString } from 'react-dom/server';
 import { match, RouterContext } from 'react-router';
 import { Router } from 'react-router';
+import { useRouterHistory } from 'react-router'
+import { createHistory } from 'history'
 import MetaTagsServer from 'react-meta-tags/server';
 import {MetaTagsContext} from 'react-meta-tags';
 
@@ -88,10 +90,11 @@ server.use(renderClient);
 
 function renderClient(req, res, next) {
     const metaTagsInstance = MetaTagsServer();
+
     /* "routes" load all of my components
        I pass routes to the match, which, in combination with RouterContext,
        makes router work properly, passing the urls sent to the server to react router.*/
-    match({ routes, location: req.url }, (err, redirectLocation, renderProps) => {
+    match({ routes, location: req.url}, (err, redirectLocation, renderProps) => {
 	if (err) { return res.status(500).end(renderError(err)); }
 	if (!renderProps) { return next(); }
 
@@ -132,9 +135,9 @@ function renderFullPage(html, meta, initialState) {
       <head>
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="shortcut icon" href="${config.domain}/media/images/favicon.png"/>
+        <link rel="shortcut icon" href="/media/images/favicon.png"/>
         ${meta}
-        <link rel="stylesheet" href="${config.domain}/styles/style.css">
+        <link rel="stylesheet" href="/styles/style.css">
       </head>
       <body>
         <div id="root">${html}</div>
@@ -143,7 +146,7 @@ function renderFullPage(html, meta, initialState) {
         </script>
 
        </body>
-       <script src="${config.domain}/bundle.js"></script>
+       <script src="/bundle.js"></script>
     </html>
     `
 }
