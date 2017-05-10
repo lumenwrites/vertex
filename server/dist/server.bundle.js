@@ -1244,7 +1244,7 @@ var _config2 = _interopRequireDefault(_config);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var API_URL = _config2.default.domain + '/api/v1';
+var API_URL = _config2.default.domain + '/blog/api/v1';
 
 if (process.env.NODE_ENV === 'development') {
 				exports.API_URL = API_URL = 'http://localhost:3000/api/v1';
