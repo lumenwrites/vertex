@@ -1,3 +1,5 @@
+import config from './config.js';
+
 var settings = {
     title: "nulis",
     domain: "https://nulis.io",
@@ -13,7 +15,7 @@ var settings = {
     googleAnalyticsCode: "",
 };
 
-settings.metaSocialImage = settings.domain + "/media/images/social.png";
+settings.metaSocialImage = config.domain + "/media/images/social.png";
 
 module.exports = settings;
 

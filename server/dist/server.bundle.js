@@ -295,36 +295,48 @@ module.exports = require("react-router");
 
 /***/ }),
 /* 4 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-module.exports = require("express");
+"use strict";
+
+
+module.exports = {
+    secret: 'secret-key',
+    domain: 'https://nulis.io/blog'
+};
 
 /***/ }),
 /* 5 */
 /***/ (function(module, exports) {
 
-module.exports = require("react-bootstrap");
+module.exports = require("express");
 
 /***/ }),
 /* 6 */
 /***/ (function(module, exports) {
 
-module.exports = require("mongoose");
+module.exports = require("react-bootstrap");
 
 /***/ }),
 /* 7 */
 /***/ (function(module, exports) {
 
-module.exports = require("react-meta-tags");
+module.exports = require("mongoose");
 
 /***/ }),
 /* 8 */
 /***/ (function(module, exports) {
 
-module.exports = require("redux");
+module.exports = require("react-meta-tags");
 
 /***/ }),
 /* 9 */
+/***/ (function(module, exports) {
+
+module.exports = require("redux");
+
+/***/ }),
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -443,7 +455,7 @@ function fetchMessage() {
 }
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -463,13 +475,17 @@ var _reactRedux = __webpack_require__(1);
 
 var _reactRouter = __webpack_require__(3);
 
-var _reactBootstrap = __webpack_require__(5);
+var _reactBootstrap = __webpack_require__(6);
 
 var _remarkable = __webpack_require__(31);
 
 var _remarkable2 = _interopRequireDefault(_remarkable);
 
 var _index = __webpack_require__(2);
+
+var _config = __webpack_require__(4);
+
+var _config2 = _interopRequireDefault(_config);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -610,7 +626,7 @@ var Post = function (_Component) {
 						{ key: tag },
 						_react2.default.createElement(
 							_reactRouter.Link,
-							{ to: '/tag/' + tag },
+							{ to: _config2.default.domain + '/tag/' + tag },
 							_react2.default.createElement(
 								_reactBootstrap.Label,
 								{ bsStyle: 'default' },
@@ -642,7 +658,7 @@ var Post = function (_Component) {
 					) : null,
 					this.props.authenticated ? _react2.default.createElement(
 						_reactRouter.Link,
-						{ to: "/post/" + this.props.slug + "/edit", className: 'icon' },
+						{ to: _config2.default.domain + '/post/' + this.props.slug + "/edit", className: 'icon' },
 						_react2.default.createElement('i', { className: 'fa fa-pencil' })
 					) : null,
 					this.props.authenticated ? _react2.default.createElement(
@@ -704,18 +720,6 @@ function mapStateToProps(state) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps, { deletePost: _index.deletePost, fetchSettings: _index.fetchSettings })(Post);
 
 /***/ }),
-/* 11 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-module.exports = {
-    secret: 'secret-key',
-    domain: 'https://nulis.io/blog'
-};
-
-/***/ }),
 /* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -726,7 +730,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _mongoose = __webpack_require__(6);
+var _mongoose = __webpack_require__(7);
 
 var _mongoose2 = _interopRequireDefault(_mongoose);
 
@@ -781,7 +785,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(1);
 
-var _reactBootstrap = __webpack_require__(5);
+var _reactBootstrap = __webpack_require__(6);
 
 var _Header = __webpack_require__(55);
 
@@ -872,7 +876,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _redux = __webpack_require__(8);
+var _redux = __webpack_require__(9);
 
 var _reduxForm = __webpack_require__(15);
 
@@ -940,7 +944,7 @@ var _reactDom = __webpack_require__(29);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _redux = __webpack_require__(8);
+var _redux = __webpack_require__(9);
 
 var _reactRedux = __webpack_require__(1);
 
@@ -948,7 +952,7 @@ var _index = __webpack_require__(2);
 
 var actionCreators = _interopRequireWildcard(_index);
 
-var _reactBootstrap = __webpack_require__(5);
+var _reactBootstrap = __webpack_require__(6);
 
 var _reactRouterBootstrap = __webpack_require__(14);
 
@@ -1140,7 +1144,7 @@ var _reactDom2 = _interopRequireDefault(_reactDom);
 
 var _reactRouter = __webpack_require__(3);
 
-var _reactBootstrap = __webpack_require__(5);
+var _reactBootstrap = __webpack_require__(6);
 
 var _index = __webpack_require__(2);
 
@@ -1227,7 +1231,7 @@ var _isomorphicFetch = __webpack_require__(81);
 
 var _isomorphicFetch2 = _interopRequireDefault(_isomorphicFetch);
 
-var _config = __webpack_require__(11);
+var _config = __webpack_require__(4);
 
 var _config2 = _interopRequireDefault(_config);
 
@@ -1278,6 +1282,12 @@ exports.API_URL = API_URL;
 "use strict";
 
 
+var _config = __webpack_require__(4);
+
+var _config2 = _interopRequireDefault(_config);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 var settings = {
     title: "nulis",
     domain: "https://nulis.io",
@@ -1293,7 +1303,7 @@ var settings = {
     googleAnalyticsCode: ""
 };
 
-settings.metaSocialImage = settings.domain + "/media/images/social.png";
+settings.metaSocialImage = _config2.default.domain + "/media/images/social.png";
 
 module.exports = settings;
 
@@ -1504,7 +1514,7 @@ function sendPostToFollowers(post) {
 
 
 /* Mongoose is ORM, like models.py in django */
-var mongoose = __webpack_require__(6);
+var mongoose = __webpack_require__(7);
 var validator = __webpack_require__(35);
 var Schema = mongoose.Schema;
 var bcrypt = __webpack_require__(26);
@@ -1585,7 +1595,7 @@ var JwtStrategy = __webpack_require__(28).Strategy;
 var LocalStrategy = __webpack_require__(83);
 var ExtractJwt = __webpack_require__(28).ExtractJwt;
 var User = __webpack_require__(23);
-var config = __webpack_require__(11);
+var config = __webpack_require__(4);
 
 // by default you send a POST request with username and password
 // here Im telling it to use email instead
@@ -1840,7 +1850,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.configureStore = configureStore;
 
-var _redux = __webpack_require__(8);
+var _redux = __webpack_require__(9);
 
 var _reduxThunk = __webpack_require__(84);
 
@@ -1876,7 +1886,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _express = __webpack_require__(4);
+var _express = __webpack_require__(5);
 
 var _activitypub = __webpack_require__(22);
 
@@ -1904,7 +1914,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _express = __webpack_require__(4);
+var _express = __webpack_require__(5);
 
 var _feeds = __webpack_require__(71);
 
@@ -1930,7 +1940,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _express = __webpack_require__(4);
+var _express = __webpack_require__(5);
 
 var _ostatus = __webpack_require__(72);
 
@@ -1960,7 +1970,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _express = __webpack_require__(4);
+var _express = __webpack_require__(5);
 
 var _posts = __webpack_require__(73);
 
@@ -2006,7 +2016,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _express = __webpack_require__(4);
+var _express = __webpack_require__(5);
 
 var router = new _express.Router();
 
@@ -2043,7 +2053,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _express = __webpack_require__(4);
+var _express = __webpack_require__(5);
 
 var _settings = __webpack_require__(75);
 
@@ -2163,7 +2173,7 @@ var _reactRedux = __webpack_require__(1);
 
 var _index = __webpack_require__(2);
 
-var _reactMetaTags = __webpack_require__(7);
+var _reactMetaTags = __webpack_require__(8);
 
 var _reactMetaTags2 = _interopRequireDefault(_reactMetaTags);
 
@@ -2171,7 +2181,7 @@ var _removeMarkdown = __webpack_require__(32);
 
 var _removeMarkdown2 = _interopRequireDefault(_removeMarkdown);
 
-var _Post = __webpack_require__(10);
+var _Post = __webpack_require__(11);
 
 var _Post2 = _interopRequireDefault(_Post);
 
@@ -2360,9 +2370,13 @@ var _reactRouter = __webpack_require__(3);
 
 var _index = __webpack_require__(2);
 
-var _auth = __webpack_require__(9);
+var _auth = __webpack_require__(10);
 
-var _reactBootstrap = __webpack_require__(5);
+var _reactBootstrap = __webpack_require__(6);
+
+var _config = __webpack_require__(4);
+
+var _config2 = _interopRequireDefault(_config);
 
 var _SubscribeForm = __webpack_require__(19);
 
@@ -2470,7 +2484,7 @@ var Header = function (_Component) {
 					{ key: category },
 					_react2.default.createElement(
 						_reactRouter.Link,
-						{ to: '/tag/' + category },
+						{ to: _config2.default.domain + '/tag/' + category },
 						capitalized
 					)
 				);
@@ -2481,7 +2495,7 @@ var Header = function (_Component) {
 				{ className: 'dropdown' },
 				_react2.default.createElement(
 					_reactRouter.Link,
-					{ to: '/' },
+					{ to: _config2.default.domain + '/' },
 					'Browse'
 				),
 				_react2.default.createElement(
@@ -2492,7 +2506,7 @@ var Header = function (_Component) {
 						null,
 						_react2.default.createElement(
 							_reactRouter.Link,
-							{ to: '/' },
+							{ to: _config2.default.domain + '/' },
 							'All'
 						)
 					),
@@ -2530,7 +2544,7 @@ var Header = function (_Component) {
 							_react2.default.createElement(
 								_reactRouter.Link,
 								{ className: 'logo', to: '/' },
-								_react2.default.createElement('img', { src: '/media/images/logo.png' }),
+								_react2.default.createElement('img', { src: _config2.default.domain + '/media/images/logo.png' }),
 								_react2.default.createElement('span', { className: 'title',
 									dangerouslySetInnerHTML: { __html: title } })
 							)
@@ -2549,12 +2563,12 @@ var Header = function (_Component) {
 								),
 								_react2.default.createElement(
 									_reactRouter.Link,
-									{ to: '/about/' },
+									{ to: _config2.default.domain + '/about/' },
 									'About'
 								),
 								this.props.authenticated ? _react2.default.createElement(
 									_reactRouter.Link,
-									{ key: 2, to: { pathname: '/logout' } },
+									{ key: 2, to: { pathname: _config2.default.domain + '/logout' } },
 									_react2.default.createElement('i', { className: 'fa fa-sign-out' })
 								) : null
 							)
@@ -2727,7 +2741,7 @@ var _reactRedux = __webpack_require__(1);
 
 var _index = __webpack_require__(2);
 
-var _reactMetaTags = __webpack_require__(7);
+var _reactMetaTags = __webpack_require__(8);
 
 var _reactMetaTags2 = _interopRequireDefault(_reactMetaTags);
 
@@ -2739,11 +2753,11 @@ var _removeMarkdown = __webpack_require__(32);
 
 var _removeMarkdown2 = _interopRequireDefault(_removeMarkdown);
 
-var _reactBootstrap = __webpack_require__(5);
+var _reactBootstrap = __webpack_require__(6);
 
 var _reactRouterBootstrap = __webpack_require__(14);
 
-var _Post = __webpack_require__(10);
+var _Post = __webpack_require__(11);
 
 var _Post2 = _interopRequireDefault(_Post);
 
@@ -2952,13 +2966,13 @@ var _reactRedux = __webpack_require__(1);
 
 var _reactRouter = __webpack_require__(3);
 
-var _reactMetaTags = __webpack_require__(7);
+var _reactMetaTags = __webpack_require__(8);
 
 var _reactMetaTags2 = _interopRequireDefault(_reactMetaTags);
 
 var _index = __webpack_require__(2);
 
-var _Post = __webpack_require__(10);
+var _Post = __webpack_require__(11);
 
 var _Post2 = _interopRequireDefault(_Post);
 
@@ -2969,6 +2983,10 @@ var _Editor2 = _interopRequireDefault(_Editor);
 var _Pagination = __webpack_require__(57);
 
 var _Pagination2 = _interopRequireDefault(_Pagination);
+
+var _config = __webpack_require__(4);
+
+var _config2 = _interopRequireDefault(_config);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -3067,7 +3085,7 @@ var PostList = function (_Component) {
 																		published: post.published,
 																		tags: post.tags,
 																		truncate: 100,
-																		link: '/post/' + post.slug });
+																		link: _config2.default.domain + '/post/' + post.slug });
 												}
 									});
 						}
@@ -3163,7 +3181,7 @@ var _reduxForm = __webpack_require__(15);
 
 var _index = __webpack_require__(2);
 
-var _reactBootstrap = __webpack_require__(5);
+var _reactBootstrap = __webpack_require__(6);
 
 var _reactRouterBootstrap = __webpack_require__(14);
 
@@ -3420,7 +3438,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reduxForm = __webpack_require__(15);
 
-var _auth = __webpack_require__(9);
+var _auth = __webpack_require__(10);
 
 var actions = _interopRequireWildcard(_auth);
 
@@ -3542,7 +3560,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(1);
 
-var _auth = __webpack_require__(9);
+var _auth = __webpack_require__(10);
 
 var actions = _interopRequireWildcard(_auth);
 
@@ -4170,7 +4188,7 @@ function test(req, res) {
 
 
 var jwt = __webpack_require__(82);
-var config = __webpack_require__(11);
+var config = __webpack_require__(4);
 var User = __webpack_require__(23);
 var Subscriber = __webpack_require__(77);
 
@@ -4288,7 +4306,7 @@ exports.settings = function (req, res, next) {
 
 
 /* Mongoose is ORM, like models.py in django */
-var mongoose = __webpack_require__(6);
+var mongoose = __webpack_require__(7);
 var Schema = mongoose.Schema;
 
 // Define model. 
@@ -4321,7 +4339,7 @@ module.exports = ModelClass;
 
 
 /* Mongoose is ORM, like models.py in django */
-var mongoose = __webpack_require__(6);
+var mongoose = __webpack_require__(7);
 var validator = __webpack_require__(35);
 var Schema = mongoose.Schema;
 var bcrypt = __webpack_require__(26);
@@ -4359,7 +4377,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _express = __webpack_require__(4);
+var _express = __webpack_require__(5);
 
 var _express2 = _interopRequireDefault(_express);
 
@@ -4367,7 +4385,7 @@ var _compression = __webpack_require__(46);
 
 var _compression2 = _interopRequireDefault(_compression);
 
-var _mongoose = __webpack_require__(6);
+var _mongoose = __webpack_require__(7);
 
 var _mongoose2 = _interopRequireDefault(_mongoose);
 
@@ -4411,11 +4429,15 @@ var _activitypubRoutes = __webpack_require__(38);
 
 var _activitypubRoutes2 = _interopRequireDefault(_activitypubRoutes);
 
+var _config = __webpack_require__(4);
+
+var _config2 = _interopRequireDefault(_config);
+
 var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _redux = __webpack_require__(8);
+var _redux = __webpack_require__(9);
 
 var _reactRedux = __webpack_require__(1);
 
@@ -4427,7 +4449,7 @@ var _server2 = __webpack_require__(51);
 
 var _server3 = _interopRequireDefault(_server2);
 
-var _reactMetaTags = __webpack_require__(7);
+var _reactMetaTags = __webpack_require__(8);
 
 var _store = __webpack_require__(37);
 
@@ -4448,12 +4470,12 @@ var _fetchData = __webpack_require__(44);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // Initialize the Express Server
-
-
-/* Routes */
 var server = new _express2.default();
 
 // Connect to db.
+
+
+/* Routes */
 _mongoose2.default.Promise = global.Promise;
 var MONGO_DB_URL = process.env.MONGO_URL || 'mongodb://localhost:27017/vertex';
 console.log("Connecting to the db at " + MONGO_DB_URL);
@@ -4555,7 +4577,7 @@ function renderClient(req, res, next) {
 }
 
 function renderFullPage(html, meta, initialState) {
-    return '\n    <!doctype html>\n    <html lang="en-us">\n      <head>\n        <meta charset="utf-8"/>\n        <meta name="viewport" content="width=device-width, initial-scale=1">\n        <link rel="shortcut icon" href="/media/images/favicon.png"/>\n        ' + meta + '\n        <link rel="stylesheet" href="/styles/style.css">\n      </head>\n      <body>\n        <div id="root">' + html + '</div>\n        <script>\n          window.__INITIAL_STATE__ = ' + JSON.stringify(initialState) + ';\n        </script>\n\n       </body>\n       <script src="/bundle.js"></script>\n    </html>\n    ';
+    return '\n    <!doctype html>\n    <html lang="en-us">\n      <head>\n        <meta charset="utf-8"/>\n        <meta name="viewport" content="width=device-width, initial-scale=1">\n        <link rel="shortcut icon" href="' + _config2.default.domain + '/media/images/favicon.png"/>\n        ' + meta + '\n        <link rel="stylesheet" href="' + _config2.default.domain + '/styles/style.css">\n      </head>\n      <body>\n        <div id="root">' + html + '</div>\n        <script>\n          window.__INITIAL_STATE__ = ' + JSON.stringify(initialState) + ';\n        </script>\n\n       </body>\n       <script src="' + _config2.default.domain + '/bundle.js"></script>\n    </html>\n    ';
 }
 
 // start server

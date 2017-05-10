@@ -14,6 +14,8 @@ import profilesRoutes from './routes/profiles.routes.js';
 import ostatusRoutes from './routes/ostatus.routes.js';
 import activitypubRoutes from './routes/activitypub.routes.js';
 
+import config from '../config/config.js';
+
 // Initialize the Express Server
 const server = new Express();
 
@@ -130,9 +132,9 @@ function renderFullPage(html, meta, initialState) {
       <head>
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="shortcut icon" href="/media/images/favicon.png"/>
+        <link rel="shortcut icon" href="${config.domain}/media/images/favicon.png"/>
         ${meta}
-        <link rel="stylesheet" href="/styles/style.css">
+        <link rel="stylesheet" href="${config.domain}/styles/style.css">
       </head>
       <body>
         <div id="root">${html}</div>
@@ -141,7 +143,7 @@ function renderFullPage(html, meta, initialState) {
         </script>
 
        </body>
-       <script src="/bundle.js"></script>
+       <script src="${config.domain}/bundle.js"></script>
     </html>
     `
 }

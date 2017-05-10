@@ -10,6 +10,8 @@ import Remarkable from 'remarkable';
 import { deletePost, fetchSettings } from '../actions/index';
 import {  } from '../actions/index';
 
+import config from '../../config/config.js';
+
 class Post extends Component {
     componentWillMount() {
         /* Fetch settings if there aren't any.
@@ -43,7 +45,7 @@ class Post extends Component {
     }
 
     renderDraftLabel () {
-	if (!this.props.published ) {
+	if (!this.props.published) {
 	    /* Show "Draft" label on non-published posts */
 	    return (
 		<Label bsStyle="default" className="label-draft">
@@ -113,7 +115,7 @@ class Post extends Component {
 	    tagItems = tags.map((tag) => {
 		return (
 		    <span key={tag}>
-			<Link to={'/tag/' + tag}>
+			<Link to={`${config.domain}/tag/` + tag}>
 			    <Label bsStyle="default">
 				{tag}
 			    </Label>
@@ -152,7 +154,7 @@ class Post extends Component {
 		      </Label>
 		      : null }		    
 		    { this.props.authenticated ?
-		      <Link to={"/post/"+this.props.slug+"/edit"} className="icon">
+		      <Link to={`${config.domain}/post/`+this.props.slug+"/edit"} className="icon">
 			  <i className="fa fa-pencil"></i>
 		      </Link>
 		      : null }
