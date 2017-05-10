@@ -4513,19 +4513,19 @@ server.use(_bodyParser2.default.urlencoded({ limit: '20mb', extended: false }));
 server.use((0, _cors2.default)());
 
 /* API Routes */
-server.use('/api/v1', _postsRoutes2.default);
-server.use('/api/v1', _settingsRoutes2.default);
-server.use('/api/v1', _profilesRoutes2.default);
+server.use('/blog/api/v1', _postsRoutes2.default);
+server.use('/blog/api/v1', _settingsRoutes2.default);
+server.use('/blog/api/v1', _profilesRoutes2.default);
 
 /* OStatus Routes */
-server.use('/', _ostatusRoutes2.default);
-server.use('/', _activitypubRoutes2.default);
-server.use('/', _feedsRoutes2.default);
+server.use('/blog/', _ostatusRoutes2.default);
+server.use('/blog/', _activitypubRoutes2.default);
+server.use('/blog/', _feedsRoutes2.default);
 
 /* Serve static files */
-server.use('/styles', _express2.default.static(_path2.default.resolve(__dirname, '../client/styles')));
-server.use('/media', _express2.default.static(_path2.default.resolve(__dirname, '../client/media')));
-server.get('/bundle.js', function (req, res) {
+server.use('/blog/styles', _express2.default.static(_path2.default.resolve(__dirname, '../client/styles')));
+server.use('/blog/media', _express2.default.static(_path2.default.resolve(__dirname, '../client/media')));
+server.get('/blog/bundle.js', function (req, res) {
     res.sendFile(_path2.default.resolve(__dirname, '../client/dist/bundle.js'));
 });
 
@@ -4564,7 +4564,7 @@ function renderClient(req, res, next) {
         if (!renderProps) {
             return next();
         }
-        console.log("Accessing page " + req.url);
+
         /* Create a new empty Redux store*/
         var store = (0, _store.configureStore)();
         /* This function will execute all the action creators I need,
@@ -4597,7 +4597,7 @@ function renderClient(req, res, next) {
 }
 
 function renderFullPage(html, meta, initialState) {
-    return '\n    <!doctype html>\n    <html lang="en-us">\n      <head>\n        <meta charset="utf-8"/>\n        <meta name="viewport" content="width=device-width, initial-scale=1">\n        <link rel="shortcut icon" href="/blog/media/images/favicon.png"/>\n        ' + meta + '\n        <link rel="stylesheet" href="/blog/styles/style.css">\n      </head>\n      <body>\n        <div id="root">' + html + '</div>\n        <script>\n          window.__INITIAL_STATE__ = ' + JSON.stringify(initialState) + ';\n        </script>\n\n       </body>\n       <script src="/blog/bundle.js"></script>\n    </html>\n    ';
+    return '\n    <!doctype html>\n    <html lang="en-us">\n      <head>\n        <meta charset="utf-8"/>\n        <meta name="viewport" content="width=device-width, initial-scale=1">\n        <link rel="shortcut icon" href="' + _config2.default.domain + '/media/images/favicon.png"/>\n        ' + meta + '\n        <link rel="stylesheet" href="' + _config2.default.domain + '/styles/style.css">\n      </head>\n      <body>\n        <div id="root">' + html + '</div>\n        <script>\n          window.__INITIAL_STATE__ = ' + JSON.stringify(initialState) + ';\n        </script>\n\n       </body>\n       <script src="' + _config2.default.domain + '/bundle.js"></script>\n    </html>\n    ';
 }
 
 // start server

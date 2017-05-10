@@ -38,20 +38,20 @@ server.use(bodyParser.urlencoded({ limit: '20mb', extended: false }));
 server.use(cors());
 
 /* API Routes */
-server.use('/api/v1', postsRoutes);
-server.use('/api/v1', settingsRoutes);
-server.use('/api/v1', profilesRoutes);
+server.use('/blog/api/v1', postsRoutes);
+server.use('/blog/api/v1', settingsRoutes);
+server.use('/blog/api/v1', profilesRoutes);
 
 
 /* OStatus Routes */
-server.use('/', ostatusRoutes);
-server.use('/', activitypubRoutes);
-server.use('/', feedsRoutes);
+server.use('/blog/', ostatusRoutes);
+server.use('/blog/', activitypubRoutes);
+server.use('/blog/', feedsRoutes);
 
 /* Serve static files */
-server.use('/styles', Express.static(path.resolve(__dirname, '../client/styles')));
-server.use('/media', Express.static(path.resolve(__dirname, '../client/media')));
-server.get('/bundle.js',(req,res) => {
+server.use('/blog/styles', Express.static(path.resolve(__dirname, '../client/styles')));
+server.use('/blog/media', Express.static(path.resolve(__dirname, '../client/media')));
+server.get('/blog/bundle.js',(req,res) => {
     res.sendFile(path.resolve(__dirname, '../client/dist/bundle.js'));
 });
 
@@ -97,7 +97,7 @@ function renderClient(req, res, next) {
     match({ routes, location: req.url}, (err, redirectLocation, renderProps) => {
 	if (err) { return res.status(500).end(renderError(err)); }
 	if (!renderProps) { return next(); }
-	console.log("Accessing page " + req.url);
+
 	/* Create a new empty Redux store*/
 	const store = configureStore()
 	/* This function will execute all the action creators I need,
@@ -135,9 +135,9 @@ function renderFullPage(html, meta, initialState) {
       <head>
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="shortcut icon" href="/blog/media/images/favicon.png"/>
+        <link rel="shortcut icon" href="${config.domain}/media/images/favicon.png"/>
         ${meta}
-        <link rel="stylesheet" href="/blog/styles/style.css">
+        <link rel="stylesheet" href="${config.domain}/styles/style.css">
       </head>
       <body>
         <div id="root">${html}</div>
@@ -146,7 +146,7 @@ function renderFullPage(html, meta, initialState) {
         </script>
 
        </body>
-       <script src="/blog/bundle.js"></script>
+       <script src="${config.domain}/bundle.js"></script>
     </html>
     `
 }
