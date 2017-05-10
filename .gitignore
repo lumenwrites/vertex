@@ -2,3 +2,5 @@ node_modules
 npm-debug.log
 config.js
 settings.js		
+data/
+data_back/

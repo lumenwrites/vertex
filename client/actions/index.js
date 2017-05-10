@@ -73,7 +73,7 @@ export function fetchPost(slug) {
 export function createPost(post) {
     // Get the saved token from local storage
     const config = {
-	headers:  { authorization: localStorage.getItem('token')}	
+	headers:  { authorization: localStorage.getItem('authtoken')}	
     };
     console.log("Sending token " + JSON.stringify(config));
 
@@ -97,7 +97,7 @@ export function updatePost(slug, post) {
 
     /* Get the saved token from local storage */
     const config = {
-	headers:  { authorization: localStorage.getItem('token')}		
+	headers:  { authorization: localStorage.getItem('authtoken')}		
     };
 
     /* console.log("Post Tags: " + post.tags);*/
@@ -121,7 +121,7 @@ export function deletePost(slug) {
     /* console.log(">>>> src/actions/index.js:");
      * console.log("Deleting post.");	    */
     const config = {
-	headers:  { authorization: localStorage.getItem('token')}		
+	headers:  { authorization: localStorage.getItem('authtoken')}		
     };
     
     return function(dispatch) {    

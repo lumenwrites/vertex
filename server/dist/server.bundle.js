@@ -178,7 +178,7 @@ function fetchPost(slug) {
 function createPost(post) {
 			// Get the saved token from local storage
 			var config = {
-						headers: { authorization: localStorage.getItem('token') }
+						headers: { authorization: localStorage.getItem('authtoken') }
 			};
 			console.log("Sending token " + JSON.stringify(config));
 
@@ -200,7 +200,7 @@ function updatePost(slug, post) {
 
 			/* Get the saved token from local storage */
 			var config = {
-						headers: { authorization: localStorage.getItem('token') }
+						headers: { authorization: localStorage.getItem('authtoken') }
 			};
 
 			/* console.log("Post Tags: " + post.tags);*/
@@ -223,7 +223,7 @@ function deletePost(slug) {
 			/* console.log(">>>> src/actions/index.js:");
     * console.log("Deleting post.");	    */
 			var config = {
-						headers: { authorization: localStorage.getItem('token') }
+						headers: { authorization: localStorage.getItem('authtoken') }
 			};
 
 			return function (dispatch) {
@@ -385,7 +385,7 @@ function signinUser(_ref) {
 			dispatch({ type: 'AUTH_USER' });
 			console.log("Auth action dispatched(to flip auth state to true)");
 			// - save JWT token
-			localStorage.setItem('token', response.data.token);
+			localStorage.setItem('authtoken', response.data.token);
 			console.log("Token saved! " + response.data.token);
 			// - redirect to /feature
 			_reactRouter.browserHistory.push('/blog');
@@ -409,7 +409,7 @@ function signupUser(_ref2) {
 			// - update state to indicate that I'm signed up
 			dispatch({ type: _types.AUTH_USER });
 			// - save JWT token
-			localStorage.setItem('token', response.data.token);
+			localStorage.setItem('authtoken', response.data.token);
 			// - redirect to /feature
 			_reactRouter.browserHistory.push('/blog');
 		}).catch(function () {
@@ -423,7 +423,7 @@ function signoutUser() {
 	// delete token and signout
 	console.log(">>>> src/actions/auth.js:");
 	console.log("Signing out user, deleting token from localStorage.");
-	localStorage.removeItem('token');
+	localStorage.removeItem('authtoken');
 	console.log("Redirecting to /, and dispatching action UNAUTH_USER.");
 	_reactRouter.browserHistory.push('/blog');
 	return {
@@ -440,7 +440,7 @@ function authError(error) {
 
 function fetchMessage() {
 	var config = {
-		headers: { authorization: localStorage.getItem('token') }
+		headers: { authorization: localStorage.getItem('authtoken') }
 	};
 
 	return function (dispatch) {

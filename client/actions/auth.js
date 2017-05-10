@@ -24,7 +24,7 @@ export function signinUser({username, password}) {
 		 dispatch({ type: 'AUTH_USER'});
 		 console.log("Auth action dispatched(to flip auth state to true)");
 		 // - save JWT token
-		 localStorage.setItem('token', response.data.token);
+		 localStorage.setItem('authtoken', response.data.token);
 		 console.log("Token saved! " + response.data.token);
 		 // - redirect to /feature
 		 browserHistory.push('/blog');
@@ -50,7 +50,7 @@ export function signupUser({username, password}) {
 		 // - update state to indicate that I'm signed up
 		 dispatch({ type: AUTH_USER});
 		 // - save JWT token
-		 localStorage.setItem('token', response.data.token);
+		 localStorage.setItem('authtoken', response.data.token);
 		 // - redirect to /feature
 		 browserHistory.push('/blog');
 	     })
@@ -68,7 +68,7 @@ export function signoutUser() {
     // delete token and signout
     console.log(">>>> src/actions/auth.js:");
     console.log("Signing out user, deleting token from localStorage.");		    
-    localStorage.removeItem('token');
+    localStorage.removeItem('authtoken');
     console.log("Redirecting to /, and dispatching action UNAUTH_USER.");
     browserHistory.push('/blog');    
     return {
@@ -85,7 +85,7 @@ export function authError(error) {
 
 export function fetchMessage() {
     const config = {
-	headers:  { authorization: localStorage.getItem('token')}
+	headers:  { authorization: localStorage.getItem('authtoken')}
     };
     
     return function(dispatch) {

@@ -31,7 +31,7 @@ function logPageView() {
 }
 
 // Sign in
-const token = localStorage.getItem('token');
+const token = localStorage.getItem('authtoken');
 // if user has a token - sign him in
 if (token) {
     store.dispatch({ type: 'AUTH_USER' });
