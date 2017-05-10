@@ -1254,7 +1254,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var API_URL = 'https://nulis.io/blog/api/v1';
 
 if (process.env.NODE_ENV === 'development') {
-				exports.API_URL = API_URL = 'http://localhost:3000/api/v1';
+				exports.API_URL = API_URL = 'http://localhost:3000/blog/api/v1';
 }
 console.log("API_URL " + API_URL);
 

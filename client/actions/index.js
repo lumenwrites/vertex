@@ -8,6 +8,7 @@ import {API_URL} from '../utils/apiCaller';
 /* console.log("API_URL " + API_URL);*/
 
 import config from '../../config/config.js';
+
 console.log("config.domain " + config.domain);
 
 export function updatePostBody(value) {
