@@ -1813,7 +1813,7 @@ if (false) {
 // More info: http://blog.mxstbr.com/2016/01/react-apps-with-pages/
 exports.default = _react2.default.createElement(
     _reactRouter.Route,
-    { path: '/', component: _Main2.default },
+    { path: '/blog', component: _Main2.default },
     _react2.default.createElement(_reactRouter.IndexRoute, { component: _PostList2.default }),
     _react2.default.createElement(_reactRouter.Route, { path: 'write', component: (0, _require_auth2.default)(_Editor2.default) }),
     _react2.default.createElement(_reactRouter.Route, { path: 'post/:slug', component: _PostDetail2.default }),

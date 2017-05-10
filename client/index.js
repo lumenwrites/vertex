@@ -42,10 +42,11 @@ if (token) {
 const history = useRouterHistory(createHistory)({
     basename: "/blog"
 })
-
+/* history={history}*/
+/* basename={config.domain} */
 render(
     <Provider store={store}>
-	<Router history={history} routes={routes} onUpdate={logPageView} basename={config.domain} >
+	<Router history={browserHistory} routes={routes} onUpdate={logPageView} >
 	</Router>
     </Provider>,
     document.getElementById('root')
