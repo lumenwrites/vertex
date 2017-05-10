@@ -116,7 +116,7 @@ var _config2 = _interopRequireDefault(_config);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-console.log("config.domain" + _config2.default.domain);
+console.log("config.domain " + _config2.default.domain);
 /* console.log("API_URL " + API_URL);*/
 
 /* Isomorphic api caller. Magically fetches data, both on client and server. */
@@ -213,7 +213,7 @@ function updatePost(slug, post) {
 			return function (dispatch) {
 						_axios2.default.post(_apiCaller.API_URL + '/posts/' + slug, post, config).then(function (response) {
 									console.log(">>>> src/actions/index.js:");
-									var post_url = config.domain + '/post/' + response.data.slug;
+									var post_url = config.domain + "/post/" + response.data.slug;
 									console.log("Updated a post. Redirecting to " + post_url);
 									_reactRouter.browserHistory.push(post_url);
 									/* console.log(response);*/

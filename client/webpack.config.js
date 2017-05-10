@@ -30,7 +30,7 @@ module.exports = {
     ],
     output: {
 	path: __dirname + '/dist/',
-	publicPath: '/',
+	publicPath: '/blog',
 	filename: 'vertex.js'
     },
     module: {

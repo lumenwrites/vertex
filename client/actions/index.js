@@ -8,7 +8,7 @@ import {API_URL} from '../utils/apiCaller';
 /* console.log("API_URL " + API_URL);*/
 
 import config from '../../config/config.js';
-console.log("config.domain" + config.domain);
+console.log("config.domain " + config.domain);
 
 export function updatePostBody(value) {
     return {
@@ -109,7 +109,7 @@ export function updatePost(slug, post) {
 	axios.post(`${API_URL}/posts/${slug}`, post, config)
 	     .then(response => {
 		 console.log(">>>> src/actions/index.js:");
-		 var post_url = `${config.domain}/post/${response.data.slug}`;
+		 var post_url = config.domain+"/post/"+response.data.slug;
 		 console.log("Updated a post. Redirecting to " + post_url); 
 		 browserHistory.push(post_url);
 		 /* console.log(response);*/
