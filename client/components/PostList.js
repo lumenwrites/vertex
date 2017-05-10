@@ -76,7 +76,7 @@ class PostList extends Component {
 			  published={post.published}
 			  tags={post.tags}
 			  truncate={100}
-			  link={`/post/${post.slug}`}/>
+			  link={`${config.domain}/post/${post.slug}`}/>
 		)
 	    }
 	});

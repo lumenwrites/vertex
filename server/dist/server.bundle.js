@@ -3098,7 +3098,7 @@ var PostList = function (_Component) {
 																		published: post.published,
 																		tags: post.tags,
 																		truncate: 100,
-																		link: '/post/' + post.slug });
+																		link: _config2.default.domain + '/post/' + post.slug });
 												}
 									});
 						}
