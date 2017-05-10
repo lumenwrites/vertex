@@ -116,15 +116,17 @@ var _config2 = _interopRequireDefault(_config);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+console.log("config.domain" + _config2.default.domain);
+/* console.log("API_URL " + API_URL);*/
+
+/* Isomorphic api caller. Magically fetches data, both on client and server. */
 function updatePostBody(value) {
 			return {
 						type: 'UPDATE_POST_BODY',
 						payload: value
 			};
 }
-/* console.log("API_URL " + API_URL);*/
 
-/* Isomorphic api caller. Magically fetches data, both on client and server. */
 function updatePostTags(value) {
 			return {
 						type: 'UPDATE_POST_TAGS',
