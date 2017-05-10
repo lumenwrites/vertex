@@ -377,6 +377,8 @@ var _config2 = _interopRequireDefault(_config);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var domain = "https://nulis.io/blog";
+
 function signinUser(_ref) {
 	var username = _ref.username,
 	    password = _ref.password;
@@ -402,7 +404,7 @@ function signinUser(_ref) {
 			localStorage.setItem('authtoken', response.data.token);
 			console.log("Token saved! " + response.data.token);
 			// - redirect to /feature
-			_reactRouter.browserHistory.push('' + _config2.default.domain);
+			_reactRouter.browserHistory.push(domain);
 			console.log("Redirected to /");
 		}).catch(function () {
 			// if request is bad
@@ -425,7 +427,7 @@ function signupUser(_ref2) {
 			// - save JWT token
 			localStorage.setItem('authtoken', response.data.token);
 			// - redirect to /feature
-			_reactRouter.browserHistory.push('' + _config2.default.domain);
+			_reactRouter.browserHistory.push(domain);
 		}).catch(function () {
 			// if request is bad - add error to the state.
 			dispatch(authError('User with this username already exists'));
@@ -439,7 +441,7 @@ function signoutUser() {
 	console.log("Signing out user, deleting token from localStorage.");
 	localStorage.removeItem('authtoken');
 	console.log("Redirecting to /, and dispatching action UNAUTH_USER.");
-	_reactRouter.browserHistory.push(_config2.default.domain + '/blog');
+	_reactRouter.browserHistory.push(domain);
 	return {
 		type: 'UNAUTH_USER'
 	};
@@ -1318,7 +1320,7 @@ var settings = {
     metaAuthor: "Ray Alez",
     metaEmail: "raymestalez@gmail.com",
     metaKeywords: "Comedy, Ceativity, Fiction, Jokes, Writing, Text Editor, Mind Mapping",
-    googleAnalyticsCode: ""
+    googleAnalyticsCode: "UA-44003603-22"
 };
 
 settings.metaSocialImage = _config2.default.domain + "/media/images/social.png";
@@ -2598,7 +2600,7 @@ var Header = function (_Component) {
 								),
 								this.props.authenticated ? _react2.default.createElement(
 									_reactRouter.Link,
-									{ key: 2, to: { pathname: _config2.default.domain + '/logout' } },
+									{ key: 2, to: { pathname: '/logout' } },
 									_react2.default.createElement('i', { className: 'fa fa-sign-out' })
 								) : null
 							)

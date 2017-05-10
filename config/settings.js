@@ -12,7 +12,7 @@ var settings = {
     metaAuthor: "Ray Alez",
     metaEmail: "raymestalez@gmail.com",    
     metaKeywords: "Comedy, Ceativity, Fiction, Jokes, Writing, Text Editor, Mind Mapping",
-    googleAnalyticsCode: "",
+    googleAnalyticsCode: "UA-44003603-22",
 };
 
 settings.metaSocialImage = config.domain + "/media/images/social.png";

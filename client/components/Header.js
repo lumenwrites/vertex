@@ -131,7 +131,7 @@ class Header extends Component {
 				    About
 				</Link>
 				{ this.props.authenticated ?
-				  <Link key={2} to={{ pathname: `${config.domain}/logout`}}>
+				  <Link key={2} to={{ pathname: `/logout`}}>
 				      <i className="fa fa-sign-out"></i>
 				  </Link>
 				: null }
