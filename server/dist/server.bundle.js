@@ -626,7 +626,7 @@ var Post = function (_Component) {
 						{ key: tag },
 						_react2.default.createElement(
 							_reactRouter.Link,
-							{ to: _config2.default.domain + '/tag/' + tag },
+							{ to: '/tag/' + tag },
 							_react2.default.createElement(
 								_reactBootstrap.Label,
 								{ bsStyle: 'default' },
@@ -658,7 +658,7 @@ var Post = function (_Component) {
 					) : null,
 					this.props.authenticated ? _react2.default.createElement(
 						_reactRouter.Link,
-						{ to: _config2.default.domain + '/post/' + this.props.slug + "/edit", className: 'icon' },
+						{ to: '/post/' + this.props.slug + "/edit", className: 'icon' },
 						_react2.default.createElement('i', { className: 'fa fa-pencil' })
 					) : null,
 					this.props.authenticated ? _react2.default.createElement(
