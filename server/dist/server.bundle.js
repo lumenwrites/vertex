@@ -391,7 +391,7 @@ function signinUser(_ref) {
 			localStorage.setItem('authtoken', response.data.token);
 			console.log("Token saved! " + response.data.token);
 			// - redirect to /feature
-			_reactRouter.browserHistory.push('${config.domain}');
+			_reactRouter.browserHistory.push('' + config.domain);
 			console.log("Redirected to /");
 		}).catch(function () {
 			// if request is bad
@@ -414,7 +414,7 @@ function signupUser(_ref2) {
 			// - save JWT token
 			localStorage.setItem('authtoken', response.data.token);
 			// - redirect to /feature
-			_reactRouter.browserHistory.push('${config.domain}');
+			_reactRouter.browserHistory.push('' + config.domain);
 		}).catch(function () {
 			// if request is bad - add error to the state.
 			dispatch(authError('User with this username already exists'));
@@ -428,7 +428,7 @@ function signoutUser() {
 	console.log("Signing out user, deleting token from localStorage.");
 	localStorage.removeItem('authtoken');
 	console.log("Redirecting to /, and dispatching action UNAUTH_USER.");
-	_reactRouter.browserHistory.push('${config.domain}/blog');
+	_reactRouter.browserHistory.push(config.domain + '/blog');
 	return {
 		type: 'UNAUTH_USER'
 	};
@@ -2555,8 +2555,8 @@ var Header = function (_Component) {
 							'div',
 							{ className: 'col-xs-12 col-sm-6 search' },
 							_react2.default.createElement(
-								_reactRouter.Link,
-								{ className: 'logo', to: '/' },
+								'a',
+								{ className: 'logo', href: '/' },
 								_react2.default.createElement('img', { src: _config2.default.domain + '/media/images/logo.png' }),
 								_react2.default.createElement('span', { className: 'title',
 									dangerouslySetInnerHTML: { __html: title } })

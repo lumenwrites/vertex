@@ -115,11 +115,11 @@ class Header extends Component {
 		<div className="container">
 		    <div className="row">      
 			<div className="col-xs-12 col-sm-6 search">
-			    <Link className="logo" to={'/'}>
+			    <a className="logo" href='/'>
 				<img src={`${config.domain}/media/images/logo.png`}/>
 				<span className="title"
 				      dangerouslySetInnerHTML={{__html: title}}></span>
-			    </Link>
+			    </a>
 			</div>
 			<div className="col-xs-12 col-sm-6 main-menu">
 			    <div className="menu">
