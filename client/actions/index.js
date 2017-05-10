@@ -108,8 +108,9 @@ export function updatePost(slug, post) {
 	axios.post(`${API_URL}/posts/${slug}`, post, config)
 	     .then(response => {
 		 console.log(">>>> src/actions/index.js:");
-		 console.log("Updated a post. Redirecting to it. " + response.data.body ); 
-		 browserHistory.push(`${config.domain}/post/` + response.data.slug);
+		 var post_url = `${config.domain}/post/${response.data.slug}`;
+		 console.log("Updated a post. Redirecting to " + post_url); 
+		 browserHistory.push(post_url);
 		 /* console.log(response);*/
 		 dispatch({
 		     type: 'UPDATE_POST',

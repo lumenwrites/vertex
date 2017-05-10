@@ -51,8 +51,8 @@ server.use('/', feedsRoutes);
 /* Serve static files */
 server.use('/styles', Express.static(path.resolve(__dirname, '../client/styles')));
 server.use('/media', Express.static(path.resolve(__dirname, '../client/media')));
-server.get('/bundle.js',(req,res) => {
-    res.sendFile(path.resolve(__dirname, '../client/dist/bundle.js'));
+server.get('/vertex.js',(req,res) => {
+    res.sendFile(path.resolve(__dirname, '../client/dist/vertex.js'));
 });
 
 /* Send the rest of the requests to react. */
@@ -147,7 +147,7 @@ function renderFullPage(html, meta, initialState) {
         </script>
 
        </body>
-       <script src="${config.domain}/bundle.js"></script>
+       <script src="${config.domain}/vertex.js"></script>
     </html>
     `
 }

@@ -211,8 +211,9 @@ function updatePost(slug, post) {
 			return function (dispatch) {
 						_axios2.default.post(_apiCaller.API_URL + '/posts/' + slug, post, config).then(function (response) {
 									console.log(">>>> src/actions/index.js:");
-									console.log("Updated a post. Redirecting to it. " + response.data.body);
-									_reactRouter.browserHistory.push(config.domain + '/post/' + response.data.slug);
+									var post_url = config.domain + '/post/' + response.data.slug;
+									console.log("Updated a post. Redirecting to " + post_url);
+									_reactRouter.browserHistory.push(post_url);
 									/* console.log(response);*/
 									dispatch({
 												type: 'UPDATE_POST',
@@ -4533,8 +4534,8 @@ server.use('/', _feedsRoutes2.default);
 /* Serve static files */
 server.use('/styles', _express2.default.static(_path2.default.resolve(__dirname, '../client/styles')));
 server.use('/media', _express2.default.static(_path2.default.resolve(__dirname, '../client/media')));
-server.get('/bundle.js', function (req, res) {
-    res.sendFile(_path2.default.resolve(__dirname, '../client/dist/bundle.js'));
+server.get('/vertex.js', function (req, res) {
+    res.sendFile(_path2.default.resolve(__dirname, '../client/dist/vertex.js'));
 });
 
 /* Send the rest of the requests to react. */
@@ -4606,7 +4607,7 @@ function renderClient(req, res, next) {
 }
 
 function renderFullPage(html, meta, initialState) {
-    return '\n    <!doctype html>\n    <html lang="en-us">\n      <head>\n        <meta charset="utf-8"/>\n        <meta name="viewport" content="width=device-width, initial-scale=1">\n        <link rel="shortcut icon" href="' + _config2.default.domain + '/media/images/favicon.png"/>\n        ' + meta + '\n        <link rel="stylesheet" href="' + _config2.default.domain + '/styles/style.css">\n      </head>\n      <body>\n        <div id="root">' + html + '</div>\n        <script>\n          window.__INITIAL_STATE__ = ' + JSON.stringify(initialState) + ';\n        </script>\n\n       </body>\n       <script src="' + _config2.default.domain + '/bundle.js"></script>\n    </html>\n    ';
+    return '\n    <!doctype html>\n    <html lang="en-us">\n      <head>\n        <meta charset="utf-8"/>\n        <meta name="viewport" content="width=device-width, initial-scale=1">\n        <link rel="shortcut icon" href="' + _config2.default.domain + '/media/images/favicon.png"/>\n        ' + meta + '\n        <link rel="stylesheet" href="' + _config2.default.domain + '/styles/style.css">\n      </head>\n      <body>\n        <div id="root">' + html + '</div>\n        <script>\n          window.__INITIAL_STATE__ = ' + JSON.stringify(initialState) + ';\n        </script>\n\n       </body>\n       <script src="' + _config2.default.domain + '/vertex.js"></script>\n    </html>\n    ';
 }
 
 // start server
