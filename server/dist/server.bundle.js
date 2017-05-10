@@ -4593,7 +4593,7 @@ function renderClient(req, res, next) {
 }
 
 function renderFullPage(html, meta, initialState) {
-    return '\n    <!doctype html>\n    <html lang="en-us">\n      <head>\n        <meta charset="utf-8"/>\n        <meta name="viewport" content="width=device-width, initial-scale=1">\n        <link rel="shortcut icon" href="/media/images/favicon.png"/>\n        ' + meta + '\n        <link rel="stylesheet" href="/styles/style.css">\n      </head>\n      <body>\n        <div id="root">' + html + '</div>\n        <script>\n          window.__INITIAL_STATE__ = ' + JSON.stringify(initialState) + ';\n        </script>\n\n       </body>\n       <script src="/bundle.js"></script>\n    </html>\n    ';
+    return '\n    <!doctype html>\n    <html lang="en-us">\n      <head>\n        <meta charset="utf-8"/>\n        <meta name="viewport" content="width=device-width, initial-scale=1">\n        <link rel="shortcut icon" href="/blog/media/images/favicon.png"/>\n        ' + meta + '\n        <link rel="stylesheet" href="/blog/styles/style.css">\n      </head>\n      <body>\n        <div id="root">' + html + '</div>\n        <script>\n          window.__INITIAL_STATE__ = ' + JSON.stringify(initialState) + ';\n        </script>\n\n       </body>\n       <script src="/blog/bundle.js"></script>\n    </html>\n    ';
 }
 
 // start server

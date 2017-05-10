@@ -135,9 +135,9 @@ function renderFullPage(html, meta, initialState) {
       <head>
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="shortcut icon" href="/media/images/favicon.png"/>
+        <link rel="shortcut icon" href="/blog/media/images/favicon.png"/>
         ${meta}
-        <link rel="stylesheet" href="/styles/style.css">
+        <link rel="stylesheet" href="/blog/styles/style.css">
       </head>
       <body>
         <div id="root">${html}</div>
@@ -146,7 +146,7 @@ function renderFullPage(html, meta, initialState) {
         </script>
 
        </body>
-       <script src="/bundle.js"></script>
+       <script src="/blog/bundle.js"></script>
     </html>
     `
 }
