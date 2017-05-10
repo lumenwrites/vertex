@@ -82,7 +82,7 @@ export function createPost(post) {
     return function(dispatch) {
 	axios.post(`${API_URL}/posts`, post, config)
 	     .then(response => {
-		 browserHistory.push('${config.domain}');
+		 browserHistory.push(`${config.domain}`);
 		 /* console.log(response);*/
 		 dispatch({
 		     type: 'CREATE_POST',
@@ -131,7 +131,7 @@ export function deletePost(slug) {
 	     .then(response => {
 		 console.log(">>>> src/actions/index.js (promise):");
 		 console.log("Successfully deleted post. Dispatching action DELETE_POST.");
-		 browserHistory.push('${config.domain}');
+		 browserHistory.push(`${config.domain}`);
 
 		 dispatch({
 		     type: 'DELETE_POST',

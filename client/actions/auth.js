@@ -4,6 +4,8 @@ import { AUTH_USER, UNAUTH_USER, AUTH_ERROR, FETCH_MESSAGE } from './types';
 
 import {API_URL} from '../utils/apiCaller';
 
+import config from '../../config/config.js';
+
 export function signinUser({username, password}) {
     return function(dispatch) {
 	// send username/password

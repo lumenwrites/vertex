@@ -187,7 +187,7 @@ function createPost(post) {
 
 			return function (dispatch) {
 						_axios2.default.post(_apiCaller.API_URL + '/posts', post, config).then(function (response) {
-									_reactRouter.browserHistory.push('${config.domain}');
+									_reactRouter.browserHistory.push('' + config.domain);
 									/* console.log(response);*/
 									dispatch({
 												type: 'CREATE_POST',
@@ -233,7 +233,7 @@ function deletePost(slug) {
 						_axios2.default.delete(_apiCaller.API_URL + '/posts/' + slug, config).then(function (response) {
 									console.log(">>>> src/actions/index.js (promise):");
 									console.log("Successfully deleted post. Dispatching action DELETE_POST.");
-									_reactRouter.browserHistory.push('${config.domain}');
+									_reactRouter.browserHistory.push('' + config.domain);
 
 									dispatch({
 												type: 'DELETE_POST',
@@ -364,6 +364,10 @@ var _types = __webpack_require__(53);
 
 var _apiCaller = __webpack_require__(20);
 
+var _config = __webpack_require__(3);
+
+var _config2 = _interopRequireDefault(_config);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function signinUser(_ref) {
@@ -391,7 +395,7 @@ function signinUser(_ref) {
 			localStorage.setItem('authtoken', response.data.token);
 			console.log("Token saved! " + response.data.token);
 			// - redirect to /feature
-			_reactRouter.browserHistory.push('' + config.domain);
+			_reactRouter.browserHistory.push('' + _config2.default.domain);
 			console.log("Redirected to /");
 		}).catch(function () {
 			// if request is bad
@@ -414,7 +418,7 @@ function signupUser(_ref2) {
 			// - save JWT token
 			localStorage.setItem('authtoken', response.data.token);
 			// - redirect to /feature
-			_reactRouter.browserHistory.push('' + config.domain);
+			_reactRouter.browserHistory.push('' + _config2.default.domain);
 		}).catch(function () {
 			// if request is bad - add error to the state.
 			dispatch(authError('User with this username already exists'));
@@ -428,7 +432,7 @@ function signoutUser() {
 	console.log("Signing out user, deleting token from localStorage.");
 	localStorage.removeItem('authtoken');
 	console.log("Redirecting to /, and dispatching action UNAUTH_USER.");
-	_reactRouter.browserHistory.push(config.domain + '/blog');
+	_reactRouter.browserHistory.push(_config2.default.domain + '/blog');
 	return {
 		type: 'UNAUTH_USER'
 	};
