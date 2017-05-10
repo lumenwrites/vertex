@@ -388,7 +388,7 @@ function signinUser(_ref) {
 			localStorage.setItem('token', response.data.token);
 			console.log("Token saved! " + response.data.token);
 			// - redirect to /feature
-			_reactRouter.browserHistory.push('/');
+			_reactRouter.browserHistory.push('/blog');
 			console.log("Redirected to /");
 		}).catch(function () {
 			// if request is bad
@@ -411,7 +411,7 @@ function signupUser(_ref2) {
 			// - save JWT token
 			localStorage.setItem('token', response.data.token);
 			// - redirect to /feature
-			_reactRouter.browserHistory.push('/');
+			_reactRouter.browserHistory.push('/blog');
 		}).catch(function () {
 			// if request is bad - add error to the state.
 			dispatch(authError('User with this username already exists'));
@@ -425,7 +425,7 @@ function signoutUser() {
 	console.log("Signing out user, deleting token from localStorage.");
 	localStorage.removeItem('token');
 	console.log("Redirecting to /, and dispatching action UNAUTH_USER.");
-	_reactRouter.browserHistory.push('/');
+	_reactRouter.browserHistory.push('/blog');
 	return {
 		type: 'UNAUTH_USER'
 	};
@@ -1197,7 +1197,7 @@ var SubscribeForm = function (_Component) {
 				),
 				_react2.default.createElement(
 					'a',
-					{ href: '/feed/posts.atom', className: 'btn rss' },
+					{ href: '/blog/feed/posts.atom', className: 'btn rss' },
 					_react2.default.createElement('i', { className: 'fa fa-rss' })
 				),
 				_react2.default.createElement('div', { className: 'clearfix' })
@@ -2484,7 +2484,7 @@ var Header = function (_Component) {
 					{ key: category },
 					_react2.default.createElement(
 						_reactRouter.Link,
-						{ to: _config2.default.domain + '/tag/' + category },
+						{ to: '/tag/' + category },
 						capitalized
 					)
 				);
@@ -2495,7 +2495,7 @@ var Header = function (_Component) {
 				{ className: 'dropdown' },
 				_react2.default.createElement(
 					_reactRouter.Link,
-					{ to: _config2.default.domain + '/' },
+					{ to: '/' },
 					'Browse'
 				),
 				_react2.default.createElement(
@@ -2506,7 +2506,7 @@ var Header = function (_Component) {
 						null,
 						_react2.default.createElement(
 							_reactRouter.Link,
-							{ to: _config2.default.domain + '/' },
+							{ to: '/' },
 							'All'
 						)
 					),
@@ -2544,7 +2544,7 @@ var Header = function (_Component) {
 							_react2.default.createElement(
 								_reactRouter.Link,
 								{ className: 'logo', to: '/' },
-								_react2.default.createElement('img', { src: _config2.default.domain + '/media/images/logo.png' }),
+								_react2.default.createElement('img', { src: '/media/images/logo.png' }),
 								_react2.default.createElement('span', { className: 'title',
 									dangerouslySetInnerHTML: { __html: title } })
 							)
@@ -2563,12 +2563,12 @@ var Header = function (_Component) {
 								),
 								_react2.default.createElement(
 									_reactRouter.Link,
-									{ to: _config2.default.domain + '/about/' },
+									{ to: '/about/' },
 									'About'
 								),
 								this.props.authenticated ? _react2.default.createElement(
 									_reactRouter.Link,
-									{ key: 2, to: { pathname: _config2.default.domain + '/logout' } },
+									{ key: 2, to: { pathname: '/logout' } },
 									_react2.default.createElement('i', { className: 'fa fa-sign-out' })
 								) : null
 							)
@@ -3085,7 +3085,7 @@ var PostList = function (_Component) {
 																		published: post.published,
 																		tags: post.tags,
 																		truncate: 100,
-																		link: _config2.default.domain + '/post/' + post.slug });
+																		link: '/post/' + post.slug });
 												}
 									});
 						}

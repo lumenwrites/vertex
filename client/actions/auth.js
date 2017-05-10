@@ -27,7 +27,7 @@ export function signinUser({username, password}) {
 		 localStorage.setItem('token', response.data.token);
 		 console.log("Token saved! " + response.data.token);
 		 // - redirect to /feature
-		 browserHistory.push('/');
+		 browserHistory.push('/blog');
 		 console.log("Redirected to /");		 
 
 	     })
@@ -52,7 +52,7 @@ export function signupUser({username, password}) {
 		 // - save JWT token
 		 localStorage.setItem('token', response.data.token);
 		 // - redirect to /feature
-		 browserHistory.push('/');
+		 browserHistory.push('/blog');
 	     })
 	     .catch(() => {
 		 // if request is bad - add error to the state.
@@ -70,7 +70,7 @@ export function signoutUser() {
     console.log("Signing out user, deleting token from localStorage.");		    
     localStorage.removeItem('token');
     console.log("Redirecting to /, and dispatching action UNAUTH_USER.");
-    browserHistory.push('/');    
+    browserHistory.push('/blog');    
     return {
 	type: 'UNAUTH_USER'
     };

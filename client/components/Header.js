@@ -80,7 +80,7 @@ class Header extends Component {
 	    /* console.log("Looping over categories. Category: " + category);*/
 	    return (
 		<li key={category}>
-		    <Link to={`${config.domain}/tag/` + category}>
+		    <Link to={`/tag/` + category}>
 		    {capitalized}
 		    </Link>
 		</li>
@@ -89,11 +89,11 @@ class Header extends Component {
 
 	return (
 	    <span className="dropdown">
-		<Link to={`${config.domain}/`}>
+		<Link to={`/`}>
 		    Browse
 		</Link>
 		<ul className="dropdown-menu">
-		    <li><Link to={`${config.domain}/`}>All</Link></li>
+		    <li><Link to={`/`}>All</Link></li>
 		    { categories_list }
 		</ul>	
 	    </span>				
@@ -116,7 +116,7 @@ class Header extends Component {
 		    <div className="row">      
 			<div className="col-xs-12 col-sm-6 search">
 			    <Link className="logo" to={'/'}>
-				<img src={`${config.domain}/media/images/logo.png`}/>
+				<img src={`/media/images/logo.png`}/>
 				<span className="title"
 				      dangerouslySetInnerHTML={{__html: title}}></span>
 			    </Link>
@@ -127,11 +127,11 @@ class Header extends Component {
 				<a onClick={this.openModal}>
 				    Subscribe
 				</a>
-				<Link to={`${config.domain}/about/`}>
+				<Link to={`/about/`}>
 				    About
 				</Link>
 				{ this.props.authenticated ?
-				  <Link key={2} to={{ pathname: `${config.domain}/logout`}}>
+				  <Link key={2} to={{ pathname: `/logout`}}>
 				      <i className="fa fa-sign-out"></i>
 				  </Link>
 				: null }

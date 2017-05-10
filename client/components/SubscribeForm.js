@@ -8,6 +8,8 @@ import { FormGroup, FieldGroup, FormControl, ControlLabel, Button } from 'react-
 
 import { createSubscriber } from '../actions/index';
 
+import config from '../../config/config.js';
+
 class SubscribeForm extends Component {
     constructor(props) {
 	super(props);
@@ -29,7 +31,7 @@ class SubscribeForm extends Component {
 			     ref="email" />
 		<Button bsStyle="primary" className="subscribe"
 			type="submit">Subscribe</Button>
-		<a href="/feed/posts.atom" className="btn rss">
+		<a href="${config.domain}/feed/posts.atom" className="btn rss">
 		    <i className="fa fa-rss"></i>
 		</a> 
 		<div className="clearfix"></div>
