@@ -24,10 +24,14 @@ if (typeof require.ensure !== 'function') {
   };
 }
 
+var path = "/blog";
+if (typeof window === 'undefined'){
+    path = "/";
+}
 // react-router setup with code-splitting
 // More info: http://blog.mxstbr.com/2016/01/react-apps-with-pages/
 export default (
-    <Route path="/blog" component={Main}>
+    <Route path={path} component={Main}>
 	<IndexRoute component={PostList} />
 	<Route path="write" component={RequireAuth(Editor)} />
 	<Route path="post/:slug" component={PostDetail} />

@@ -38,20 +38,20 @@ server.use(bodyParser.urlencoded({ limit: '20mb', extended: false }));
 server.use(cors());
 
 /* API Routes */
-server.use('/blog/api/v1', postsRoutes);
-server.use('/blog/api/v1', settingsRoutes);
-server.use('/blog/api/v1', profilesRoutes);
+server.use('/api/v1', postsRoutes);
+server.use('/api/v1', settingsRoutes);
+server.use('/api/v1', profilesRoutes);
 
 
 /* OStatus Routes */
-server.use('/blog/', ostatusRoutes);
-server.use('/blog/', activitypubRoutes);
-server.use('/blog/', feedsRoutes);
+server.use('/', ostatusRoutes);
+server.use('/', activitypubRoutes);
+server.use('/', feedsRoutes);
 
 /* Serve static files */
-server.use('/blog/styles', Express.static(path.resolve(__dirname, '../client/styles')));
-server.use('/blog/media', Express.static(path.resolve(__dirname, '../client/media')));
-server.get('/blog/bundle.js',(req,res) => {
+server.use('/styles', Express.static(path.resolve(__dirname, '../client/styles')));
+server.use('/media', Express.static(path.resolve(__dirname, '../client/media')));
+server.get('/bundle.js',(req,res) => {
     res.sendFile(path.resolve(__dirname, '../client/dist/bundle.js'));
 });
 
@@ -106,10 +106,11 @@ function renderClient(req, res, next) {
 	    .then(() => {
 		/* Now store is filled with fetched data */
 		/* Pass it to the provider, which will use it to render components. */
+		renderProps.path="/blog";
 		const html = renderToString(
 		    <Provider store={store}>
 			<MetaTagsContext extract={metaTagsInstance.extract}>
-			    <RouterContext {...renderProps} />
+			    <RouterContext {...renderProps} path="/blog"/>
 			</MetaTagsContext>
 		    </Provider>
 		)

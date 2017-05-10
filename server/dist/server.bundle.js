@@ -1813,11 +1813,15 @@ if (false) {
     };
 }
 
+var path = "/blog";
+if (typeof window === 'undefined') {
+    path = "/";
+}
 // react-router setup with code-splitting
 // More info: http://blog.mxstbr.com/2016/01/react-apps-with-pages/
 exports.default = _react2.default.createElement(
     _reactRouter.Route,
-    { path: '/blog', component: _Main2.default },
+    { path: path, component: _Main2.default },
     _react2.default.createElement(_reactRouter.IndexRoute, { component: _PostList2.default }),
     _react2.default.createElement(_reactRouter.Route, { path: 'write', component: (0, _require_auth2.default)(_Editor2.default) }),
     _react2.default.createElement(_reactRouter.Route, { path: 'post/:slug', component: _PostDetail2.default }),
@@ -4394,6 +4398,11 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+/* Routes */
+
+
 var _express = __webpack_require__(5);
 
 var _express2 = _interopRequireDefault(_express);
@@ -4492,9 +4501,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var server = new _express2.default();
 
 // Connect to db.
-
-
-/* Routes */
 _mongoose2.default.Promise = global.Promise;
 var MONGO_DB_URL = process.env.MONGO_URL || 'mongodb://localhost:27017/vertex';
 console.log("Connecting to the db at " + MONGO_DB_URL);
@@ -4513,19 +4519,19 @@ server.use(_bodyParser2.default.urlencoded({ limit: '20mb', extended: false }));
 server.use((0, _cors2.default)());
 
 /* API Routes */
-server.use('/blog/api/v1', _postsRoutes2.default);
-server.use('/blog/api/v1', _settingsRoutes2.default);
-server.use('/blog/api/v1', _profilesRoutes2.default);
+server.use('/api/v1', _postsRoutes2.default);
+server.use('/api/v1', _settingsRoutes2.default);
+server.use('/api/v1', _profilesRoutes2.default);
 
 /* OStatus Routes */
-server.use('/blog/', _ostatusRoutes2.default);
-server.use('/blog/', _activitypubRoutes2.default);
-server.use('/blog/', _feedsRoutes2.default);
+server.use('/', _ostatusRoutes2.default);
+server.use('/', _activitypubRoutes2.default);
+server.use('/', _feedsRoutes2.default);
 
 /* Serve static files */
-server.use('/blog/styles', _express2.default.static(_path2.default.resolve(__dirname, '../client/styles')));
-server.use('/blog/media', _express2.default.static(_path2.default.resolve(__dirname, '../client/media')));
-server.get('/blog/bundle.js', function (req, res) {
+server.use('/styles', _express2.default.static(_path2.default.resolve(__dirname, '../client/styles')));
+server.use('/media', _express2.default.static(_path2.default.resolve(__dirname, '../client/media')));
+server.get('/bundle.js', function (req, res) {
     res.sendFile(_path2.default.resolve(__dirname, '../client/dist/bundle.js'));
 });
 
@@ -4572,13 +4578,14 @@ function renderClient(req, res, next) {
         return (0, _fetchData.fetchComponentData)(store, renderProps.components, renderProps.params).then(function () {
             /* Now store is filled with fetched data */
             /* Pass it to the provider, which will use it to render components. */
+            renderProps.path = "/blog";
             var html = (0, _server.renderToString)(_react2.default.createElement(
                 _reactRedux.Provider,
                 { store: store },
                 _react2.default.createElement(
                     _reactMetaTags.MetaTagsContext,
                     { extract: metaTagsInstance.extract },
-                    _react2.default.createElement(_reactRouter.RouterContext, renderProps)
+                    _react2.default.createElement(_reactRouter.RouterContext, _extends({}, renderProps, { path: '/blog' }))
                 )
             ));
 
