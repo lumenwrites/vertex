@@ -95,7 +95,7 @@ class Header extends Component {
 		<ul className="dropdown-menu">
 		    <li><Link to={`${config.domain}/`}>All</Link></li>
 		    { categories_list }
-		    { config.domain == "https://lumenwrites.com" ?
+	            { config.domain == "https://lumenwrites.com" ?
 		    <li><a href="https://nulis.io/blog/">On Writing</a></li>
 		    : null }
 		</ul>	
@@ -120,8 +120,12 @@ class Header extends Component {
 		    <div className="row">      
 			<div className="col-xs-12 col-sm-6 search">
 			    <a className="logo" href='/'>
-				<img src={`${config.domain}/media/images/logo.png`}/>
-				<span className="title"
+				{ config.domain == "https://lumenwrites.com" ?
+				  <img src={`${config.domain}/media/images/logo-lmn.png`}/>
+				  :
+				  <img src={`${config.domain}/media/images/logo.png`}/>
+				}
+		<span className="title"
 				      dangerouslySetInnerHTML={{__html: title}}></span>
 			    </a>
 			</div>

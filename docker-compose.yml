@@ -15,7 +15,7 @@ services:
     links:
       - db
     ports:
-      - "3100:3000"
+      - "3100:3000" # 3100 lumen, 3200 nulis
     volumes:
       - ./client:/home/vertex/client
       - ./server:/home/vertex/server      

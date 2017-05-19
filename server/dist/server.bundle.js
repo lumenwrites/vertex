@@ -1308,7 +1308,7 @@ var settings = {
     domain: "https://lumenwrites.com",
     categories: ["fiction", "jokes", "meta"],
     username: "lumen",
-    about: "I make dumb jokes. Sometimes I write stories. SciFi is fun. <br/> <br/>  If you like my stuff - go read a <a href='https://nulis.io/blog/'>blog</a> where I share everything I've learned in the process of trying to get good at this(start <a href='https://nulis.io/blog/post/nulis-writing-prompts-e58092f'>here</a>). <br/><br/> Wanna talk? Email to <b>lumenwrites@gmail.com</b>.",
+    about: "I make dumb jokes. Sometimes I write stories. SciFi is fun. <br/> <br/>  If you like my stuff - go read a <a href='https://nulis.io/blog/'>blog</a> where I share everything I've learned in the process of trying to get good at this(start <a href='https://nulis.io/blog/post/nulis-writing-prompts-e58092f'>here</a>). <br/><br/> Wanna talk? Email to lumenwrites@gmail.com.",
     userurl: "https://lumenwrites.com",
     metaTitle: "Lumen Writes",
     metaDescription: "I make dumb jokes",
@@ -2585,7 +2585,7 @@ var Header = function (_Component) {
 							_react2.default.createElement(
 								'a',
 								{ className: 'logo', href: '/' },
-								_react2.default.createElement('img', { src: _config2.default.domain + '/media/images/logo.png' }),
+								_config2.default.domain == "https://lumenwrites.com" ? _react2.default.createElement('img', { src: _config2.default.domain + '/media/images/logo-lmn.png' }) : _react2.default.createElement('img', { src: _config2.default.domain + '/media/images/logo.png' }),
 								_react2.default.createElement('span', { className: 'title',
 									dangerouslySetInnerHTML: { __html: title } })
 							)
