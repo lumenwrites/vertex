@@ -122,7 +122,7 @@ console.log("config.domain " + _config2.default.domain);
 /* Isomorphic api caller. Magically fetches data, both on client and server. */
 
 
-var domain = "https://nulis.io/blog";
+var domain = _config2.default.domain;
 
 function updatePostBody(value) {
 			return {
@@ -306,7 +306,8 @@ function subscribedClose() {
 
 module.exports = {
     secret: 'secret-key',
-    domain: 'https://nulis.io/blog'
+    domain: 'https://lumenwrites.com',
+    path: '/'
 };
 
 /***/ }),
@@ -377,7 +378,7 @@ var _config2 = _interopRequireDefault(_config);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var domain = "https://nulis.io/blog";
+var domain = _config2.default.domain;
 
 function signinUser(_ref) {
 	var username = _ref.username,
@@ -1257,10 +1258,10 @@ var _config2 = _interopRequireDefault(_config);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var API_URL = 'https://nulis.io/blog/api/v1';
+var API_URL = _config2.default.domain + '/api/v1';
 
 if (process.env.NODE_ENV === 'development') {
-				exports.API_URL = API_URL = 'http://localhost:3000/blog/api/v1';
+				exports.API_URL = API_URL = 'http://localhost:3000/api/v1';
 }
 console.log("API_URL " + API_URL);
 
@@ -1268,7 +1269,7 @@ function callApi(endpoint) {
 				var method = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'get';
 				var body = arguments[2];
 
-				/* console.log("Calling api " + API_URL+"/"+endpoint);*/
+				console.log("Calling api " + API_URL + "/" + endpoint);
 				return (0, _isomorphicFetch2.default)(API_URL + '/' + endpoint, {
 								headers: { 'content-type': 'application/json' },
 								method: method,
@@ -1302,28 +1303,22 @@ exports.API_URL = API_URL;
 "use strict";
 
 
-var _config = __webpack_require__(3);
-
-var _config2 = _interopRequireDefault(_config);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 var settings = {
-    title: "nulis",
-    domain: "https://nulis.io",
-    categories: ["fiction", "creativity", "productivity", "meta"],
-    username: "rayalez",
-    about: "An outline editor for writers that makes the process of outlining stoires and articles easy, fun, and convenient.",
-    userurl: "https://nulis.io",
-    metaTitle: "Nulis",
-    metaDescription: "An outline editor for writers that makes the process of outlining stoires and articles easy, fun, and convenient.",
-    metaAuthor: "Ray Alez",
-    metaEmail: "raymestalez@gmail.com",
-    metaKeywords: "Comedy, Ceativity, Fiction, Jokes, Writing, Text Editor, Mind Mapping",
-    googleAnalyticsCode: "UA-44003603-22"
+    title: "lumen<b>writes</b>",
+    domain: "https://lumenwrites.com",
+    categories: ["fiction", "jokes", "meta"],
+    username: "lumen",
+    about: "I make dumb jokes. Sometimes I write stories. SciFi is fun. <br/> <br/>  If you like my stuff - go read a <a href='https://nulis.io/blog/'>blog</a> where I share everything I've learned in the process of trying to get good at this(start <a href='https://nulis.io/blog/post/nulis-writing-prompts-e58092f'>here</a>). <br/><br/> Wanna talk? Email to <b>lumenwrites@gmail.com</b>.",
+    userurl: "https://lumenwrites.com",
+    metaTitle: "Lumen Writes",
+    metaDescription: "I make dumb jokes",
+    metaAuthor: "Lumen",
+    metaEmail: "lumenwrites@gmail.com",
+    metaKeywords: "Comedy, fiction, jokes, writing",
+    googleAnalyticsCode: ""
 };
 
-settings.metaSocialImage = _config2.default.domain + "/media/images/social.png";
+settings.metaSocialImage = settings.domain + "/media/images/social.png";
 
 module.exports = settings;
 
@@ -1813,6 +1808,10 @@ var _require_auth = __webpack_require__(62);
 
 var _require_auth2 = _interopRequireDefault(_require_auth);
 
+var _config = __webpack_require__(3);
+
+var _config2 = _interopRequireDefault(_config);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // require.ensure polyfill for node
@@ -1822,7 +1821,7 @@ if (false) {
     };
 }
 
-var path = "/blog";
+var path = _config2.default.path; /* "/blog"; */
 if (typeof window === 'undefined') {
     /* Using nginx rewrite, so client router should pick up /blog,
        but on ssr I want to use /*/
@@ -2542,7 +2541,16 @@ var Header = function (_Component) {
 							'All'
 						)
 					),
-					categories_list
+					categories_list,
+					_config2.default.domain == "https://lumenwrites.com" ? _react2.default.createElement(
+						'li',
+						null,
+						_react2.default.createElement(
+							'a',
+							{ href: 'https://nulis.io/blog/' },
+							'On Writing'
+						)
+					) : null
 				)
 			);
 		}
@@ -2550,6 +2558,7 @@ var Header = function (_Component) {
 		key: 'render',
 		value: function render() {
 			var title = this.props.settings.title;
+			console.log("settings.title " + title);
 			return _react2.default.createElement(
 				'header',
 				null,

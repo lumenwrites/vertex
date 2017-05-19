@@ -16,6 +16,7 @@ import Signin from './components/auth/signin';
 import Signout from './components/auth/signout';
 import RequireAuth from './components/auth/require_auth';
 
+import config from '../config/config.js';
 
 // require.ensure polyfill for node
 if (typeof require.ensure !== 'function') {
@@ -24,7 +25,7 @@ if (typeof require.ensure !== 'function') {
   };
 }
 
-var path = "/blog";
+var path = config.path; /* "/blog"; */
 if (typeof window === 'undefined'){
     /* Using nginx rewrite, so client router should pick up /blog,
        but on ssr I want to use /*/

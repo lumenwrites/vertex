@@ -11,7 +11,7 @@ import config from '../../config/config.js';
 
 console.log("config.domain " + config.domain);
 
-var domain = "https://nulis.io/blog"
+var domain = config.domain;
 
 export function updatePostBody(value) {
     return {

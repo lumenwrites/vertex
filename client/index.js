@@ -40,7 +40,7 @@ if (token) {
 }
 
 const history = useRouterHistory(createHistory)({
-    basename: "/blog"
+    basename: config.path
 })
 /* history={history}*/
 /* basename={config.domain} */

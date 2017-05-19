@@ -1,4 +1,5 @@
-const webpack = require('webpack'); 
+const webpack = require('webpack');
+const config = require('../config/config.js'); 
 
 function getPlugins() {
     const plugins = [];
@@ -30,7 +31,7 @@ module.exports = {
     ],
     output: {
 	path: __dirname + '/dist/',
-	publicPath: '/blog',
+	publicPath: '/',
 	filename: 'vertex.js'
     },
     module: {

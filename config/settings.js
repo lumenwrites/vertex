@@ -1,21 +1,19 @@
-import config from './config.js';
-
 var settings = {
-    title: "nulis",
-    domain: "https://nulis.io",
-    categories: ["fiction", "creativity", "productivity", "meta"],
-    username: "rayalez",
-    about: "An outline editor for writers that makes the process of outlining stoires and articles easy, fun, and convenient.",
-    userurl: "https://nulis.io",        
-    metaTitle: "Nulis",
-    metaDescription: "An outline editor for writers that makes the process of outlining stoires and articles easy, fun, and convenient.",
-    metaAuthor: "Ray Alez",
-    metaEmail: "raymestalez@gmail.com",    
-    metaKeywords: "Comedy, Ceativity, Fiction, Jokes, Writing, Text Editor, Mind Mapping",
-    googleAnalyticsCode: "UA-44003603-22",
+    title: "lumen<b>writes</b>",
+    domain: "https://lumenwrites.com",
+    categories: ["fiction", "jokes", "meta"],
+    username: "lumen",
+    about: "I make dumb jokes. Sometimes I write stories. SciFi is fun. <br/> <br/>  If you like my stuff - go read a <a href='https://nulis.io/blog/'>blog</a> where I share everything I've learned in the process of trying to get good at this(start <a href='https://nulis.io/blog/post/nulis-writing-prompts-e58092f'>here</a>). <br/><br/> Wanna talk? Email to <b>lumenwrites@gmail.com</b>.",
+    userurl: "https://lumenwrites.com",        
+    metaTitle: "Lumen Writes",
+    metaDescription: "I make dumb jokes",
+    metaAuthor: "Lumen",
+    metaEmail: "lumenwrites@gmail.com",    
+    metaKeywords: "Comedy, fiction, jokes, writing",
+    googleAnalyticsCode: "",
 };
 
-settings.metaSocialImage = config.domain + "/media/images/social.png";
+settings.metaSocialImage = settings.domain + "/media/images/social.png";
 
 module.exports = settings;
 

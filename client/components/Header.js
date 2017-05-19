@@ -95,6 +95,9 @@ class Header extends Component {
 		<ul className="dropdown-menu">
 		    <li><Link to={`${config.domain}/`}>All</Link></li>
 		    { categories_list }
+		    { config.domain == "https://lumenwrites.com" ?
+		    <li><a href="https://nulis.io/blog/">On Writing</a></li>
+		    : null }
 		</ul>	
 	    </span>				
 	);
@@ -103,6 +106,7 @@ class Header extends Component {
     
     render() {
 	const title = this.props.settings.title;
+	console.log("settings.title " + title);
 	return (
 	    <header>
 		<Modal show={this.state.showModal}

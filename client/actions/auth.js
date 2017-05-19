@@ -6,7 +6,7 @@ import {API_URL} from '../utils/apiCaller';
 
 import config from '../../config/config.js';
 
-var domain = "https://nulis.io/blog"
+var domain = config.domain;
 
 export function signinUser({username, password}) {
     return function(dispatch) {
