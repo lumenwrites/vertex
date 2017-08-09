@@ -120,12 +120,8 @@ class Header extends Component {
 		    <div className="row">      
 			<div className="col-xs-12 col-sm-6 search">
 			    <a className="logo" href='/'>
-				{ config.domain == "https://lumenwrites.com" ?
-				  <img src={`${config.domain}/media/images/logo-lmn.png`}/>
-				  :
-				  <img src={`${config.domain}/media/images/logo.png`}/>
-				}
-		<span className="title"
+				<img src={`${config.domain}/media/images/logo.png`}/>
+				<span className="title"
 				      dangerouslySetInnerHTML={{__html: title}}></span>
 			    </a>
 			</div>
@@ -134,6 +130,9 @@ class Header extends Component {
 				{ this.renderCategories() }
 				<a onClick={this.openModal}>
 				    Subscribe
+				</a>
+				<a href="/">
+				    Services
 				</a>
 				<Link to={`${config.domain}/about/`}>
 				    About

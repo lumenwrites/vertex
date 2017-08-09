@@ -3,11 +3,11 @@
     "version": "0.1.0",
     "description": "Node/React/Redux blog decentralized with ActivityPub.",
     "scripts": {
-	"start": "cd ./server && BABEL_DISABLE_CACHE=1 NODE_ENV=development nodemon index.js",
+	"startserver": "cd ./server && BABEL_DISABLE_CACHE=1 NODE_ENV=development nodemon index.js",
 	"startclient": "cd ./client && NODE_ENV=development node ../node_modules/webpack-dev-server/bin/webpack-dev-server.js",
 	"watchstyles": "cd ./client/styles && compass watch",      
 	"serve": "cd ./server && NODE_ENV=production node ./index.js",
-	"createsuperuser": "node ./server/admin.js createsuperuser your@email.com yourpass",
+	"createsuperuser": "node ./server/admin.js createsuperuser rayalez Qwe1s1zxCstl",
 	"buildclient": "NODE_ENV=production cd ./client &&  webpack -p --config ./webpack.config.js --progress",
 	"buildserver": "NODE_ENV=production cd ./server && webpack --config ./webpack.config.server.js --progress",
 	"build": "NODE_ENV=production cd ./server && webpack --config ./webpack.config.server.js --progress &&  cd ../client &&  webpack -p --config ./webpack.config.js --progress && cd styles &&  compass compile -e production --force"
